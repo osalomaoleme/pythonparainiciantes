@@ -1,0 +1,1732 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 10: Mini Projetos - Curso Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            line-height: 1.6;
+            tab-size: 4;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+        .solution {
+            display: none;
+        }
+        .solution.show {
+            display: block;
+        }
+        .project-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .difficulty-easy {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .difficulty-medium {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        .difficulty-hard {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .feature-item {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+        }
+    
+        
+        @media (max-width: 640px) {
+            .code-block {
+                font-size: 0.75rem;
+                padding: 0.75rem;
+            }
+            .container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-4 md:py-8">
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+            <div class="mb-6">
+                <a href="curso-python-completo.html" class="text-blue-600 hover:text-blue-800 font-medium">&larr; Voltar ao Curso</a>
+            </div>
+            
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8">Capítulo 10: Mini Projetos</h1>
+            
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+                <h2 class="text-xl font-semibold text-blue-800 mb-3">🎯 Objetivo do Capítulo</h2>
+                <p class="text-blue-700">
+                    Neste capítulo final, você aplicará todos os conhecimentos adquiridos criando 
+                    projetos práticos e completos. Cada projeto foi cuidadosamente selecionado para 
+                    reforçar conceitos específicos e demonstrar aplicações reais do Python.
+                </p>
+            </div>
+            
+            <div class="space-y-6 md:space-y-8">
+                <!-- Projeto 1: Calculadora -->
+                <div class="project-card difficulty-easy">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold">🧮 Projeto 1: Calculadora Avançada</h2>
+                        <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">Fácil</span>
+                    </div>
+                    
+                    <p class="mb-4 opacity-90">
+                        Uma calculadora com interface de linha de comando que suporta operações básicas, 
+                        científicas e conversões de unidades.
+                    </p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">✅ Operações básicas (+, -, ×, ÷)</div>
+                        <div class="feature-item">✅ Funções científicas</div>
+                        <div class="feature-item">✅ Histórico de cálculos</div>
+                        <div class="feature-item">✅ Conversão de unidades</div>
+                        <div class="feature-item">✅ Interface amigável</div>
+                        <div class="feature-item">✅ Tratamento de erros</div>
+                    </div>
+                    
+                    <button onclick="toggleSolution('calc-solution')" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-6 py-2 rounded-lg transition-all mt-4">
+                        Ver Código Completo
+                    </button>
+                    
+                    <div id="calc-solution" class="solution mt-6">
+                        <div class="code-block">
+# calculadora_avancada.py
+"""
+Calculadora Avançada
+Uma calculadora completa com múltiplas funcionalidades.
+
+Autor: Curso Python
+Versão: 1.0
+"""
+
+import math
+import json
+from datetime import datetime
+from pathlib import Path
+
+class CalculadoraAvancada:
+    """Calculadora com funcionalidades avançadas."""
+    
+    def __init__(self):
+        self.historico = []
+        self.arquivo_historico = Path("historico_calculadora.json")
+        self.carregar_historico()
+        
+        # Constantes científicas
+        self.constantes = {
+            'pi': math.pi,
+            'e': math.e,
+            'phi': (1 + math.sqrt(5)) / 2,  # Razão áurea
+            'c': 299792458,  # Velocidade da luz (m/s)
+            'g': 9.81  # Aceleração da gravidade (m/s²)
+        }
+        
+        # Conversões de unidades
+        self.conversoes = {
+            'temperatura': {
+                'celsius_fahrenheit': lambda c: (c * 9/5) + 32,
+                'fahrenheit_celsius': lambda f: (f - 32) * 5/9,
+                'celsius_kelvin': lambda c: c + 273.15,
+                'kelvin_celsius': lambda k: k - 273.15
+            },
+            'distancia': {
+                'metros_quilometros': lambda m: m / 1000,
+                'quilometros_metros': lambda km: km * 1000,
+                'metros_milhas': lambda m: m * 0.000621371,
+                'milhas_metros': lambda mi: mi / 0.000621371,
+                'centimetros_polegadas': lambda cm: cm * 0.393701,
+                'polegadas_centimetros': lambda inch: inch / 0.393701
+            },
+            'peso': {
+                'quilos_libras': lambda kg: kg * 2.20462,
+                'libras_quilos': lambda lb: lb / 2.20462,
+                'gramas_onças': lambda g: g * 0.035274,
+                'onças_gramas': lambda oz: oz / 0.035274
+            }
+        }
+    
+    def adicionar_historico(self, operacao, resultado):
+        """Adiciona operação ao histórico."""
+        entrada = {
+            'timestamp': datetime.now().isoformat(),
+            'operacao': operacao,
+            'resultado': resultado
+        }
+        self.historico.append(entrada)
+        self.salvar_historico()
+    
+    def salvar_historico(self):
+        """Salva histórico em arquivo JSON."""
+        try:
+            with open(self.arquivo_historico, 'w', encoding='utf-8') as f:
+                json.dump(self.historico, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            print(f"Erro ao salvar histórico: {e}")
+    
+    def carregar_historico(self):
+        """Carrega histórico do arquivo."""
+        try:
+            if self.arquivo_historico.exists():
+                with open(self.arquivo_historico, 'r', encoding='utf-8') as f:
+                    self.historico = json.load(f)
+        except Exception as e:
+            print(f"Erro ao carregar histórico: {e}")
+            self.historico = []
+    
+    def operacao_basica(self, num1, operador, num2):
+        """Executa operações básicas."""
+        operacoes = {
+            '+': lambda x, y: x + y,
+            '-': lambda x, y: x - y,
+            '*': lambda x, y: x * y,
+            'x': lambda x, y: x * y,
+            '/': lambda x, y: x / y if y != 0 else None,
+            '//': lambda x, y: x // y if y != 0 else None,
+            '%': lambda x, y: x % y if y != 0 else None,
+            '**': lambda x, y: x ** y,
+            '^': lambda x, y: x ** y
+        }
+        
+        if operador in operacoes:
+            resultado = operacoes[operador](num1, num2)
+            if resultado is not None:
+                operacao_str = f"{num1} {operador} {num2}"
+                self.adicionar_historico(operacao_str, resultado)
+                return resultado
+            else:
+                return "Erro: Divisão por zero"
+        else:
+            return "Erro: Operador inválido"
+    
+    def funcao_cientifica(self, funcao, numero):
+        """Executa funções científicas."""
+        try:
+            funcoes = {
+                'sin': math.sin,
+                'cos': math.cos,
+                'tan': math.tan,
+                'asin': math.asin,
+                'acos': math.acos,
+                'atan': math.atan,
+                'sinh': math.sinh,
+                'cosh': math.cosh,
+                'tanh': math.tanh,
+                'log': math.log10,
+                'ln': math.log,
+                'sqrt': math.sqrt,
+                'cbrt': lambda x: x ** (1/3),
+                'abs': abs,
+                'ceil': math.ceil,
+                'floor': math.floor,
+                'factorial': math.factorial,
+                'degrees': math.degrees,
+                'radians': math.radians
+            }
+            
+            if funcao in funcoes:
+                if funcao == 'factorial' and (numero < 0 or numero != int(numero)):
+                    return "Erro: Fatorial só aceita números inteiros não-negativos"
+                
+                resultado = funcoes[funcao](numero)
+                operacao_str = f"{funcao}({numero})"
+                self.adicionar_historico(operacao_str, resultado)
+                return resultado
+            else:
+                return "Erro: Função não reconhecida"
+        
+        except Exception as e:
+            return f"Erro: {str(e)}"
+    
+    def converter_unidade(self, valor, categoria, conversao):
+        """Converte unidades."""
+        try:
+            if categoria in self.conversoes and conversao in self.conversoes[categoria]:
+                resultado = self.conversoes[categoria][conversao](valor)
+                operacao_str = f"Converter {valor} ({conversao.replace('_', ' para ')})"
+                self.adicionar_historico(operacao_str, resultado)
+                return resultado
+            else:
+                return "Erro: Conversão não encontrada"
+        except Exception as e:
+            return f"Erro: {str(e)}"
+    
+    def obter_constante(self, nome):
+        """Retorna valor de constante científica."""
+        if nome.lower() in self.constantes:
+            return self.constantes[nome.lower()]
+        else:
+            return "Erro: Constante não encontrada"
+    
+    def mostrar_historico(self, limite=10):
+        """Mostra histórico de operações."""
+        if not self.historico:
+            return "Histórico vazio"
+        
+        historico_recente = self.historico[-limite:]
+        resultado = "\n=== HISTÓRICO DE OPERAÇÕES ===\n"
+        
+        for i, entrada in enumerate(historico_recente, 1):
+            timestamp = datetime.fromisoformat(entrada['timestamp'])
+            data_formatada = timestamp.strftime('%d/%m/%Y %H:%M:%S')
+            resultado += f"{i:2d}. [{data_formatada}] {entrada['operacao']} = {entrada['resultado']}\n"
+        
+        return resultado
+    
+    def limpar_historico(self):
+        """Limpa o histórico."""
+        self.historico = []
+        self.salvar_historico()
+        return "Histórico limpo com sucesso"
+    
+    def ajuda(self):
+        """Mostra ajuda sobre como usar a calculadora."""
+        return """
+=== CALCULADORA AVANÇADA - AJUDA ===
+
+🔢 OPERAÇÕES BÁSICAS:
+  Formato: numero1 operador numero2
+  Operadores: +, -, *, x, /, //, %, **, ^
+  Exemplo: 5 + 3
+
+🔬 FUNÇÕES CIENTÍFICAS:
+  Formato: funcao(numero)
+  Funções: sin, cos, tan, asin, acos, atan, sinh, cosh, tanh
+           log, ln, sqrt, cbrt, abs, ceil, floor, factorial
+           degrees, radians
+  Exemplo: sin(30)
+
+🔄 CONVERSÕES:
+  Formato: converter valor categoria conversao
+  
+  Temperatura: celsius_fahrenheit, fahrenheit_celsius,
+               celsius_kelvin, kelvin_celsius
+  
+  Distância: metros_quilometros, quilometros_metros,
+             metros_milhas, milhas_metros,
+             centimetros_polegadas, polegadas_centimetros
+  
+  Peso: quilos_libras, libras_quilos,
+        gramas_onças, onças_gramas
+  
+  Exemplo: converter 100 temperatura celsius_fahrenheit
+
+📊 CONSTANTES:
+  pi, e, phi, c (velocidade da luz), g (gravidade)
+  Exemplo: pi
+
+⚙️ COMANDOS ESPECIAIS:
+  historico - Mostra últimas 10 operações
+  limpar - Limpa o histórico
+  ajuda - Mostra esta ajuda
+  sair - Encerra a calculadora
+"""
+
+def main():
+    """Função principal da calculadora."""
+    calc = CalculadoraAvancada()
+    
+    print("🧮 CALCULADORA AVANÇADA")
+    print("=" * 50)
+    print("Digite 'ajuda' para ver os comandos disponíveis")
+    print("Digite 'sair' para encerrar\n")
+    
+    while True:
+        try:
+            entrada = input(">>> ").strip()
+            
+            if not entrada:
+                continue
+            
+            # Comandos especiais
+            if entrada.lower() == 'sair':
+                print("👋 Obrigado por usar a Calculadora Avançada!")
+                break
+            elif entrada.lower() == 'ajuda':
+                print(calc.ajuda())
+                continue
+            elif entrada.lower() == 'historico':
+                print(calc.mostrar_historico())
+                continue
+            elif entrada.lower() == 'limpar':
+                print(calc.limpar_historico())
+                continue
+            
+            # Constantes
+            elif entrada.lower() in calc.constantes:
+                valor = calc.obter_constante(entrada)
+                print(f"📊 {entrada} = {valor}")
+                continue
+            
+            # Conversões
+            elif entrada.lower().startswith('converter'):
+                partes = entrada.split()
+                if len(partes) == 4:
+                    _, valor_str, categoria, conversao = partes
+                    try:
+                        valor = float(valor_str)
+                        resultado = calc.converter_unidade(valor, categoria, conversao)
+                        print(f"🔄 {resultado}")
+                    except ValueError:
+                        print("❌ Valor inválido para conversão")
+                else:
+                    print("❌ Formato: converter valor categoria conversao")
+                continue
+            
+            # Funções científicas
+            elif '(' in entrada and ')' in entrada:
+                # Extrair função e número
+                funcao = entrada.split('(')[0].strip()
+                numero_str = entrada.split('(')[1].split(')')[0].strip()
+                try:
+                    numero = float(numero_str)
+                    resultado = calc.funcao_cientifica(funcao, numero)
+                    print(f"🔬 {resultado}")
+                except ValueError:
+                    print("❌ Número inválido")
+                continue
+            
+            # Operações básicas
+            else:
+                # Tentar parsear operação básica
+                for op in ['+', '-', '*', 'x', '/', '//', '%', '**', '^']:
+                    if op in entrada:
+                        partes = entrada.split(op)
+                        if len(partes) == 2:
+                            try:
+                                num1 = float(partes[0].strip())
+                                num2 = float(partes[1].strip())
+                                resultado = calc.operacao_basica(num1, op, num2)
+                                print(f"🔢 {resultado}")
+                                break
+                            except ValueError:
+                                print("❌ Números inválidos")
+                                break
+                        else:
+                            print("❌ Formato inválido")
+                            break
+                else:
+                    print("❌ Operação não reconhecida. Digite 'ajuda' para ver os comandos.")
+        
+        except KeyboardInterrupt:
+            print("\n👋 Calculadora encerrada pelo usuário")
+            break
+        except Exception as e:
+            print(f"❌ Erro inesperado: {e}")
+
+if __name__ == "__main__":
+    main()
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projeto 2: Jogo da Forca -->
+                <div class="project-card difficulty-medium">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold">🎯 Projeto 2: Jogo da Forca</h2>
+                        <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">Médio</span>
+                    </div>
+                    
+                    <p class="mb-4 opacity-90">
+                        Um jogo da forca completo com diferentes categorias, níveis de dificuldade 
+                        e sistema de pontuação.
+                    </p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">✅ Múltiplas categorias</div>
+                        <div class="feature-item">✅ Níveis de dificuldade</div>
+                        <div class="feature-item">✅ Sistema de pontuação</div>
+                        <div class="feature-item">✅ Dicas progressivas</div>
+                        <div class="feature-item">✅ Estatísticas do jogador</div>
+                        <div class="feature-item">✅ Interface ASCII art</div>
+                    </div>
+                    
+                    <button onclick="toggleSolution('forca-solution')" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-6 py-2 rounded-lg transition-all mt-4">
+                        Ver Código Completo
+                    </button>
+                    
+                    <div id="forca-solution" class="solution mt-6">
+                        <div class="code-block">
+# jogo_da_forca.py
+"""
+Jogo da Forca
+Um jogo completo com múltiplas funcionalidades.
+
+Autor: Curso Python
+Versão: 1.0
+"""
+
+import random
+import json
+from pathlib import Path
+from datetime import datetime
+
+class JogoDaForca:
+    """Jogo da Forca com múltiplas funcionalidades."""
+    
+    def __init__(self):
+        self.arquivo_stats = Path("stats_forca.json")
+        self.stats = self.carregar_stats()
+        
+        # Desenhos da forca
+        self.desenhos_forca = [
+            """
+   +---+
+   |   |
+       |
+       |
+       |
+       |
+=========""",
+            """
+   +---+
+   |   |
+   O   |
+       |
+       |
+       |
+=========""",
+            """
+   +---+
+   |   |
+   O   |
+   |   |
+       |
+       |
+=========""",
+            """
+   +---+
+   |   |
+   O   |
+  /|   |
+       |
+       |
+=========""",
+            """
+   +---+
+   |   |
+   O   |
+  /|\  |
+       |
+       |
+=========""",
+            """
+   +---+
+   |   |
+   O   |
+  /|\  |
+  /    |
+       |
+=========""",
+            """
+   +---+
+   |   |
+   O   |
+  /|\  |
+  / \  |
+       |
+========="""
+        ]
+        
+        # Banco de palavras por categoria e dificuldade
+        self.palavras = {
+            'animais': {
+                'facil': [
+                    {'palavra': 'GATO', 'dica': 'Animal doméstico que mia'},
+                    {'palavra': 'CACHORRO', 'dica': 'Melhor amigo do homem'},
+                    {'palavra': 'PEIXE', 'dica': 'Vive na água'},
+                    {'palavra': 'PASSARO', 'dica': 'Animal que voa'},
+                    {'palavra': 'CAVALO', 'dica': 'Animal usado para montaria'}
+                ],
+                'medio': [
+                    {'palavra': 'ELEFANTE', 'dica': 'Maior mamífero terrestre'},
+                    {'palavra': 'GIRAFA', 'dica': 'Animal com pescoço longo'},
+                    {'palavra': 'RINOCERONTE', 'dica': 'Animal com chifre no nariz'},
+                    {'palavra': 'HIPOPOTAMO', 'dica': 'Animal que vive na água e na terra'},
+                    {'palavra': 'CROCODILO', 'dica': 'Réptil aquático perigoso'}
+                ],
+                'dificil': [
+                    {'palavra': 'ORNITORRINCO', 'dica': 'Mamífero que põe ovos'},
+                    {'palavra': 'QUETZAL', 'dica': 'Ave sagrada dos maias'},
+                    {'palavra': 'AXOLOTL', 'dica': 'Salamandra aquática mexicana'},
+                    {'palavra': 'PANGOLIM', 'dica': 'Mamífero com escamas'},
+                    {'palavra': 'NUMBAT', 'dica': 'Marsupial que come cupins'}
+                ]
+            },
+            'paises': {
+                'facil': [
+                    {'palavra': 'BRASIL', 'dica': 'País onde falamos português'},
+                    {'palavra': 'ARGENTINA', 'dica': 'País vizinho famoso pelo tango'},
+                    {'palavra': 'FRANCA', 'dica': 'País da Torre Eiffel'},
+                    {'palavra': 'ITALIA', 'dica': 'País em forma de bota'},
+                    {'palavra': 'JAPAO', 'dica': 'Terra do sol nascente'}
+                ],
+                'medio': [
+                    {'palavra': 'ALEMANHA', 'dica': 'País conhecido pela Oktoberfest'},
+                    {'palavra': 'AUSTRALIA', 'dica': 'País-continente'},
+                    {'palavra': 'TAILANDIA', 'dica': 'País do sudeste asiático'},
+                    {'palavra': 'NORUEGA', 'dica': 'País dos fiordes'},
+                    {'palavra': 'MARROCOS', 'dica': 'País do norte da África'}
+                ],
+                'dificil': [
+                    {'palavra': 'QUIRGUISTAO', 'dica': 'País da Ásia Central'},
+                    {'palavra': 'LIECHTENSTEIN', 'dica': 'Pequeno país europeu'},
+                    {'palavra': 'AZERBAIJAO', 'dica': 'País entre Europa e Ásia'},
+                    {'palavra': 'MADAGASCAR', 'dica': 'Grande ilha africana'},
+                    {'palavra': 'BANGLADESH', 'dica': 'País do sul da Ásia'}
+                ]
+            },
+            'tecnologia': {
+                'facil': [
+                    {'palavra': 'COMPUTADOR', 'dica': 'Máquina para processar dados'},
+                    {'palavra': 'INTERNET', 'dica': 'Rede mundial de computadores'},
+                    {'palavra': 'CELULAR', 'dica': 'Telefone portátil'},
+                    {'palavra': 'PROGRAMA', 'dica': 'Software de computador'},
+                    {'palavra': 'TECLADO', 'dica': 'Dispositivo para digitar'}
+                ],
+                'medio': [
+                    {'palavra': 'ALGORITMO', 'dica': 'Sequência de instruções'},
+                    {'palavra': 'INTELIGENCIA', 'dica': 'Capacidade de aprender (IA)'},
+                    {'palavra': 'BLOCKCHAIN', 'dica': 'Tecnologia das criptomoedas'},
+                    {'palavra': 'ROBOTICA', 'dica': 'Ciência dos robôs'},
+                    {'palavra': 'CIBERSEGURANCA', 'dica': 'Proteção digital'}
+                ],
+                'dificil': [
+                    {'palavra': 'QUANTUM', 'dica': 'Computação do futuro'},
+                    {'palavra': 'BIOMETRIA', 'dica': 'Identificação por características físicas'},
+                    {'palavra': 'NANOTECNOLOGIA', 'dica': 'Tecnologia em escala molecular'},
+                    {'palavra': 'CRIPTOGRAFIA', 'dica': 'Arte de escrever em códigos'},
+                    {'palavra': 'NEUROCIENCIA', 'dica': 'Estudo do sistema nervoso'}
+                ]
+            }
+        }
+    
+    def carregar_stats(self):
+        """Carrega estatísticas do jogador."""
+        try:
+            if self.arquivo_stats.exists():
+                with open(self.arquivo_stats, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+        except Exception:
+            pass
+        
+        return {
+            'jogos_totais': 0,
+            'vitorias': 0,
+            'derrotas': 0,
+            'pontuacao_total': 0,
+            'melhor_pontuacao': 0,
+            'palavras_descobertas': [],
+            'categoria_favorita': None
+        }
+    
+    def salvar_stats(self):
+        """Salva estatísticas do jogador."""
+        try:
+            with open(self.arquivo_stats, 'w', encoding='utf-8') as f:
+                json.dump(self.stats, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            print(f"Erro ao salvar estatísticas: {e}")
+    
+    def escolher_palavra(self, categoria, dificuldade):
+        """Escolhe uma palavra aleatória."""
+        palavras_disponiveis = self.palavras[categoria][dificuldade]
+        return random.choice(palavras_disponiveis)
+    
+    def mostrar_forca(self, erros):
+        """Mostra o desenho da forca."""
+        if erros < len(self.desenhos_forca):
+            return self.desenhos_forca[erros]
+        return self.desenhos_forca[-1]
+    
+    def mostrar_palavra(self, palavra, letras_certas):
+        """Mostra a palavra com letras descobertas."""
+        resultado = ""
+        for letra in palavra:
+            if letra in letras_certas:
+                resultado += letra + " "
+            else:
+                resultado += "_ "
+        return resultado.strip()
+    
+    def calcular_pontuacao(self, palavra, erros, dificuldade, usou_dica):
+        """Calcula pontuação baseada no desempenho."""
+        pontos_base = len(palavra) * 10
+        
+        # Multiplicador por dificuldade
+        multiplicadores = {'facil': 1, 'medio': 1.5, 'dificil': 2}
+        pontos_base *= multiplicadores[dificuldade]
+        
+        # Penalidade por erros
+        penalidade_erros = erros * 5
+        
+        # Penalidade por usar dica
+        penalidade_dica = pontos_base * 0.2 if usou_dica else 0
+        
+        pontuacao = max(0, int(pontos_base - penalidade_erros - penalidade_dica))
+        return pontuacao
+    
+    def jogar(self):
+        """Inicia um jogo."""
+        print("\n🎯 JOGO DA FORCA")
+        print("=" * 40)
+        
+        # Escolher categoria
+        print("\nCategorias disponíveis:")
+        categorias = list(self.palavras.keys())
+        for i, cat in enumerate(categorias, 1):
+            print(f"{i}. {cat.title()}")
+        
+        while True:
+            try:
+                escolha = int(input("\nEscolha uma categoria (número): ")) - 1
+                if 0 <= escolha < len(categorias):
+                    categoria = categorias[escolha]
+                    break
+                else:
+                    print("❌ Opção inválida!")
+            except ValueError:
+                print("❌ Digite um número válido!")
+        
+        # Escolher dificuldade
+        print("\nNíveis de dificuldade:")
+        print("1. Fácil (mais pontos, palavras simples)")
+        print("2. Médio (pontos normais, palavras moderadas)")
+        print("3. Difícil (mais pontos, palavras complexas)")
+        
+        dificuldades = ['facil', 'medio', 'dificil']
+        while True:
+            try:
+                escolha = int(input("\nEscolha a dificuldade (1-3): ")) - 1
+                if 0 <= escolha < 3:
+                    dificuldade = dificuldades[escolha]
+                    break
+                else:
+                    print("❌ Opção inválida!")
+            except ValueError:
+                print("❌ Digite um número válido!")
+        
+        # Escolher palavra
+        palavra_info = self.escolher_palavra(categoria, dificuldade)
+        palavra = palavra_info['palavra']
+        dica = palavra_info['dica']
+        
+        # Inicializar jogo
+        letras_certas = set()
+        letras_erradas = set()
+        erros = 0
+        max_erros = 6
+        usou_dica = False
+        
+        print(f"\n🎯 Iniciando jogo - Categoria: {categoria.title()} | Dificuldade: {dificuldade.title()}")
+        print(f"📊 Palavra tem {len(palavra)} letras")
+        print("💡 Digite 'dica' para receber uma dica (reduz pontuação)")
+        print("🚪 Digite 'sair' para abandonar o jogo\n")
+        
+        # Loop principal do jogo
+        while erros < max_erros:
+            # Mostrar estado atual
+            print(self.mostrar_forca(erros))
+            print(f"\nPalavra: {self.mostrar_palavra(palavra, letras_certas)}")
+            print(f"Letras erradas: {' '.join(sorted(letras_erradas)) if letras_erradas else 'Nenhuma'}")
+            print(f"Erros: {erros}/{max_erros}")
+            
+            # Verificar vitória
+            if all(letra in letras_certas for letra in palavra):
+                print("\n🎉 PARABÉNS! Você descobriu a palavra!")
+                print(f"✅ A palavra era: {palavra}")
+                
+                # Calcular pontuação
+                pontuacao = self.calcular_pontuacao(palavra, erros, dificuldade, usou_dica)
+                print(f"🏆 Pontuação: {pontuacao} pontos")
+                
+                # Atualizar estatísticas
+                self.stats['jogos_totais'] += 1
+                self.stats['vitorias'] += 1
+                self.stats['pontuacao_total'] += pontuacao
+                if pontuacao > self.stats['melhor_pontuacao']:
+                    self.stats['melhor_pontuacao'] = pontuacao
+                if palavra not in self.stats['palavras_descobertas']:
+                    self.stats['palavras_descobertas'].append(palavra)
+                
+                self.salvar_stats()
+                return True
+            
+            # Entrada do jogador
+            entrada = input("\nDigite uma letra: ").strip().upper()
+            
+            if entrada == 'SAIR':
+                print("👋 Jogo abandonado!")
+                return False
+            elif entrada == 'DICA':
+                if not usou_dica:
+                    print(f"💡 Dica: {dica}")
+                    usou_dica = True
+                else:
+                    print("❌ Você já usou a dica!")
+                continue
+            elif len(entrada) != 1 or not entrada.isalpha():
+                print("❌ Digite apenas uma letra!")
+                continue
+            elif entrada in letras_certas or entrada in letras_erradas:
+                print("❌ Você já tentou essa letra!")
+                continue
+            
+            # Verificar letra
+            if entrada in palavra:
+                letras_certas.add(entrada)
+                print(f"✅ Boa! A letra '{entrada}' está na palavra!")
+            else:
+                letras_erradas.add(entrada)
+                erros += 1
+                print(f"❌ A letra '{entrada}' não está na palavra!")
+        
+        # Fim do jogo - derrota
+        print(self.mostrar_forca(erros))
+        print("\n💀 GAME OVER!")
+        print(f"📝 A palavra era: {palavra}")
+        print(f"💡 Dica era: {dica}")
+        
+        # Atualizar estatísticas
+        self.stats['jogos_totais'] += 1
+        self.stats['derrotas'] += 1
+        self.salvar_stats()
+        
+        return False
+    
+    def mostrar_estatisticas(self):
+        """Mostra estatísticas do jogador."""
+        stats = self.stats
+        
+        print("\n📊 SUAS ESTATÍSTICAS")
+        print("=" * 40)
+        print(f"🎯 Jogos totais: {stats['jogos_totais']}")
+        print(f"🏆 Vitórias: {stats['vitorias']}")
+        print(f"💀 Derrotas: {stats['derrotas']}")
+        
+        if stats['jogos_totais'] > 0:
+            taxa_vitoria = (stats['vitorias'] / stats['jogos_totais']) * 100
+            print(f"📈 Taxa de vitória: {taxa_vitoria:.1f}%")
+        
+        print(f"🥇 Melhor pontuação: {stats['melhor_pontuacao']}")
+        print(f"💯 Pontuação total: {stats['pontuacao_total']}")
+        
+        if stats['palavras_descobertas']:
+            print(f"\n📝 Palavras descobertas ({len(stats['palavras_descobertas'])}):"))
+            for palavra in stats['palavras_descobertas'][-10:]:  # Últimas 10
+                print(f"  ✅ {palavra}")
+            if len(stats['palavras_descobertas']) > 10:
+                print(f"  ... e mais {len(stats['palavras_descobertas']) - 10}")
+    
+    def menu_principal(self):
+        """Menu principal do jogo."""
+        while True:
+            print("\n🎯 JOGO DA FORCA - MENU PRINCIPAL")
+            print("=" * 40)
+            print("1. 🎯 Jogar")
+            print("2. 📊 Ver Estatísticas")
+            print("3. 🏆 Ranking de Palavras")
+            print("4. ❓ Como Jogar")
+            print("5. 🚪 Sair")
+            
+            escolha = input("\nEscolha uma opção: ").strip()
+            
+            if escolha == '1':
+                self.jogar()
+                input("\nPressione Enter para continuar...")
+            elif escolha == '2':
+                self.mostrar_estatisticas()
+                input("\nPressione Enter para continuar...")
+            elif escolha == '3':
+                self.mostrar_ranking_palavras()
+                input("\nPressione Enter para continuar...")
+            elif escolha == '4':
+                self.mostrar_como_jogar()
+                input("\nPressione Enter para continuar...")
+            elif escolha == '5':
+                print("\n👋 Obrigado por jogar! Até a próxima!")
+                break
+            else:
+                print("❌ Opção inválida!")
+    
+    def mostrar_ranking_palavras(self):
+        """Mostra ranking das palavras por categoria."""
+        print("\n🏆 RANKING DE PALAVRAS POR CATEGORIA")
+        print("=" * 50)
+        
+        for categoria, dificuldades in self.palavras.items():
+            print(f"\n📂 {categoria.upper()}:")
+            for dificuldade, palavras in dificuldades.items():
+                print(f"  {dificuldade.title()}: {len(palavras)} palavras")
+                # Mostrar algumas palavras como exemplo
+                exemplos = [p['palavra'] for p in palavras[:3]]
+                print(f"    Exemplos: {', '.join(exemplos)}")
+    
+    def mostrar_como_jogar(self):
+        """Mostra instruções do jogo."""
+        print("\n❓ COMO JOGAR - JOGO DA FORCA")
+        print("=" * 40)
+        print("""
+🎯 OBJETIVO:
+   Descobrir a palavra secreta antes que o boneco seja enforcado!
+
+🎯 COMO JOGAR:
+   1. Escolha uma categoria (animais, países, tecnologia)
+   2. Escolha a dificuldade (fácil, médio, difícil)
+   3. Digite uma letra por vez para tentar descobrir a palavra
+   4. Você tem 6 tentativas erradas antes de perder
+
+💡 DICAS:
+   ✅ Digite 'dica' para receber uma dica (reduz pontuação)
+   ✅ Digite 'sair' para abandonar o jogo
+   ✅ Palavras mais difíceis dão mais pontos
+   ✅ Menos erros = mais pontos
+
+🏆 PONTUAÇÃO:
+   ✅ Pontos base = tamanho da palavra × 10
+   ✅ Multiplicador por dificuldade:
+     - Fácil: ×1
+     - Médio: ×1.5
+     - Difícil: ×2
+   ✅ Penalidades:
+     - Cada erro: -5 pontos
+     - Usar dica: -20% dos pontos
+
+📊 ESTATÍSTICAS:
+   Suas estatísticas são salvas automaticamente!
+""")
+
+def main():
+    """Função principal."""
+    jogo = JogoDaForca()
+    jogo.menu_principal()
+
+if __name__ == "__main__":
+    main()
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projeto 3: Gerenciador de Tarefas -->
+                <div class="project-card difficulty-hard">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold">📋 Projeto 3: Gerenciador de Tarefas</h2>
+                        <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">Difícil</span>
+                    </div>
+                    
+                    <p class="mb-4 opacity-90">
+                        Um sistema completo de gerenciamento de tarefas com categorias, prioridades, 
+                        lembretes e relatórios detalhados.
+                    </p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">✅ CRUD completo de tarefas</div>
+                        <div class="feature-item">✅ Categorias e tags</div>
+                        <div class="feature-item">✅ Prioridades e prazos</div>
+                        <div class="feature-item">✅ Sistema de lembretes</div>
+                        <div class="feature-item">✅ Relatórios e estatísticas</div>
+                        <div class="feature-item">✅ Exportação de dados</div>
+                    </div>
+                    
+                    <button onclick="toggleSolution('tasks-solution')" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-6 py-2 rounded-lg transition-all mt-4">
+                        Ver Código Completo
+                    </button>
+                    
+                    <div id="tasks-solution" class="solution mt-6">
+                        <div class="code-block">
+# gerenciador_tarefas.py
+"""
+Gerenciador de Tarefas
+Sistema completo para gerenciar tarefas pessoais e profissionais.
+
+Autor: Curso Python
+Versão: 1.0
+"""
+
+import json
+import csv
+from datetime import datetime, timedelta
+from pathlib import Path
+from enum import Enum
+from typing import List, Dict, Optional
+
+class Prioridade(Enum):
+    """Enum para prioridades das tarefas."""
+    BAIXA = 1
+    MEDIA = 2
+    ALTA = 3
+    URGENTE = 4
+
+class Status(Enum):
+    """Enum para status das tarefas."""
+    PENDENTE = "pendente"
+    EM_ANDAMENTO = "em_andamento"
+    CONCLUIDA = "concluida"
+    CANCELADA = "cancelada"
+
+class Tarefa:
+    """Classe para representar uma tarefa."""
+    
+    def __init__(self, titulo: str, descricao: str = "", categoria: str = "Geral", 
+                 prioridade: Prioridade = Prioridade.MEDIA, prazo: Optional[datetime] = None):
+        self.id = self._gerar_id()
+        self.titulo = titulo
+        self.descricao = descricao
+        self.categoria = categoria
+        self.prioridade = prioridade
+        self.status = Status.PENDENTE
+        self.data_criacao = datetime.now()
+        self.data_conclusao = None
+        self.prazo = prazo
+        self.tags = []
+        self.subtarefas = []
+        self.tempo_estimado = None  # em minutos
+        self.tempo_gasto = 0  # em minutos
+    
+    def _gerar_id(self) -> str:
+        """Gera ID único baseado no timestamp."""
+        return f"task_{int(datetime.now().timestamp() * 1000)}"
+    
+    def adicionar_tag(self, tag: str):
+        """Adiciona uma tag à tarefa."""
+        if tag not in self.tags:
+            self.tags.append(tag)
+    
+    def remover_tag(self, tag: str):
+        """Remove uma tag da tarefa."""
+        if tag in self.tags:
+            self.tags.remove(tag)
+    
+    def adicionar_subtarefa(self, subtarefa: str):
+        """Adiciona uma subtarefa."""
+        self.subtarefas.append({
+            'texto': subtarefa,
+            'concluida': False,
+            'data_criacao': datetime.now().isoformat()
+        })
+    
+    def concluir_subtarefa(self, indice: int):
+        """Marca uma subtarefa como concluída."""
+        if 0 <= indice < len(self.subtarefas):
+            self.subtarefas[indice]['concluida'] = True
+    
+    def marcar_como_concluida(self):
+        """Marca a tarefa como concluída."""
+        self.status = Status.CONCLUIDA
+        self.data_conclusao = datetime.now()
+    
+    def marcar_como_em_andamento(self):
+        """Marca a tarefa como em andamento."""
+        self.status = Status.EM_ANDAMENTO
+    
+    def cancelar(self):
+        """Cancela a tarefa."""
+        self.status = Status.CANCELADA
+    
+    def esta_atrasada(self) -> bool:
+        """Verifica se a tarefa está atrasada."""
+        if self.prazo and self.status not in [Status.CONCLUIDA, Status.CANCELADA]:
+            return datetime.now() > self.prazo
+        return False
+    
+    def dias_para_prazo(self) -> Optional[int]:
+        """Retorna quantos dias faltam para o prazo."""
+        if self.prazo:
+            delta = self.prazo - datetime.now()
+            return delta.days
+        return None
+    
+    def progresso_subtarefas(self) -> float:
+        """Retorna o progresso das subtarefas (0-100)."""
+        if not self.subtarefas:
+            return 0.0
+        
+        concluidas = sum(1 for st in self.subtarefas if st['concluida'])
+        return (concluidas / len(self.subtarefas)) * 100
+    
+    def to_dict(self) -> Dict:
+        """Converte a tarefa para dicionário."""
+        return {
+            'id': self.id,
+            'titulo': self.titulo,
+            'descricao': self.descricao,
+            'categoria': self.categoria,
+            'prioridade': self.prioridade.value,
+            'status': self.status.value,
+            'data_criacao': self.data_criacao.isoformat(),
+            'data_conclusao': self.data_conclusao.isoformat() if self.data_conclusao else None,
+            'prazo': self.prazo.isoformat() if self.prazo else None,
+            'tags': self.tags,
+            'subtarefas': self.subtarefas,
+            'tempo_estimado': self.tempo_estimado,
+            'tempo_gasto': self.tempo_gasto
+        }
+    
+    @classmethod
+    def from_dict(cls, data: Dict) -> 'Tarefa':
+        """Cria uma tarefa a partir de um dicionário."""
+        tarefa = cls(
+            titulo=data['titulo'],
+            descricao=data['descricao'],
+            categoria=data['categoria'],
+            prioridade=Prioridade(data['prioridade'])
+        )
+        
+        tarefa.id = data['id']
+        tarefa.status = Status(data['status'])
+        tarefa.data_criacao = datetime.fromisoformat(data['data_criacao'])
+        
+        if data['data_conclusao']:
+            tarefa.data_conclusao = datetime.fromisoformat(data['data_conclusao'])
+        
+        if data['prazo']:
+            tarefa.prazo = datetime.fromisoformat(data['prazo'])
+        
+        tarefa.tags = data['tags']
+        tarefa.subtarefas = data['subtarefas']
+        tarefa.tempo_estimado = data.get('tempo_estimado')
+        tarefa.tempo_gasto = data.get('tempo_gasto', 0)
+        
+        return tarefa
+    
+    def __str__(self) -> str:
+        status_emoji = {
+            Status.PENDENTE: "⏳",
+            Status.EM_ANDAMENTO: "🔄",
+            Status.CONCLUIDA: "✅",
+            Status.CANCELADA: "❌"
+        }
+        
+        prioridade_emoji = {
+            Prioridade.BAIXA: "🟢",
+            Prioridade.MEDIA: "🟡",
+            Prioridade.ALTA: "🟠",
+            Prioridade.URGENTE: "🔴"
+        }
+        
+        resultado = f"{status_emoji[self.status]} {prioridade_emoji[self.prioridade]} {self.titulo}"
+        
+        if self.prazo:
+            dias = self.dias_para_prazo()
+            if dias is not None:
+                if dias < 0:
+                    resultado += f" (🚨 {abs(dias)} dias atrasado)"
+                elif dias == 0:
+                    resultado += " (🔥 vence hoje)"
+                elif dias <= 3:
+                    resultado += f" (⏰ {dias} dias restantes)"
+        
+        return resultado
+
+class GerenciadorTarefas:
+    """Gerenciador principal de tarefas."""
+    
+    def __init__(self, arquivo_dados: str = "tarefas.json"):
+        self.arquivo_dados = Path(arquivo_dados)
+        self.tarefas: List[Tarefa] = []
+        self.categorias = set(["Geral", "Trabalho", "Pessoal", "Estudos", "Saúde"])
+        self.carregar_dados()
+    
+    def carregar_dados(self):
+        """Carrega tarefas do arquivo."""
+        try:
+            if self.arquivo_dados.exists():
+                with open(self.arquivo_dados, 'r', encoding='utf-8') as f:
+                    dados = json.load(f)
+                    
+                self.tarefas = [Tarefa.from_dict(t) for t in dados.get('tarefas', [])]
+                self.categorias.update(dados.get('categorias', []))
+                
+                print(f"✅ {len(self.tarefas)} tarefas carregadas")
+        except Exception as e:
+            print(f"❌ Erro ao carregar dados: {e}")
+            self.tarefas = []
+    
+    def salvar_dados(self):
+        """Salva tarefas no arquivo."""
+        try:
+            dados = {
+                'tarefas': [t.to_dict() for t in self.tarefas],
+                'categorias': list(self.categorias),
+                'ultima_atualizacao': datetime.now().isoformat()
+            }
+            
+            with open(self.arquivo_dados, 'w', encoding='utf-8') as f:
+                json.dump(dados, f, indent=2, ensure_ascii=False)
+            
+            print("💾 Dados salvos com sucesso")
+        except Exception as e:
+            print(f"❌ Erro ao salvar dados: {e}")
+    
+    def criar_tarefa(self, titulo: str, descricao: str = "", categoria: str = "Geral",
+                    prioridade: str = "media", prazo_str: str = "") -> Tarefa:
+        """Cria uma nova tarefa."""
+        # Converter prioridade
+        prioridades = {
+            'baixa': Prioridade.BAIXA,
+            'media': Prioridade.MEDIA,
+            'alta': Prioridade.ALTA,
+            'urgente': Prioridade.URGENTE
+        }
+        prioridade_obj = prioridades.get(prioridade.lower(), Prioridade.MEDIA)
+        
+        # Converter prazo
+        prazo = None
+        if prazo_str:
+            try:
+                prazo = datetime.strptime(prazo_str, "%d/%m/%Y %H:%M")
+            except ValueError:
+                try:
+                    prazo = datetime.strptime(prazo_str, "%d/%m/%Y")
+                    prazo = prazo.replace(hour=23, minute=59)  # Final do dia
+                except ValueError:
+                    print("❌ Formato de data inválido. Use DD/MM/AAAA ou DD/MM/AAAA HH:MM")
+        
+        tarefa = Tarefa(titulo, descricao, categoria, prioridade_obj, prazo)
+        self.tarefas.append(tarefa)
+        self.categorias.add(categoria)
+        
+        print(f"✅ Tarefa '{titulo}' criada com sucesso!")
+        return tarefa
+    
+    def listar_tarefas(self, filtro_status: Optional[str] = None, 
+                      filtro_categoria: Optional[str] = None,
+                      filtro_prioridade: Optional[str] = None) -> List[Tarefa]:
+        """Lista tarefas com filtros opcionais."""
+        tarefas_filtradas = self.tarefas.copy()
+        
+        if filtro_status:
+            status_map = {
+                'pendente': Status.PENDENTE,
+                'andamento': Status.EM_ANDAMENTO,
+                'concluida': Status.CONCLUIDA,
+                'cancelada': Status.CANCELADA
+            }
+            if filtro_status in status_map:
+                tarefas_filtradas = [t for t in tarefas_filtradas 
+                                   if t.status == status_map[filtro_status]]
+        
+        if filtro_categoria:
+            tarefas_filtradas = [t for t in tarefas_filtradas 
+                               if t.categoria.lower() == filtro_categoria.lower()]
+        
+        if filtro_prioridade:
+            prioridade_map = {
+                'baixa': Prioridade.BAIXA,
+                'media': Prioridade.MEDIA,
+                'alta': Prioridade.ALTA,
+                'urgente': Prioridade.URGENTE
+            }
+            if filtro_prioridade in prioridade_map:
+                tarefas_filtradas = [t for t in tarefas_filtradas 
+                                   if t.prioridade == prioridade_map[filtro_prioridade]]
+        
+        # Ordenar por prioridade e prazo
+        tarefas_filtradas.sort(key=lambda t: (
+            t.prioridade.value,
+            t.prazo if t.prazo else datetime.max,
+            t.data_criacao
+        ), reverse=True)
+        
+        return tarefas_filtradas
+    
+    def buscar_tarefa(self, termo: str) -> List[Tarefa]:
+        """Busca tarefas por termo no título ou descrição."""
+        termo = termo.lower()
+        return [t for t in self.tarefas 
+                if termo in t.titulo.lower() or termo in t.descricao.lower()]
+    
+    def obter_tarefa_por_id(self, task_id: str) -> Optional[Tarefa]:
+        """Obtém tarefa pelo ID."""
+        for tarefa in self.tarefas:
+            if tarefa.id == task_id:
+                return tarefa
+        return None
+    
+    def excluir_tarefa(self, task_id: str) -> bool:
+        """Exclui uma tarefa pelo ID."""
+        for i, tarefa in enumerate(self.tarefas):
+            if tarefa.id == task_id:
+                del self.tarefas[i]
+                print(f"✅ Tarefa '{tarefa.titulo}' excluída")
+                return True
+        print("❌ Tarefa não encontrada")
+        return False
+    
+    def gerar_relatorio(self) -> Dict:
+        """Gera relatório estatístico das tarefas."""
+        total = len(self.tarefas)
+        if total == 0:
+            return {'total': 0}
+        
+        concluidas = len([t for t in self.tarefas if t.status == Status.CONCLUIDA])
+        pendentes = len([t for t in self.tarefas if t.status == Status.PENDENTE])
+        em_andamento = len([t for t in self.tarefas if t.status == Status.EM_ANDAMENTO])
+        canceladas = len([t for t in self.tarefas if t.status == Status.CANCELADA])
+        atrasadas = len([t for t in self.tarefas if t.esta_atrasada()])
+        
+        # Estatísticas por categoria
+        por_categoria = {}
+        for tarefa in self.tarefas:
+            cat = tarefa.categoria
+            if cat not in por_categoria:
+                por_categoria[cat] = {'total': 0, 'concluidas': 0}
+            por_categoria[cat]['total'] += 1
+            if tarefa.status == Status.CONCLUIDA:
+                por_categoria[cat]['concluidas'] += 1
+        
+        # Tempo médio de conclusão
+        tarefas_concluidas = [t for t in self.tarefas if t.data_conclusao]
+        tempo_medio = None
+        if tarefas_concluidas:
+            tempos = [(t.data_conclusao - t.data_criacao).days for t in tarefas_concluidas]
+            tempo_medio = sum(tempos) / len(tempos)
+        
+        return {
+            'total': total,
+            'concluidas': concluidas,
+            'pendentes': pendentes,
+            'em_andamento': em_andamento,
+            'canceladas': canceladas,
+            'atrasadas': atrasadas,
+            'taxa_conclusao': (concluidas / total) * 100,
+            'por_categoria': por_categoria,
+            'tempo_medio_conclusao': tempo_medio
+        }
+    
+    def exportar_csv(self, arquivo: str = "tarefas_export.csv"):
+        """Exporta tarefas para CSV."""
+        try:
+            with open(arquivo, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                writer.writerow([
+                    'ID', 'Título', 'Descrição', 'Categoria', 'Prioridade',
+                    'Status', 'Data criação', 'Data Conclusão', 'Prazo',
+                    'Tags', 'Progresso Subtarefas'
+                ])
+                
+                for tarefa in self.tarefas:
+                    writer.writerow([
+                        tarefa.id,
+                        tarefa.titulo,
+                        tarefa.descricao,
+                        tarefa.categoria,
+                        tarefa.prioridade.name,
+                        tarefa.status.value,
+                        tarefa.data_criacao.strftime('%d/%m/%Y %H:%M'),
+                        tarefa.data_conclusao.strftime('%d/%m/%Y %H:%M') if tarefa.data_conclusao else '',
+                        tarefa.prazo.strftime('%d/%m/%Y %H:%M') if tarefa.prazo else '',
+                        ', '.join(tarefa.tags),
+                        f"{tarefa.progresso_subtarefas():.1f}%"
+                    ])
+            
+            print(f"✅ Tarefas exportadas para {arquivo}")
+        except Exception as e:
+            print(f"❌ Erro ao exportar: {e}")
+
+def main():
+    """Interface principal do gerenciador."""
+    gerenciador = GerenciadorTarefas()
+    
+    def mostrar_menu():
+        print("\n📋 GERENCIADOR DE TAREFAS")
+        print("=" * 40)
+        print("1. ➕ Criar tarefa")
+        print("2. 📋 Listar tarefas")
+        print("3. 🔍 Buscar tarefas")
+        print("4. ✏️ Editar tarefa")
+        print("5. ✅ Marcar como concluída")
+        print("6. 🗑️ Excluir tarefa")
+        print("7. 📊 Relatório")
+        print("8. 📤 Exportar CSV")
+        print("9. 💾 Salvar")
+        print("0. 🚪 Sair")
+    
+    while True:
+        try:
+            mostrar_menu()
+            opcao = input("\nEscolha uma opção: ").strip()
+            
+            if opcao == '1':
+                # Criar tarefa
+                titulo = input("Título: ").strip()
+                if not titulo:
+                    print("❌ Título é obrigatório")
+                    continue
+                
+                descricao = input("Descrição (opcional): ").strip()
+                
+                print(f"Categorias: {', '.join(sorted(gerenciador.categorias))}")
+                categoria = input("Categoria (ou nova): ").strip() or "Geral"
+                
+                print("Prioridades: baixa, media, alta, urgente")
+                prioridade = input("Prioridade: ").strip() or "media"
+                
+                prazo = input("Prazo (DD/MM/AAAA HH:MM ou DD/MM/AAAA): ").strip()
+                
+                gerenciador.criar_tarefa(titulo, descricao, categoria, prioridade, prazo)
+            
+            elif opcao == '2':
+                # Listar tarefas
+                print("\nFiltros (deixe vazio para todos):")
+                filtro_status = input("Status (pendente/andamento/concluida/cancelada): ").strip()
+                filtro_categoria = input("Categoria: ").strip()
+                filtro_prioridade = input("Prioridade (baixa/media/alta/urgente): ").strip()
+                
+                tarefas = gerenciador.listar_tarefas(
+                    filtro_status or None,
+                    filtro_categoria or None,
+                    filtro_prioridade or None
+                )
+                
+                if tarefas:
+                    print(f"\n📋 {len(tarefas)} tarefa(s) encontrada(s):\n")
+                    for i, tarefa in enumerate(tarefas, 1):
+                        print(f"{i:2d}. {tarefa}")
+                        if tarefa.descricao:
+                            print(f"    📝 {tarefa.descricao}")
+                        if tarefa.tags:
+                            print(f"    🏷️ {', '.join(tarefa.tags)}")
+                        if tarefa.subtarefas:
+                            progresso = tarefa.progresso_subtarefas()
+                            print(f"    📊 Subtarefas: {progresso:.0f}% ({len([st for st in tarefa.subtarefas if st['concluida']])}/{len(tarefa.subtarefas)})")
+                        print()
+                else:
+                    print("\n🔍 Nenhuma tarefa encontrada")
+            
+            elif opcao == '7':
+                # Relatório
+                relatorio = gerenciador.gerar_relatorio()
+                if relatorio['total'] > 0:
+                    print("\n📊 RELATÓRIO DE TAREFAS")
+                    print("=" * 40)
+                    print(f"📋 Total de tarefas: {relatorio['total']}")
+                    print(f"✅ Concluídas: {relatorio['concluidas']} ({relatorio['taxa_conclusao']:.1f}%)")
+                    print(f"⏳ Pendentes: {relatorio['pendentes']}")
+                    print(f"🔄 Em andamento: {relatorio['em_andamento']}")
+                    print(f"❌ Canceladas: {relatorio['canceladas']}")
+                    print(f"🚨 Atrasadas: {relatorio['atrasadas']}")
+                    
+                    if relatorio['tempo_medio_conclusao']:
+                        print(f"⏱️ Tempo médio de conclusão: {relatorio['tempo_medio_conclusao']:.1f} dias")
+                    
+                    print("\n📂 Por categoria:")
+                    for cat, stats in relatorio['por_categoria'].items():
+                        taxa = (stats['concluidas'] / stats['total']) * 100 if stats['total'] > 0 else 0
+                        print(f"  {cat}: {stats['concluidas']}/{stats['total']} ({taxa:.1f}%)")
+                else:
+                    print("\n🔍 Nenhuma tarefa cadastrada")
+            
+            elif opcao == '8':
+                # Exportar CSV
+                arquivo = input("Nome do arquivo (padrão: tarefas_export.csv): ").strip()
+                gerenciador.exportar_csv(arquivo or "tarefas_export.csv")
+            
+            elif opcao == '9':
+                # Salvar
+                gerenciador.salvar_dados()
+            
+            elif opcao == '0':
+                # Sair
+                gerenciador.salvar_dados()
+                print("\n👋 Até logo!")
+                break
+            
+            else:
+                print("❌ Opção inválida")
+        
+        except KeyboardInterrupt:
+            print("\n\n👋 Programa encerrado pelo usuário")
+            gerenciador.salvar_dados()
+            break
+        except Exception as e:
+            print(f"❌ Erro: {e}")
+
+if __name__ == "__main__":
+    main()
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exercícios Práticos -->
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mt-8">
+                <h2 class="text-2xl font-bold text-yellow-800 mb-4">🎯 Exercícios Práticos</h2>
+                
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg p-4 border border-yellow-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Exercício 1: Personalize a Calculadora</h3>
+                        <p class="text-gray-600 mb-3">
+                            Adicione novas funcionalidades à calculadora:
+                        </p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Calculadora de IMC (Índice de Massa Corporal)</li>
+                            <li>Conversor de moedas (com taxas fixas)</li>
+                            <li>Calculadora de juros compostos</li>
+                            <li>Gerador de números aleatórios</li>
+                        </ul>
+                        
+                        <button onclick="toggleSolution('ex1-solution')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded mt-3">
+                            Ver solução
+                        </button>
+                        
+                        <div id="ex1-solution" class="solution mt-4">
+                            <div class="code-block">
+# Adicione estas funções à classe CalculadoraAvancada:
+
+def calcular_imc(self, peso, altura):
+    """Calcula o Índice de Massa Corporal."""
+    try:
+        imc = peso / (altura ** 2)
+        
+        if imc < 18.5:
+            categoria = "Abaixo do peso"
+        elif imc < 25:
+            categoria = "Peso normal"
+        elif imc < 30:
+            categoria = "Sobrepeso"
+        else:
+            categoria = "Obesidade"
+        
+        operacao_str = f"IMC({peso}kg, {altura}m)"
+        self.adicionar_historico(operacao_str, f"{imc:.1f} - {categoria}")
+        
+        return f"IMC: {imc:.1f} - {categoria}"
+    except Exception as e:
+        return f"Erro: {str(e)}"
+
+def converter_moeda(self, valor, moeda_origem, moeda_destino):
+    """Converte entre moedas com taxas fixas."""
+    # Taxas em relação ao USD
+    taxas = {
+        'USD': 1.0,
+        'BRL': 5.2,
+        'EUR': 0.85,
+        'GBP': 0.73,
+        'JPY': 110.0
+    }
+    
+    try:
+        if moeda_origem not in taxas or moeda_destino not in taxas:
+            return "Erro: Moeda não suportada"
+        
+        # Converter para USD primeiro, depois para moeda destino
+        valor_usd = valor / taxas[moeda_origem]
+        valor_final = valor_usd * taxas[moeda_destino]
+        
+        operacao_str = f"Converter {valor} {moeda_origem} para {moeda_destino}"
+        self.adicionar_historico(operacao_str, f"{valor_final:.2f} {moeda_destino}")
+        
+        return f"{valor_final:.2f} {moeda_destino}"
+    except Exception as e:
+        return f"Erro: {str(e)}"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-4 border border-yellow-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Exercício 2: Expanda o Jogo da Forca</h3>
+                        <p class="text-gray-600 mb-3">
+                            Adicione estas funcionalidades ao jogo:
+                        </p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Modo multiplayer (dois jogadores)</li>
+                            <li>Sistema de achievements/conquistas</li>
+                            <li>Palavras personalizadas (adicionar/remover)</li>
+                            <li>Interface gráfica simples com tkinter</li>
+                        </ul>
+                        
+                        <button onclick="toggleSolution('ex2-solution')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded mt-3">
+                            Ver Dica
+                        </button>
+                        
+                        <div id="ex2-solution" class="solution mt-4">
+                            <div class="code-block">
+# Dica para modo multiplayer:
+
+class ModoMultiplayer:
+    def __init__(self, jogo_forca):
+        self.jogo = jogo_forca
+        self.jogador1 = {"nome": "", "pontos": 0}
+        self.jogador2 = {"nome": "", "pontos": 0}
+        self.jogador_atual = 1
+    
+    def alternar_jogador(self):
+        self.jogador_atual = 2 if self.jogador_atual == 1 else 1
+    
+    def jogar_rodada(self):
+        jogador = self.jogador1 if self.jogador_atual == 1 else self.jogador2
+        print(f"\n🎯 Vez de {jogador['nome']}")
+        
+        # Lógica do jogo normal aqui
+        # Se ganhar, adicionar pontos
+        # Alternar jogador
+        
+# Dica para achievements:
+
+class Achievements:
+    def __init__(self):
+        self.conquistas = {
+            "primeira_vitoria": {"nome": "Primeira Vitória", "desbloqueada": False},
+            "sem_erros": {"nome": "Perfeito!", "desbloqueada": False},
+            "dez_vitorias": {"nome": "Veterano", "desbloqueada": False}
+        }
+    
+    def verificar_conquista(self, tipo, dados):
+        # Verificar se conquista foi desbloqueada
+        pass
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-4 border border-yellow-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Exercício 3: Melhore o Gerenciador</h3>
+                        <p class="text-gray-600 mb-3">
+                            Adicione funcionalidades avançadas:
+                        </p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Notificações de prazo (usando plyer)</li>
+                            <li>Sincronização com Google Calendar</li>
+                            <li>Interface web com Flask</li>
+                            <li>Backup automático na nuvem</li>
+                        </ul>
+                        
+                        <button onclick="toggleSolution('ex3-solution')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded mt-3">
+                            Ver Estrutura
+                        </button>
+                        
+                        <div id="ex3-solution" class="solution mt-4">
+                            <div class="code-block">
+# Estrutura para interface web com Flask:
+
+from flask import Flask, render_template, request, jsonify
+
+app = Flask(__name__)
+gerenciador = GerenciadorTarefas()
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/api/tarefas', methods=['GET'])
+def listar_tarefas_api():
+    tarefas = gerenciador.listar_tarefas()
+    return jsonify([t.to_dict() for t in tarefas])
+
+@app.route('/api/tarefas', methods=['POST'])
+def criar_tarefa_api():
+    dados = request.json
+    tarefa = gerenciador.criar_tarefa(
+        dados['titulo'],
+        dados.get('descricao', ''),
+        dados.get('categoria', 'Geral'),
+        dados.get('prioridade', 'media'),
+        dados.get('prazo', '')
+    )
+    return jsonify(tarefa.to_dict())
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+# Para notificações:
+# pip install plyer
+from plyer import notification
+
+def enviar_notificacao(titulo, mensagem):
+    notification.notify(
+        title=titulo,
+        message=mensagem,
+        timeout=10
+    )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Resumo do Capítulo -->
+            <div class="bg-green-50 border border-green-200 rounded-lg p-6 mt-8">
+                <h2 class="text-2xl font-bold text-green-800 mb-4">📚 Resumo do Capítulo</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-green-700 mb-3">🎯 O que você aprendeu:</h3>
+                        <ul class="space-y-2 text-green-600">
+                            <li>✅ Como estruturar projetos Python completos</li>
+                            <li>✅ Aplicação prática de todos os conceitos do curso</li>
+                            <li>✅ Organização de código em classes e módulos</li>
+                            <li>✅ Tratamento de erros e validação de dados</li>
+                            <li>✅ Persistência de dados com JSON e CSV</li>
+                            <li>✅ Interface de linha de comando interativa</li>
+                            <li>✅ Documentação e boas práticas</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-green-700 mb-3">🚀 Próximos passos:</h3>
+                        <ul class="space-y-2 text-green-600">
+                            <li>📚 Explore bibliotecas externas (requests, pandas, matplotlib)</li>
+                            <li>🌐 Aprenda desenvolvimento web (Flask, Django)</li>
+                            <li>🤖 Estude ciência de dados e machine learning</li>
+                            <li>🖥️ Desenvolva interfaces gráficas (tkinter, PyQt)</li>
+                            <li>🤝 Contribua para projetos open source</li>
+                            <li>💡 Crie seus próprios projetos pessoais</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-white rounded-lg border border-green-200">
+                    <h4 class="font-semibold text-green-800 mb-2">🎉 Parabéns!</h4>
+                    <p class="text-green-700">
+                        Você completou o Curso Python Completo! Agora você tem as bases sólidas 
+                        para continuar sua jornada como desenvolvedor Python. Continue praticando, 
+                        criando projetos e nunca pare de aprender!
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Navegação -->
+            <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+                <a href="capitulo9.html" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors w-full md:w-auto">
+                    ← Capítulo 9: Módulos e Bibliotecas
+                </a>
+                
+                <a href="curso-python-completo.html" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition-colors">
+                    🏠 Voltar ao Curso
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleSolution(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
+
+

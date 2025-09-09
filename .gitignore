@@ -1,0 +1,86 @@
+# Arquivos do sistema operacional
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Arquivos temporários do Windows
+*.tmp
+*.temp
+~$*
+
+# Logs
+*.log
+logs/
+
+# Arquivos de backup
+*.bak
+*.backup
+*~
+
+# Arquivos de cache do navegador
+.cache/
+
+# Arquivos do editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Arquivos Python (caso sejam adicionados exemplos executáveis)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+PIPFILE.lock
+
+# Ambientes virtuais Python
+venv/
+env/
+ENV/
+.env
+.venv
+
+# Arquivos de configuração local
+config.local.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Arquivos de dependências
+node_modules/
+package-lock.json
+yarn.lock
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Arquivos de teste
+test-results/
+coverage/
+
+# Arquivos pessoais
+*.personal
+*.private

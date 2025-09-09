@@ -1,0 +1,1666 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 9: Módulos e Bibliotecas - Curso Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            line-height: 1.6;
+            tab-size: 4;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+        .solution {
+            display: none;
+        }
+        .solution.show {
+            display: block;
+        }
+        .module-box {
+            border-left: 4px solid #10b981;
+            background-color: #ecfdf5;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .library-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+    
+        
+        @media (max-width: 640px) {
+            .code-block {
+                font-size: 0.75rem;
+                padding: 0.75rem;
+            }
+            .container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-4 md:py-8">
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+            <div class="mb-6">
+                <a href="curso-python-completo.html" class="text-blue-600 hover:text-blue-800 font-medium">&larr; Voltar ao Curso</a>
+            </div>
+            
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8">Capítulo 9: Módulos e Bibliotecas</h1>
+            
+            <div class="space-y-6 md:space-y-8">
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">9.1 Introdução aos Módulos</h2>
+                    <p class="text-gray-600 mb-4">
+                        Módulos são arquivos Python que contêm definições e declarações. Eles permitem 
+                        organizar código em arquivos separados e reutilizar funcionalidades.
+                    </p>
+                    
+                    <div class="module-box">
+                        <h3 class="font-semibold text-green-800 mb-2">Vantagens dos Módulos</h3>
+                        <ul class="list-disc list-inside text-green-700">
+                            <li><strong>Organização:</strong> Separa código em arquivos lógicos</li>
+                            <li><strong>Reutilização:</strong> Use o mesmo código em diferentes projetos</li>
+                            <li><strong>Namespace:</strong> Evita conflitos de nomes</li>
+                            <li><strong>Manutenção:</strong> Facilita correções e atualizações</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# Importando módulos da biblioteca padrão
+import math
+import random
+import datetime
+
+# Usando funções dos módulos
+print(f"Raiz quadrada de 16: {math.sqrt(16)}")
+print(f"Número aleatório: {random.randint(1, 100)}")
+print(f"Data atual: {datetime.datetime.now()}")
+
+# Importando funções específicas
+from math import pi, cos, sin
+from random import choice
+from datetime import date
+
+print(f"\nValor de π: {pi}")
+print(f"cos(π): {cos(pi)}")
+print(f"sin(π/2): {sin(pi/2)}")
+print(f"Escolha aleatória: {choice(['Python', 'Java', 'JavaScript'])}")
+print(f"Data de hoje: {date.today()}")
+
+# Importando com alias (apelido)
+import datetime as dt
+import math as matematica
+
+agora = dt.datetime.now()
+print(f"\nHora atual: {agora.strftime('%H:%M:%S')}")
+print(f"Valor de e: {matematica.e}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">9.2 Criando Seus Próprios Módulos</h2>
+                    <p class="text-gray-600 mb-4">
+                        Você pode criar seus próprios módulos salvando código Python em arquivos .py 
+                        e importando-os em outros scripts.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Exemplo de módulo personalizado: calculadora.py
+# (Este seria o conteúdo de um arquivo separado)
+
+"""
+Módulo Calculadora
+Contém funções matemáticas básicas e avançadas.
+
+Autor: Seu Nome
+Versão: 1.0
+"""
+
+# Constantes do m�dulo
+VERSAO = "1.0"
+AUTOR = "Curso Python"
+
+# Funções básicas
+def somar(a, b):
+    """Retorna a soma de dois números."""
+    return a + b
+
+def subtrair(a, b):
+    """Retorna a subtração de dois números."""
+    return a - b
+
+def multiplicar(a, b):
+    """Retorna a multiplicação de dois números."""
+    return a * b
+
+def dividir(a, b):
+    """Retorna a divisão de dois números."""
+    if b == 0:
+        raise ValueError("Divisão por zero não é permitida")
+    return a / b
+
+# Funções avançadas
+def potencia(base, expoente):
+    """Retorna base elevado ao expoente."""
+    return base ** expoente
+
+def raiz_quadrada(numero):
+    """Retorna a raiz quadrada de um número."""
+    if numero < 0:
+        raise ValueError("Não é possível calcular raiz de número negativo")
+    return numero ** 0.5
+
+def fatorial(n):
+    """Calcula o fatorial de um número."""
+    if n < 0:
+        raise ValueError("Fatorial não definido para números negativos")
+    if n == 0 or n == 1:
+        return 1
+    resultado = 1
+    for i in range(2, n + 1):
+        resultado *= i
+    return resultado
+
+# Função para exibir informações do módulo
+def info_modulo():
+    """Exibe informações sobre o módulo."""
+    print(f"Módulo Calculadora v{VERSAO}")
+    print(f"Autor: {AUTOR}")
+    print("Funções disponíveis:")
+    print("- somar(a, b)")
+    print("- subtrair(a, b)")
+    print("- multiplicar(a, b)")
+    print("- dividir(a, b)")
+    print("- potencia(base, expoente)")
+    print("- raiz_quadrada(numero)")
+    print("- fatorial(n)")
+
+# Código que executa apenas quando o módulo é executado diretamente
+if __name__ == "__main__":
+    print("Testando o módulo calculadora...")
+    print(f"5 + 3 = {somar(5, 3)}")
+    print(f"10 - 4 = {subtrair(10, 4)}")
+    print(f"6 × 7 = {multiplicar(6, 7)}")
+    print(f"15 ÷ 3 = {dividir(15, 3)}")
+    print(f"2³ = {potencia(2, 3)}")
+    print(f"√25 = {raiz_quadrada(25)}")
+    print(f"5! = {fatorial(5)}")
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# Como usar o módulo calculadora em outro arquivo
+
+# Importação completa
+import calculadora
+
+resultado = calculadora.somar(10, 5)
+print(f"Resultado: {resultado}")
+calculadora.info_modulo()
+
+# Importação específica
+from calculadora import multiplicar, dividir, VERSAO
+
+print(f"\nUsando calculadora v{VERSAO}")
+print(f"8 × 4 = {multiplicar(8, 4)}")
+print(f"20 ÷ 4 = {dividir(20, 4)}")
+
+# Importação com alias
+from calculadora import raiz_quadrada as raiz
+
+print(f"√64 = {raiz(64)}")
+
+# Importação de tudo (não recomendado para módulos grandes)
+from calculadora import *
+
+print(f"3! = {fatorial(3)}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">9.3 Bibliotecas Padrão Essenciais</h2>
+                    <p class="text-gray-600 mb-4">
+                        Python vem com uma rica biblioteca padrão. Aqui estão algumas das mais úteis:
+                    </p>
+                    
+                    <div class="library-grid">
+                        <div class="library-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📊 math</h4>
+                            <p class="text-sm text-gray-600 mb-2">Funções matemáticas</p>
+                            <code class="text-xs">sqrt(), sin(), cos(), pi, e</code>
+                        </div>
+                        
+                        <div class="library-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">🎲 random</h4>
+                            <p class="text-sm text-gray-600 mb-2">Números aleatórios</p>
+                            <code class="text-xs">randint(), choice(), shuffle()</code>
+                        </div>
+                        
+                        <div class="library-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📅 datetime</h4>
+                            <p class="text-sm text-gray-600 mb-2">Datas e horários</p>
+                            <code class="text-xs">datetime.now(), date.today()</code>
+                        </div>
+                        
+                        <div class="library-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">💻 os</h4>
+                            <p class="text-sm text-gray-600 mb-2">Sistema operacional</p>
+                            <code class="text-xs">listdir(), getcwd(), mkdir()</code>
+                        </div>
+                        
+                        <div class="library-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📁 pathlib</h4>
+                            <p class="text-sm text-gray-600 mb-2">Manipulação de caminhos</p>
+                            <code class="text-xs">Path(), exists(), mkdir()</code>
+                        </div>
+                        
+                        <div class="library-card">
+                            <h4 class="font-semibold text-gray-800 mb-2">📋 json</h4>
+                            <p class="text-sm text-gray-600 mb-2">Trabalhar com JSON</p>
+                            <code class="text-xs">loads(), dumps(), load(), dump()</code>
+                        </div>
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# Exemplos práticos das bibliotecas padrão
+
+# 1. Trabalhando com arquivos e diretórios
+import os
+from pathlib import Path
+
+print("=== SISTEMA DE ARQUIVOS ===")
+print(f"Diretório atual: {os.getcwd()}")
+print(f"Arquivos no diretório: {os.listdir('.')}")
+
+# Usando pathlib (mais moderno)
+caminho = Path(".")
+print(f"\nUsando pathlib:")
+print(f"Diretório atual: {caminho.absolute()}")
+print(f"É diretório? {caminho.is_dir()}")
+
+# 2. Trabalhando com datas
+from datetime import datetime, timedelta, date
+
+print("\n=== DATAS E HORÁRIOS ===")
+agora = datetime.now()
+print(f"Agora: {agora}")
+print(f"Formatado: {agora.strftime('%d/%m/%Y %H:%M:%S')}")
+
+# Calculando datas
+amanha = date.today() + timedelta(days=1)
+semana_passada = datetime.now() - timedelta(weeks=1)
+print(f"Amanhã: {amanha}")
+print(f"Semana passada: {semana_passada.strftime('%d/%m/%Y')}")
+
+# 3. Números aleatórios
+import random
+
+print("\n=== NÚMEROS ALEATÓRIOS ===")
+print(f"Número entre 1 e 100: {random.randint(1, 100)}")
+print(f"Número decimal: {random.random():.3f}")
+
+cores = ['vermelho', 'azul', 'verde', 'amarelo']
+print(f"Cor aleatória: {random.choice(cores)}")
+
+numeros = [1, 2, 3, 4, 5]
+random.shuffle(numeros)
+print(f"Lista embaralhada: {numeros}")
+
+# 4. Trabalhando com JSON
+import json
+
+print("\n=== JSON ===")
+# Convertendo dicionário para JSON
+pessoa = {
+    "nome": "João",
+    "idade": 30,
+    "cidade": "São Paulo",
+    "hobbies": ["leitura", "programação", "música"]
+}
+
+json_string = json.dumps(pessoa, indent=2, ensure_ascii=False)
+print(f"JSON string:\n{json_string}")
+
+# Convertendo JSON para dicionário
+pessoa_recuperada = json.loads(json_string)
+print(f"\nDicionário recuperado: {pessoa_recuperada}")
+
+# 5. Expressões regulares
+import re
+
+print("\n=== EXPRESSÕES REGULARES ===")
+texto = "Meu email é joao@email.com e meu telefone é (11) 99999-9999"
+
+# Encontrar email
+email = re.search(r'[\w.-]+@[\w.-]+\.\w+', texto)
+if email:
+    print(f"Email encontrado: {email.group()}")
+
+# Encontrar telefone
+telefone = re.search(r'\(\d{2}\)\s\d{5}-\d{4}', texto)
+if telefone:
+    print(f"Telefone encontrado: {telefone.group()}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">9.4 Pacotes (Packages)</h2>
+                    <p class="text-gray-600 mb-4">
+                        Pacotes são diretórios que contêm múltiplos módulos. Eles ajudam a organizar 
+                        projetos grandes em uma estrutura hierárquica.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Estrutura de um pacote
+# meu_projeto/
+#     __init__.py
+#     matematica/
+#         __init__.py
+#         basica.py
+#         avancada.py
+#     utilidades/
+#         __init__.py
+#         texto.py
+#         arquivo.py
+
+# Conteúdo de matematica/basica.py
+def somar(a, b):
+    return a + b
+
+def subtrair(a, b):
+    return a - b
+
+# Conteúdo de matematica/avancada.py
+import math
+
+def logaritmo(x, base=math.e):
+    return math.log(x, base)
+
+def seno(angulo_graus):
+    return math.sin(math.radians(angulo_graus))
+
+# Conteúdo de matematica/__init__.py
+from .basica import somar, subtrair
+from .avancada import logaritmo, seno
+
+__version__ = "1.0.0"
+__author__ = "Curso Python"
+
+# Conteúdo de utilidades/texto.py
+def capitalizar_palavras(texto):
+    return ' '.join(palavra.capitalize() for palavra in texto.split())
+
+def contar_palavras(texto):
+    return len(texto.split())
+
+def inverter_texto(texto):
+    return texto[::-1]
+
+# Como usar o pacote
+from meu_projeto.matematica import somar, logaritmo
+from meu_projeto.utilidades.texto import capitalizar_palavras
+
+# Ou importar o pacote completo
+import meu_projeto.matematica as mat
+import meu_projeto.utilidades.texto as txt
+
+resultado = mat.somar(5, 3)
+texto_formatado = txt.capitalizar_palavras("python é incrível")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">9.5 Bibliotecas Externas com pip</h2>
+                    <p class="text-gray-600 mb-4">
+                        O pip é o gerenciador de pacotes do Python. Use-o para instalar bibliotecas 
+                        externas que não fazem parte da biblioteca padrão.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Comandos pip no terminal/prompt
+
+# Instalar uma biblioteca
+# pip install requests
+# pip install pandas
+# pip install matplotlib
+
+# Instalar versão específica
+# pip install requests==2.28.0
+
+# Atualizar biblioteca
+# pip install --upgrade requests
+
+# Listar bibliotecas instaladas
+# pip list
+
+# Mostrar informações de uma biblioteca
+# pip show requests
+
+# Desinstalar biblioteca
+# pip uninstall requests
+
+# Instalar de arquivo requirements.txt
+# pip install -r requirements.txt
+
+# Gerar arquivo requirements.txt
+# pip freeze > requirements.txt
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# Exemplo usando a biblioteca requests (para requisições HTTP)
+# Primeiro instale: pip install requests
+
+import requests
+import json
+
+print("=== EXEMPLO COM REQUESTS ===")
+
+# Fazendo uma requisição GET
+response = requests.get('https://jsonplaceholder.typicode.com/posts/1')
+
+if response.status_code == 200:
+    dados = response.json()
+    print(f"Título: {dados['title']}")
+    print(f"Conteúdo: {dados['body'][:50]}...")
+else:
+    print(f"Erro na requisição: {response.status_code}")
+
+# Fazendo uma requisição POST
+novo_post = {
+    'title': 'Meu Post',
+    'body': 'Conteúdo do meu post',
+    'userId': 1
+}
+
+response = requests.post(
+    'https://jsonplaceholder.typicode.com/posts',
+    json=novo_post
+)
+
+if response.status_code == 201:
+    print(f"\nPost criado com ID: {response.json()['id']}")
+
+# Exemplo com parâmetros
+params = {'userId': 1}
+response = requests.get(
+    'https://jsonplaceholder.typicode.com/posts',
+    params=params
+)
+
+if response.status_code == 200:
+    posts = response.json()
+    print(f"\nUsuário 1 tem {len(posts)} posts")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">9.6 Ambientes Virtuais</h2>
+                    <p class="text-gray-600 mb-4">
+                        Ambientes virtuais isolam dependências de diferentes projetos, evitando 
+                        conflitos entre versões de bibliotecas.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Comandos para ambientes virtuais
+
+# Criar ambiente virtual
+# python -m venv meu_ambiente
+
+# Ativar ambiente virtual
+# Windows:
+# meu_ambiente\Scripts\activate
+
+# Linux/Mac:
+# source meu_ambiente/bin/activate
+
+# Desativar ambiente virtual
+# deactivate
+
+# Instalar bibliotecas no ambiente ativo
+# pip install requests pandas matplotlib
+
+# Gerar requirements.txt do ambiente
+# pip freeze > requirements.txt
+
+# Recriar ambiente em outro local
+# python -m venv novo_ambiente
+# novo_ambiente\Scripts\activate  # Windows
+# pip install -r requirements.txt
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Exercícios Práticos</h2>
+                    
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-3">Exercício 1: Sistema de Arquivos</h3>
+                        <p class="text-blue-700 mb-4">
+                            Crie um módulo para gerenciar arquivos que permita listar, criar, copiar 
+                            e organizar arquivos em diretórios.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol1')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol1" class="solution mt-4">
+                            <div class="code-block">
+# Módulo: gerenciador_arquivos.py
+"""
+Módulo Gerenciador de Arquivos
+Fornece funcionalidades para manipular arquivos e diretórios.
+
+Autor: Curso Python
+Versão: 1.0
+"""
+
+import os
+import shutil
+from pathlib import Path
+from datetime import datetime
+import json
+
+class GerenciadorArquivos:
+    """Classe para gerenciar operações com arquivos e diretórios."""
+    
+    def __init__(self, diretorio_base="."):
+        self.diretorio_base = Path(diretorio_base)
+        self.historico = []
+    
+    def listar_arquivos(self, diretorio=None, extensao=None):
+        """
+        Lista arquivos em um diretório.
+        
+        Args:
+            diretorio (str): Diretório a listar (padrão: diretório base)
+            extensao (str): Filtrar por extensão (ex: '.txt')
+        
+        Returns:
+            list: Lista de arquivos
+        """
+        if diretorio is None:
+            diretorio = self.diretorio_base
+        else:
+            diretorio = Path(diretorio)
+        
+        if not diretorio.exists():
+            raise FileNotFoundError(f"Diretório não encontrado: {diretorio}")
+        
+        arquivos = []
+        for item in diretorio.iterdir():
+            if item.is_file():
+                if extensao is None or item.suffix.lower() == extensao.lower():
+                    info = {
+                        'nome': item.name,
+                        'caminho': str(item),
+                        'tamanho': item.stat().st_size,
+                        'modificado': datetime.fromtimestamp(item.stat().st_mtime)
+                    }
+                    arquivos.append(info)
+        
+        return sorted(arquivos, key=lambda x: x['nome'])
+    
+    def criar_diretorio(self, nome_diretorio):
+        """
+        Cria um novo diretório.
+        
+        Args:
+            nome_diretorio (str): Nome do diretório a criar
+        
+        Returns:
+            bool: True se criado com sucesso
+        """
+        caminho = self.diretorio_base / nome_diretorio
+        
+        try:
+            caminho.mkdir(parents=True, exist_ok=True)
+            self._adicionar_historico(f"Diretório criado: {caminho}")
+            return True
+        except Exception as e:
+            print(f"Erro ao criar diretório: {e}")
+            return False
+    
+    def copiar_arquivo(self, origem, destino):
+        """
+        Copia um arquivo.
+        
+        Args:
+            origem (str): Caminho do arquivo origem
+            destino (str): Caminho do arquivo destino
+        
+        Returns:
+            bool: True se copiado com sucesso
+        """
+        try:
+            origem_path = Path(origem)
+            destino_path = Path(destino)
+            
+            if not origem_path.exists():
+                raise FileNotFoundError(f"Arquivo origem não encontrado: {origem}")
+            
+            # Criar diretório de destino se não existir
+            destino_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            shutil.copy2(origem_path, destino_path)
+            self._adicionar_historico(f"Arquivo copiado: {origem} -> {destino}")
+            return True
+        except Exception as e:
+            print(f"Erro ao copiar arquivo: {e}")
+            return False
+    
+    def mover_arquivo(self, origem, destino):
+        """
+        Move um arquivo.
+        
+        Args:
+            origem (str): Caminho do arquivo origem
+            destino (str): Caminho do arquivo destino
+        
+        Returns:
+            bool: True se movido com sucesso
+        """
+        try:
+            origem_path = Path(origem)
+            destino_path = Path(destino)
+            
+            if not origem_path.exists():
+                raise FileNotFoundError(f"Arquivo origem não encontrado: {origem}")
+            
+            # Criar diretório de destino se não existir
+            destino_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            shutil.move(str(origem_path), str(destino_path))
+            self._adicionar_historico(f"Arquivo movido: {origem} -> {destino}")
+            return True
+        except Exception as e:
+            print(f"Erro ao mover arquivo: {e}")
+            return False
+    
+    def excluir_arquivo(self, caminho_arquivo):
+        """
+        Exclui um arquivo.
+        
+        Args:
+            caminho_arquivo (str): Caminho do arquivo a excluir
+        
+        Returns:
+            bool: True se excluído com sucesso
+        """
+        try:
+            arquivo_path = Path(caminho_arquivo)
+            
+            if not arquivo_path.exists():
+                raise FileNotFoundError(f"Arquivo não encontrado: {caminho_arquivo}")
+            
+            arquivo_path.unlink()
+            self._adicionar_historico(f"Arquivo excluído: {caminho_arquivo}")
+            return True
+        except Exception as e:
+            print(f"Erro ao excluir arquivo: {e}")
+            return False
+    
+    def organizar_por_extensao(self, diretorio=None):
+        """
+        Organiza arquivos em subdiretórios por extensão.
+        
+        Args:
+            diretorio (str): Diretório a organizar (padrão: diretório base)
+        
+        Returns:
+            dict: Relatório da organização
+        """
+        if diretorio is None:
+            diretorio = self.diretorio_base
+        else:
+            diretorio = Path(diretorio)
+        
+        relatorio = {'movidos': 0, 'diretorios_criados': 0, 'erros': []}
+        
+        for arquivo in diretorio.iterdir():
+            if arquivo.is_file():
+                extensao = arquivo.suffix.lower()
+                if not extensao:
+                    extensao = 'sem_extensao'
+                else:
+                    extensao = extensao[1:]  # Remove o ponto
+                
+                # Criar diretório para a extensão
+                dir_extensao = diretorio / extensao
+                if not dir_extensao.exists():
+                    dir_extensao.mkdir()
+                    relatorio['diretorios_criados'] += 1
+                
+                # Mover arquivo
+                destino = dir_extensao / arquivo.name
+                try:
+                    arquivo.rename(destino)
+                    relatorio['movidos'] += 1
+                    self._adicionar_historico(f"Organizado: {arquivo.name} -> {extensao}/")
+                except Exception as e:
+                    relatorio['erros'].append(f"Erro ao mover {arquivo.name}: {e}")
+        
+        return relatorio
+    
+    def buscar_arquivos(self, padrao, diretorio=None):
+        """
+        Busca arquivos por padrão no nome.
+        
+        Args:
+            padrao (str): Padrão a buscar no nome do arquivo
+            diretorio (str): Diretório para buscar (padrão: diretório base)
+        
+        Returns:
+            list: Lista de arquivos encontrados
+        """
+        if diretorio is None:
+            diretorio = self.diretorio_base
+        else:
+            diretorio = Path(diretorio)
+        
+        encontrados = []
+        for arquivo in diretorio.rglob(f"*{padrao}*"):
+            if arquivo.is_file():
+                encontrados.append({
+                    'nome': arquivo.name,
+                    'caminho': str(arquivo),
+                    'tamanho': arquivo.stat().st_size
+                })
+        
+        return encontrados
+    
+    def obter_estatisticas(self, diretorio=None):
+        """
+        Obtém estatísticas de um diretório.
+        
+        Args:
+            diretorio (str): Diretório para analisar (padrão: diretório base)
+        
+        Returns:
+            dict: Estatísticas do diretório
+        """
+        if diretorio is None:
+            diretorio = self.diretorio_base
+        else:
+            diretorio = Path(diretorio)
+        
+        stats = {
+            'total_arquivos': 0,
+            'total_diretorios': 0,
+            'tamanho_total': 0,
+            'extensoes': {},
+            'maior_arquivo': None,
+            'menor_arquivo': None
+        }
+        
+        arquivos_info = []
+        
+        for item in diretorio.rglob("*"):
+            if item.is_file():
+                stats['total_arquivos'] += 1
+                tamanho = item.stat().st_size
+                stats['tamanho_total'] += tamanho
+                
+                # Extensões
+                ext = item.suffix.lower() or 'sem_extensao'
+                stats['extensoes'][ext] = stats['extensoes'].get(ext, 0) + 1
+                
+                # Informações do arquivo
+                arquivos_info.append({
+                    'nome': item.name,
+                    'tamanho': tamanho
+                })
+            
+            elif item.is_dir():
+                stats['total_diretorios'] += 1
+        
+        # Maior e menor arquivo
+        if arquivos_info:
+            stats['maior_arquivo'] = max(arquivos_info, key=lambda x: x['tamanho'])
+            stats['menor_arquivo'] = min(arquivos_info, key=lambda x: x['tamanho'])
+        
+        return stats
+    
+    def _adicionar_historico(self, acao):
+        """Adiciona ação ao histórico."""
+        self.historico.append({
+            'acao': acao,
+            'timestamp': datetime.now()
+        })
+    
+    def obter_historico(self):
+        """Retorna o histórico de ações."""
+        return self.historico.copy()
+    
+    def salvar_historico(self, arquivo="historico.json"):
+        """Salva o histórico em arquivo JSON."""
+        historico_serializado = []
+        for item in self.historico:
+            historico_serializado.append({
+                'acao': item['acao'],
+                'timestamp': item['timestamp'].isoformat()
+            })
+        
+        with open(arquivo, 'w', encoding='utf-8') as f:
+            json.dump(historico_serializado, f, indent=2, ensure_ascii=False)
+
+# Exemplo de uso do módulo
+if __name__ == "__main__":
+    # Criar instância do gerenciador
+    gm = GerenciadorArquivos()
+    
+    print("=== GERENCIADOR DE ARQUIVOS ===")
+    
+    # Listar arquivos atuais
+    print("\nArquivos no diretório atual:")
+    arquivos = gm.listar_arquivos()
+    for arquivo in arquivos[:5]:  # Mostrar apenas os primeiros 5
+        print(f"- {arquivo['nome']} ({arquivo['tamanho']} bytes)")
+    
+    # Criar diretório de teste
+    print("\nCriando diretório de teste...")
+    gm.criar_diretorio("teste_organizacao")
+    
+    # Obter estatísticas
+    print("\nEstatísticas do diretório:")
+    stats = gm.obter_estatisticas()
+    print(f"Total de arquivos: {stats['total_arquivos']}")
+    print(f"Total de diretórios: {stats['total_diretorios']}")
+    print(f"Tamanho total: {stats['tamanho_total']} bytes")
+    
+    if stats['extensoes']:
+        print("\nExtensões encontradas:")
+        for ext, count in stats['extensoes'].items():
+            print(f"- {ext}: {count} arquivo(s)")
+    
+    # Mostrar histórico
+    print("\nHistórico de ações:")
+    for acao in gm.obter_historico():
+        timestamp = acao['timestamp'].strftime('%H:%M:%S')
+        print(f"[{timestamp}] {acao['acao']}")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-green-800 mb-3">Exercício 2: API Client</h3>
+                        <p class="text-green-700 mb-4">
+                            Crie um módulo que funcione como cliente para APIs REST, com funcionalidades 
+                            para fazer requisições, tratar erros e cache de respostas.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol2')" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol2" class="solution mt-4">
+                            <div class="code-block">
+# Módulo: api_client.py
+# Instale primeiro: pip install requests
+"""
+Módulo API Client
+Cliente para fazer requisições HTTP com cache e tratamento de erros.
+
+Autor: Curso Python
+Versão: 1.0
+"""
+
+import requests
+import json
+import time
+from datetime import datetime, timedelta
+from pathlib import Path
+import hashlib
+
+class APIClient:
+    """Cliente para APIs REST com cache e tratamento de erros."""
+    
+    def __init__(self, base_url="", timeout=30, cache_dir="cache"):
+        self.base_url = base_url.rstrip('/')
+        self.timeout = timeout
+        self.cache_dir = Path(cache_dir)
+        self.cache_dir.mkdir(exist_ok=True)
+        self.session = requests.Session()
+        self.historico_requisicoes = []
+    
+    def definir_headers(self, headers):
+        """
+        Define headers padrão para todas as requisições.
+        
+        Args:
+            headers (dict): Headers a serem definidos
+        """
+        self.session.headers.update(headers)
+    
+    def definir_auth(self, auth_type, **kwargs):
+        """
+        Define autenticação para as requisições.
+        
+        Args:
+            auth_type (str): Tipo de autenticação ('basic', 'bearer')
+            **kwargs: Parâmetros específicos da autenticação
+        """
+        if auth_type == 'basic':
+            username = kwargs.get('username')
+            password = kwargs.get('password')
+            self.session.auth = (username, password)
+        
+        elif auth_type == 'bearer':
+            token = kwargs.get('token')
+            self.session.headers['Authorization'] = f'Bearer {token}'
+        
+        elif auth_type == 'api_key':
+            key = kwargs.get('key')
+            header_name = kwargs.get('header_name', 'X-API-Key')
+            self.session.headers[header_name] = key
+    
+    def _gerar_cache_key(self, url, params=None):
+        """Gera chave única para cache baseada na URL e parâmetros."""
+        cache_string = f"{url}_{params or ''}"
+        return hashlib.md5(cache_string.encode()).hexdigest()
+    
+    def _salvar_cache(self, cache_key, data, ttl_minutes=60):
+        """Salva dados no cache com TTL."""
+        cache_file = self.cache_dir / f"{cache_key}.json"
+        cache_data = {
+            'data': data,
+            'timestamp': datetime.now().isoformat(),
+            'ttl_minutes': ttl_minutes
+        }
+        
+        with open(cache_file, 'w', encoding='utf-8') as f:
+            json.dump(cache_data, f, ensure_ascii=False, indent=2)
+    
+    def _carregar_cache(self, cache_key):
+        """Carrega dados do cache se ainda válidos."""
+        cache_file = self.cache_dir / f"{cache_key}.json"
+        
+        if not cache_file.exists():
+            return None
+        
+        try:
+            with open(cache_file, 'r', encoding='utf-8') as f:
+                cache_data = json.load(f)
+            
+            # Verificar se cache ainda é válido
+            timestamp = datetime.fromisoformat(cache_data['timestamp'])
+            ttl = timedelta(minutes=cache_data['ttl_minutes'])
+            
+            if datetime.now() - timestamp < ttl:
+                return cache_data['data']
+            else:
+                # Cache expirado, remover arquivo
+                cache_file.unlink()
+                return None
+        
+        except Exception:
+            return None
+    
+    def _registrar_requisicao(self, metodo, url, status_code, tempo_resposta):
+        """Registra requisição no histórico."""
+        self.historico_requisicoes.append({
+            'timestamp': datetime.now(),
+            'metodo': metodo,
+            'url': url,
+            'status_code': status_code,
+            'tempo_resposta': tempo_resposta
+        })
+    
+    def get(self, endpoint, params=None, use_cache=True, cache_ttl=60):
+        """
+        Faz requisição GET.
+        
+        Args:
+            endpoint (str): Endpoint da API
+            params (dict): Parâmetros da query string
+            use_cache (bool): Se deve usar cache
+            cache_ttl (int): TTL do cache em minutos
+        
+        Returns:
+            dict: Resposta da API ou None em caso de erro
+        """
+        url = f"{self.base_url}/{endpoint.lstrip('/')}"
+        
+        # Verificar cache
+        if use_cache:
+            cache_key = self._gerar_cache_key(url, params)
+            cached_data = self._carregar_cache(cache_key)
+            if cached_data:
+                print(f"📦 Dados carregados do cache: {endpoint}")
+                return cached_data
+        
+        try:
+            inicio = time.time()
+            response = self.session.get(url, params=params, timeout=self.timeout)
+            tempo_resposta = time.time() - inicio
+            
+            self._registrar_requisicao('GET', url, response.status_code, tempo_resposta)
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                # Salvar no cache
+                if use_cache:
+                    self._salvar_cache(cache_key, data, cache_ttl)
+                
+                print(f"✅ GET {endpoint} - {response.status_code} ({tempo_resposta:.2f}s)")
+                return data
+            
+            else:
+                print(f"❌ GET {endpoint} - {response.status_code}: {response.text}")
+                return None
+        
+        except requests.exceptions.Timeout:
+            print(f"⏰ Timeout na requisição: {endpoint}")
+            return None
+        except requests.exceptions.ConnectionError:
+            print(f"🔌 Erro de conexão: {endpoint}")
+            return None
+        except Exception as e:
+            print(f"⚠️ Erro inesperado: {e}")
+            return None
+    
+    def post(self, endpoint, data=None, json_data=None):
+        """
+        Faz requisição POST.
+        
+        Args:
+            endpoint (str): Endpoint da API
+            data (dict): Dados para enviar como form-data
+            json_data (dict): Dados para enviar como JSON
+        
+        Returns:
+            dict: Resposta da API ou None em caso de erro
+        """
+        url = f"{self.base_url}/{endpoint.lstrip('/')}"
+        
+        try:
+            inicio = time.time()
+            
+            if json_data:
+                response = self.session.post(url, json=json_data, timeout=self.timeout)
+            else:
+                response = self.session.post(url, data=data, timeout=self.timeout)
+            
+            tempo_resposta = time.time() - inicio
+            self._registrar_requisicao('POST', url, response.status_code, tempo_resposta)
+            
+            if response.status_code in [200, 201]:
+                print(f"✅ POST {endpoint} - {response.status_code} ({tempo_resposta:.2f}s)")
+                return response.json() if response.content else {}
+            else:
+                print(f"❌ POST {endpoint} - {response.status_code}: {response.text}")
+                return None
+        
+        except Exception as e:
+            print(f"⚠️ Erro na requisição POST: {e}")
+            return None
+    
+    def put(self, endpoint, data=None, json_data=None):
+        """Faz requisição PUT."""
+        url = f"{self.base_url}/{endpoint.lstrip('/')}"
+        
+        try:
+            inicio = time.time()
+            
+            if json_data:
+                response = self.session.put(url, json=json_data, timeout=self.timeout)
+            else:
+                response = self.session.put(url, data=data, timeout=self.timeout)
+            
+            tempo_resposta = time.time() - inicio
+            self._registrar_requisicao('PUT', url, response.status_code, tempo_resposta)
+            
+            if response.status_code == 200:
+                print(f"✅ PUT {endpoint} - {response.status_code} ({tempo_resposta:.2f}s)")
+                return response.json() if response.content else {}
+            else:
+                print(f"❌ PUT {endpoint} - {response.status_code}: {response.text}")
+                return None
+        
+        except Exception as e:
+            print(f"⚠️ Erro na requisição PUT: {e}")
+            return None
+    
+    def delete(self, endpoint):
+        """Faz requisição DELETE."""
+        url = f"{self.base_url}/{endpoint.lstrip('/')}"
+        
+        try:
+            inicio = time.time()
+            response = self.session.delete(url, timeout=self.timeout)
+            tempo_resposta = time.time() - inicio
+            
+            self._registrar_requisicao('DELETE', url, response.status_code, tempo_resposta)
+            
+            if response.status_code in [200, 204]:
+                print(f"✅ DELETE {endpoint} - {response.status_code} ({tempo_resposta:.2f}s)")
+                return True
+            else:
+                print(f"❌ DELETE {endpoint} - {response.status_code}: {response.text}")
+                return False
+        
+        except Exception as e:
+            print(f"⚠️ Erro na requisição DELETE: {e}")
+            return False
+    
+    def limpar_cache(self):
+        """Remove todos os arquivos de cache."""
+        for cache_file in self.cache_dir.glob("*.json"):
+            cache_file.unlink()
+        print("🗑️ Cache limpo")
+    
+    def obter_estatisticas(self):
+        """Retorna estatísticas das requisições."""
+        if not self.historico_requisicoes:
+            return {}
+        
+        total_requisicoes = len(self.historico_requisicoes)
+        sucessos = sum(1 for req in self.historico_requisicoes if 200 <= req['status_code'] < 300)
+        erros = total_requisicoes - sucessos
+        
+        tempos_resposta = [req['tempo_resposta'] for req in self.historico_requisicoes]
+        tempo_medio = sum(tempos_resposta) / len(tempos_resposta)
+        
+        metodos = {}
+        for req in self.historico_requisicoes:
+            metodo = req['metodo']
+            metodos[metodo] = metodos.get(metodo, 0) + 1
+        
+        return {
+            'total_requisicoes': total_requisicoes,
+            'sucessos': sucessos,
+            'erros': erros,
+            'taxa_sucesso': (sucessos / total_requisicoes) * 100,
+            'tempo_medio_resposta': tempo_medio,
+            'metodos_utilizados': metodos
+        }
+
+# Exemplo de uso
+if __name__ == "__main__":
+    print("=== CLIENTE API ===")
+    
+    # Criar cliente para API de teste
+    client = APIClient(base_url="https://jsonplaceholder.typicode.com")
+    
+    # Definir headers
+    client.definir_headers({
+        'User-Agent': 'Python API Client 1.0',
+        'Accept': 'application/json'
+    })
+    
+    # Fazer algumas requisições
+    print("\n1. Buscando posts...")
+    posts = client.get('/posts', params={'_limit': 5})
+    if posts:
+        print(f"Encontrados {len(posts)} posts")
+        for post in posts[:2]:
+            print(f"- {post['title'][:50]}...")
+    
+    print("\n2. Buscando post específico...")
+    post = client.get('/posts/1')
+    if post:
+        print(f"Post: {post['title']}")
+    
+    print("\n3. Criando novo post...")
+    novo_post = {
+        'title': 'Meu Post de Teste',
+        'body': 'Conteúdo do post criado via API',
+        'userId': 1
+    }
+    
+    resultado = client.post('/posts', json_data=novo_post)
+    if resultado:
+        print(f"Post criado com ID: {resultado.get('id')}")
+    
+    print("\n4. Testando cache (segunda requisição)...")
+    post_cache = client.get('/posts/1')  # Deve vir do cache
+    
+    print("\n5. Estatísticas das requisições:")
+    stats = client.obter_estatisticas()
+    if stats:
+        print(f"Total de requisições: {stats['total_requisicoes']}")
+        print(f"Taxa de sucesso: {stats['taxa_sucesso']:.1f}%")
+        print(f"Tempo médio de resposta: {stats['tempo_medio_resposta']:.2f}s")
+        print(f"Métodos utilizados: {stats['metodos_utilizados']}")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-purple-800 mb-3">Exercício 3: Sistema de Configuração</h3>
+                        <p class="text-purple-700 mb-4">
+                            Crie um módulo para gerenciar configurações de aplicação que suporte 
+                            diferentes formatos (JSON, YAML, INI) e ambientes (dev, prod, test).
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol3')" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol3" class="solution mt-4">
+                            <div class="code-block">
+# Módulo: config_manager.py
+"""
+Módulo Gerenciador de Configurações
+Gerencia configurações de aplicação com suporte a múltiplos formatos e ambientes.
+
+Autor: Curso Python
+Versão: 1.0
+"""
+
+import json
+import os
+from pathlib import Path
+from configparser import ConfigParser
+from typing import Any, Dict, Optional
+
+class ConfigManager:
+    """Gerenciador de configurações com suporte a múltiplos formatos."""
+    
+    def __init__(self, config_dir="config", ambiente="development"):
+        self.config_dir = Path(config_dir)
+        self.ambiente = ambiente
+        self.config_data = {}
+        self.config_dir.mkdir(exist_ok=True)
+        
+        # Carregar configurações
+        self._carregar_configuracoes()
+    
+    def _carregar_configuracoes(self):
+        """Carrega configurações de todos os arquivos disponíveis."""
+        # Ordem de prioridade: base -> ambiente -> local
+        arquivos_config = [
+            'base.json',
+            f'{self.ambiente}.json',
+            'local.json'  # Para configurações locais (não versionadas)
+        ]
+        
+        for arquivo in arquivos_config:
+            caminho = self.config_dir / arquivo
+            if caminho.exists():
+                self._carregar_arquivo_json(caminho)
+        
+        # Carregar variáveis de ambiente
+        self._carregar_variaveis_ambiente()
+    
+    def _carregar_arquivo_json(self, caminho):
+        """Carrega configurações de arquivo JSON."""
+        try:
+            with open(caminho, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                self._mesclar_configuracoes(data)
+            print(f"✅ Configurações carregadas: {caminho.name}")
+        except Exception as e:
+            print(f"❌ Erro ao carregar {caminho.name}: {e}")
+    
+    def _carregar_variaveis_ambiente(self):
+        """Carrega configurações de variáveis de ambiente."""
+        # Buscar variáveis que começam com APP_
+        for key, value in os.environ.items():
+            if key.startswith('APP_'):
+                config_key = key[4:].lower()  # Remove APP_ e converte para minúsculo
+                
+                # Tentar converter para tipos apropriados
+                if value.lower() in ['true', 'false']:
+                    value = value.lower() == 'true'
+                elif value.isdigit():
+                    value = int(value)
+                elif self._is_float(value):
+                    value = float(value)
+                
+                self.config_data[config_key] = value
+    
+    def _is_float(self, value):
+        """Verifica se string pode ser convertida para float."""
+        try:
+            float(value)
+            return True
+        except ValueError:
+            return False
+    
+    def _mesclar_configuracoes(self, nova_config):
+        """Mescla nova configuração com a existente."""
+        def mesclar_dict(base, novo):
+            for key, value in novo.items():
+                if key in base and isinstance(base[key], dict) and isinstance(value, dict):
+                    mesclar_dict(base[key], value)
+                else:
+                    base[key] = value
+        
+        mesclar_dict(self.config_data, nova_config)
+    
+    def get(self, chave, padrao=None):
+        """
+        Obtém valor de configuração.
+        
+        Args:
+            chave (str): Chave da configuração (suporta notação ponto)
+            padrao: Valor padrão se chave não existir
+        
+        Returns:
+            Any: Valor da configuração
+        """
+        keys = chave.split('.')
+        valor = self.config_data
+        
+        try:
+            for key in keys:
+                valor = valor[key]
+            return valor
+        except (KeyError, TypeError):
+            return padrao
+    
+    def set(self, chave, valor):
+        """
+        Define valor de configuração.
+        
+        Args:
+            chave (str): Chave da configuração (suporta notação ponto)
+            valor: Valor a definir
+        """
+        keys = chave.split('.')
+        config = self.config_data
+        
+        # Navegar até o penúltimo nível
+        for key in keys[:-1]:
+            if key not in config:
+                config[key] = {}
+            config = config[key]
+        
+        # Definir valor
+        config[keys[-1]] = valor
+    
+    def has(self, chave):
+        """
+        Verifica se chave existe.
+        
+        Args:
+            chave (str): Chave a verificar
+        
+        Returns:
+            bool: True se chave existe
+        """
+        return self.get(chave) is not None
+    
+    def get_all(self):
+        """
+        Retorna todas as configurações.
+        
+        Returns:
+            dict: Todas as configurações
+        """
+        return self.config_data.copy()
+    
+    def salvar_configuracao(self, arquivo="local.json"):
+        """
+        Salva configurações atuais em arquivo.
+        
+        Args:
+            arquivo (str): Nome do arquivo
+        """
+        caminho = self.config_dir / arquivo
+        
+        try:
+            with open(caminho, 'w', encoding='utf-8') as f:
+                json.dump(self.config_data, f, indent=2, ensure_ascii=False)
+            print(f"✅ Configurações salvas em: {arquivo}")
+        except Exception as e:
+            print(f"❌ Erro ao salvar configurações: {e}")
+    
+    def criar_arquivo_exemplo(self):
+        """Cria arquivos de exemplo para configuração."""
+        # Configuração base
+        config_base = {
+            "app": {
+                "name": "Minha aplicação",
+                "version": "1.0.0",
+                "debug": false
+            },
+            "database": {
+                "host": "localhost",
+                "port": 5432,
+                "name": "app_db"
+            },
+            "logging": {
+                "level": "INFO",
+                "file": "app.log"
+            }
+        }
+        
+        # Configuração de desenvolvimento
+        config_dev = {
+            "app": {
+                "debug": true
+            },
+            "database": {
+                "host": "localhost",
+                "name": "app_dev_db"
+            },
+            "logging": {
+                "level": "DEBUG"
+            }
+        }
+        
+        # Configuração de produção
+        config_prod = {
+            "app": {
+                "debug": false
+            },
+            "database": {
+                "host": "prod-server.com",
+                "port": 5432,
+                "name": "app_prod_db"
+            },
+            "logging": {
+                "level": "WARNING",
+                "file": "/var/log/app.log"
+            }
+        }
+        
+        # Salvar arquivos
+        arquivos = [
+            ('base.json', config_base),
+            ('development.json', config_dev),
+            ('production.json', config_prod)
+        ]
+        
+        for nome_arquivo, config in arquivos:
+            caminho = self.config_dir / nome_arquivo
+            with open(caminho, 'w', encoding='utf-8') as f:
+                json.dump(config, f, indent=2, ensure_ascii=False)
+            print(f"✅ Arquivo criado: {nome_arquivo}")
+    
+    def validar_configuracao(self, schema):
+        """
+        Valida configuração contra um schema.
+        
+        Args:
+            schema (dict): Schema de validação
+        
+        Returns:
+            tuple: (bool, list) - (válido, lista de erros)
+        """
+        erros = []
+        
+        def validar_recursivo(config, schema_atual, caminho=""):
+            for chave, regras in schema_atual.items():
+                caminho_completo = f"{caminho}.{chave}" if caminho else chave
+                
+                if 'required' in regras and regras['required']:
+                    if chave not in config:
+                        erros.append(f"Campo obrigatório ausente: {caminho_completo}")
+                        continue
+                
+                if chave in config:
+                    valor = config[chave]
+                    
+                    # Validar tipo
+                    if 'type' in regras:
+                        tipo_esperado = regras['type']
+                        if not isinstance(valor, tipo_esperado):
+                            erros.append(f"Tipo inválido em {caminho_completo}: esperado {tipo_esperado.__name__}, recebido {type(valor).__name__}")
+                    
+                    # Validar valores permitidos
+                    if 'values' in regras:
+                        if valor not in regras['values']:
+                            erros.append(f"Valor inválido em {caminho_completo}: {valor} não está em {regras['values']}")
+                    
+                    # Validar range numérico
+                    if 'min' in regras and valor < regras['min']:
+                        erros.append(f"Valor muito baixo em {caminho_completo}: {valor} < {regras['min']}")
+                    
+                    if 'max' in regras and valor > regras['max']:
+                        erros.append(f"Valor muito alto em {caminho_completo}: {valor} > {regras['max']}")
+                    
+                    # Validar objetos aninhados
+                    if 'properties' in regras and isinstance(valor, dict):
+                        validar_recursivo(valor, regras['properties'], caminho_completo)
+        
+        validar_recursivo(self.config_data, schema)
+        return len(erros) == 0, erros
+    
+    def obter_info_ambiente(self):
+        """
+        Retorna informações sobre o ambiente atual.
+        
+        Returns:
+            dict: Informações do ambiente
+        """
+        return {
+            'ambiente': self.ambiente,
+            'config_dir': str(self.config_dir),
+            'total_configs': len(self.config_data),
+            'variaveis_ambiente': {k: v for k, v in os.environ.items() if k.startswith('APP_')}
+        }
+
+# Exemplo de uso
+if __name__ == "__main__":
+    print("=== GERENCIADOR DE CONFIGURAÇÕES ===")
+    
+    # Criar gerenciador
+    config = ConfigManager(ambiente="development")
+    
+    # Criar arquivos de exemplo
+    print("\n1. Criando arquivos de exemplo...")
+    config.criar_arquivo_exemplo()
+    
+    # Recarregar configurações
+    config._carregar_configuracoes()
+    
+    print("\n2. Testando configurações:")
+    print(f"Nome da app: {config.get('app.name')}")
+    print(f"Debug ativo: {config.get('app.debug')}")
+    print(f"Host do banco: {config.get('database.host')}")
+    print(f"Nível de log: {config.get('logging.level')}")
+    
+    # Definir nova configuração
+    print("\n3. Definindo nova configuração...")
+    config.set('app.feature_flags.new_ui', True)
+    config.set('cache.redis.host', 'localhost')
+    config.set('cache.redis.port', 6379)
+    
+    print(f"Nova feature ativa: {config.get('app.feature_flags.new_ui')}")
+    print(f"Redis host: {config.get('cache.redis.host')}")
+    
+    # Validar configuração
+    print("\n4. Validando configuração...")
+    schema = {
+        'app': {
+            'required': True,
+            'type': dict,
+            'properties': {
+                'name': {'required': True, 'type': str},
+                'version': {'required': True, 'type': str},
+                'debug': {'required': True, 'type': bool}
+            }
+        },
+        'database': {
+            'required': True,
+            'type': dict,
+            'properties': {
+                'host': {'required': True, 'type': str},
+                'port': {'required': False, 'type': int, 'min': 1, 'max': 65535}
+            }
+        }
+    }
+    
+    valido, erros = config.validar_configuracao(schema)
+    if valido:
+        print("✅ Configuração válida")
+    else:
+        print("❌ Erros na configuração:")
+        for erro in erros:
+            print(f"  - {erro}")
+    
+    # Informações do ambiente
+    print("\n5. Informações do ambiente:")
+    info = config.obter_info_ambiente()
+    for chave, valor in info.items():
+        print(f"{chave}: {valor}")
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Resumo do Capítulo</h2>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">O que aprendemos:</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong>Módulos:</strong> Como importar e usar módulos da biblioteca padrão</li>
+                            <li><strong>Criação de módulos:</strong> Como criar seus próprios módulos reutilizáveis</li>
+                            <li><strong>Pacotes:</strong> Organização de código em estruturas hierárquicas</li>
+                            <li><strong>Bibliotecas padrão:</strong> math, random, datetime, os, json e outras</li>
+                            <li><strong>pip:</strong> Instalação e gerenciamento de bibliotecas externas</li>
+                            <li><strong>Ambientes virtuais:</strong> Isolamento de dependências</li>
+                            <li><strong>Boas práticas:</strong> Documentação, organização e reutilização</li>
+                        </ul>
+                        
+                        <div class="mt-4 p-4 bg-blue-100 rounded">
+                            <p class="text-blue-800 font-medium">
+                                💡 <strong>Dica:</strong> Sempre organize seu código em módulos e use ambientes virtuais 
+                                para manter seus projetos organizados e evitar conflitos de dependências.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="mt-8 flex justify-between">
+                <a href="capitulo8.html" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors">
+                    ← Capítulo 8: Funções
+                </a>
+                <a href="capitulo10.html" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors w-full md:w-auto">
+                    Capítulo 10: Mini Projetos →
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleSolution(solutionId) {
+            const solution = document.getElementById(solutionId);
+            solution.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
+
+
