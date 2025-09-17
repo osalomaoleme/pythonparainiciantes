@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Desafios Python para Iniciantes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 10 Desafios Python para Iniciantes</h1>
+            <p>Pratique seus conhecimentos com estes exercícios progressivos!</p>
+        </header>
+
+        <main>
+            <!-- Desafio 1 -->
+            <section class="challenge-section">
+                <h2>🎯 Desafio 1: Calculadora Simples</h2>
+                <div class="challenge-description">
+                    <p><strong>Objetivo:</strong> Criar uma calculadora que realize operações básicas (+, -, *, /).</p>
+                    <p><strong>Dica:</strong> Use input() para receber os números e a operação do usuário.</p>
+                </div>
+                <div class="code-block">
+                    <pre><code># Exemplo de solução
+num1 = float(input("Digite o primeiro número: "))
+operacao = input("Digite a operação (+, -, *, /): ")
+num2 = float(input("Digite o segundo número: "))
+
+if operacao == "+":
+    resultado = num1 + num2
+elif operacao == "-":
+    resultado = num1 - num2
+elif operacao == "*":
+    resultado = num1 * num2
+elif operacao == "/":
+    if num2 != 0:
+        resultado = num1 / num2
+    else:
+        resultado = "Erro: Divisão por zero!"
+else:
+    resultado = "Operação inválida!"
+
+print(f"Resultado: {resultado}")</code></pre>
+                </div>
+            </section>
+
+            <!-- Desafio 2 -->
+            <section class="challenge-section">
+                <h2>🔢 Desafio 2: Jogo de Adivinhação</h2>
+                <div class="challenge-description">
+                    <p><strong>Objetivo:</strong> Criar um jogo onde o usuário tenta adivinhar um número aleatório entre 1 e 100.</p>
+                    <p><strong>Dica:</strong> Use a biblioteca random e um loop while.</p>
+                </div>
+                <div class="code-block">
+                    <pre><code># Exemplo de solução
+import random
+
+numero_secreto = random.randint(1, 100)
+tentativas = 0
+max_tentativas = 7
+
+print("🎲 Adivinhe o número entre 1 e 100!")
+print(f"Você tem {max_tentativas} tentativas.")
+
+while tentativas < max_tentativas:
+    palpite = int(input("Digite seu palpite: "))
+    tentativas += 1
+    
+    if palpite == numero_secreto:
+        print(f"🎉 Parabéns! Você acertou em {tentativas} tentativas!")
+        break
+    elif palpite < numero_secreto:
+        print("📈 Muito baixo! Tente um número maior.")
+    else:
+        print("📉 Muito alto! Tente um número menor.")
+    
+    print(f"Tentativas restantes: {max_tentativas - tentativas}")
+else:
+    print(f"😞 Fim de jogo! O número era {numero_secreto}")</code></pre>
+                </div>
+            </section>
+
+            <!-- Desafio 3 -->
+            <section class="challenge-section">
+                <h2>📝 Desafio 3: Lista de Tarefas</h2>
+                <div class="challenge-description">
+                    <p><strong>Objetivo:</strong> Criar um sistema simples de lista de tarefas com opções para adicionar, remover e listar.</p>
+                    <p><strong>Dica:</strong> Use uma lista para armazenar as tarefas e um menu com opções.</p>
+                </div>
+                <div class="code-block">
+                    <pre><code># Exemplo de solução
+tarefas = []
+
+while True:
+    print("\n📋 LISTA DE TAREFAS")
+    print("1. Adicionar tarefa")
+    print("2. Listar tarefas")
+    print("3. Remover tarefa")
+    print("4. Sair")
+    
+    opcao = input("Escolha uma opção: ")
+    
+    if opcao == "1":
+        tarefa = input("Digite a nova tarefa: ")
+        tarefas.append(tarefa)
+        print(f"✅ Tarefa '{tarefa}' adicionada!")
+    
+    elif opcao == "2":
+        if tarefas:
+            print("\n📝 Suas tarefas:")
+            for i, tarefa in enumerate(tarefas, 1):
+                print(f"{i}. {tarefa}")
+        else:
+            print("📭 Nenhuma tarefa encontrada!")
+    
+    elif opcao == "3":
+        if tarefas:
+            for i, tarefa in enumerate(tarefas, 1):
+                print(f"{i}. {tarefa}")
+            indice = int(input("Digite o número da tarefa a remover: ")) - 1
+            if 0 <= indice < len(tarefas):
+                tarefa_removida = tarefas.pop(indice)
+                print(f"🗑️ Tarefa '{tarefa_removida}' removida!")
+            else:
+                print("❌ Número inválido!")
+        else:
+            print("📭 Nenhuma tarefa para remover!")
+    
+    elif opcao == "4":
+        print("👋 Até logo!")
+        break
+    
+    else:
+        print("❌ Opção inválida!")</code></pre>
+                </div>
+            </section>
+
+            <!-- Desafio 4 -->
+            <section class="challenge-section">
+                <h2>🔤 Desafio 4: Contador de Palavras</h2>
+                <div class="challenge-description">
+                    <p><strong>Objetivo:</strong> Criar um programa que conte quantas palavras, caracteres e linhas há em um texto.</p>
+                    <p><strong>Dica:</strong> Use métodos de string como split() e len().</p>
+                </div>
+                <div class="code-block">
+                    <pre><code># Exemplo de solução
+texto = input("Digite um texto: ")
+
+# Contadores
+num_caracteres = len(texto)
+num_caracteres_sem_espacos = len(texto.replace(" ", ""))
+num_palavras = len(texto.split())
+num_linhas = texto.count("\n") + 1
+
+# Estatísticas adicionais
+num_vogais = sum(1 for char in texto.lower() if char in "aeiou")
+num_consoantes = sum(1 for char in texto.lower() if char.isalpha() and char not in "aeiou")
+
+print("\n📊 ESTATÍSTICAS DO TEXTO:")
+print(f"📝 Caracteres (com espaços): {num_caracteres}")
+print(f"🔤 Caracteres (sem espaços): {num_caracteres_sem_espacos}")
+print(f"📖 Palavras: {num_palavras}")
+print(f"📄 Linhas: {num_linhas}")
+print(f"🅰️ Vogais: {num_vogais}")
+print(f"🅱️ Consoantes: {num_consoantes}")</code></pre>
+                </div>
+            </section>
+
+            <!-- Desafio 5 -->
+            <section class="challenge-section">
+                <h2>🎲 Desafio 5: Gerador de Senhas</h2>
+                <div class="challenge-description">
+                    <p><strong>Objetivo:</strong> Criar um gerador de senhas aleatórias com diferentes níveis de complexidade.</p>
+                    <p><strong>Dica:</strong> Use a biblioteca random e string para gerar caracteres aleatórios.</p>
+                </div>
+                <div class="code-block">
+                    <pre><code># Exemplo de solução
+import random
+import string
+
+def gerar_senha(tamanho, incluir_maiusculas=True, incluir_numeros=True, incluir_simbolos=True):
+    caracteres = string.ascii_lowercase
+    
+    if incluir_maiusculas:
+        caracteres += string.ascii_uppercase
+    if incluir_numeros:
+        caracteres += string.digits
+    if incluir_simbolos:
+        caracteres += "!@#$%^&*()_+-="
+    
+    senha = ''.join(random.choice(caracteres) for _ in range(tamanho))
+    return senha
+
+print("🔐 GERADOR DE SENHAS")
+tamanho = int(input("Digite o tamanho da senha: "))
+
+print("\nOpções de complexidade:")
+maiusculas = input("Incluir letras maiúsculas? (s/n): ").lower() == 's'
+numeros = input("Incluir números? (s/n): ").lower() == 's'
+simbolos = input("Incluir símbolos? (s/n): ").lower() == 's'
+
+senha_gerada = gerar_senha(tamanho, maiusculas, numeros, simbolos)
+print(f"\n🎯 Sua senha gerada: {senha_gerada}")
+
+# Avaliar força da senha
+forca = 0
+if any(c.islower() for c in senha_gerada): forca += 1
+if any(c.isupper() for c in senha_gerada): forca += 1
+if any(c.isdigit() for c in senha_gerada): forca += 1
+if any(c in "!@#$%^&*()_+-=" for c in senha_gerada): forca += 1
+
+niveis = ["Muito Fraca", "Fraca", "Média", "Forte", "Muito Forte"]
+print(f"💪 Força da senha: {niveis[min(forca, 4)]}")</code></pre>
+                </div>
+            </section>
+
+            <!-- Desafio 6 -->
+            <section class="challenge-section">
+                <h2>📊 Desafio 6: Análise de Notas</h2>
+                <div class="challenge-description">
+                    <p><strong>Objetivo:</strong> Criar um programa que calcule média, maior e menor nota de uma turma.</p>
+                    <p><strong>Dica:</strong> Use listas para armazenar as notas e funções built-in como max(), min() e sum().</p>
+                </div>
+                <div class="code-block">
+                    <pre><code># Exemplo de solução
+notas = []
+num_alunos = int(input("Quantos alunos há na turma? "))
+
+print("\nDigite as notas dos alunos:")
+for i in range(num_alunos):
+    while True:
+        try:
+            nota = float(input(f"Nota do aluno {i+1}: "))
+            if 0 <= nota <= 10:
+                notas.append(nota)
+                break
+            else:
+                print("❌ Nota deve estar entre 0 e 10!")
+        except ValueError:
+            print("❌ Digite um número válido!")
+
+# Cálculos
+media = sum(notas) / len(notas)
+maior_nota = max(notas)
+menor_nota = min(notas)
+aprovados = sum(1 for nota in notas if nota >= 7)
+reprovados = len(notas) - aprovados
+
+print("\n📊 RELATÓRIO DA TURMA:")
+print(f"📈 Média da turma: {media:.2f}")
+print(f"🏆 Maior nota: {maior_nota}")
+print(f"📉 Menor nota: {menor_nota}")
+print(f"✅ Aprovados (≥7): {aprovados} alunos")
+print(f"❌ Reprovados (<7): {reprovados} alunos")
+
+# Distribuição de notas
+print("\n📋 Distribuição por faixas:")
+faixas = [(0, 3, "Insuficiente"), (3, 5, "Regular"), (5, 7, "Bom"), (7, 9, "Muito Bom"), (9, 10, "Excelente")]
+for min_nota, max_nota, categoria in faixas:
+    count = sum(1 for nota in notas if min_nota <= nota < max_nota or (max_nota == 10 and nota == 10))
+    print(f"{categoria}: {count} alunos")</code></pre>
+                </div>
+            </section>
+
+            <!-- Desafio 7 -->
+            <section class="challenge-section">
+                <h2>🎯 Desafio 7: Jogo da Forca</h2>
+                <div class="challenge-description">
+                    <p><strong>Objetivo:</strong> Implementar o clássico jogo da forca com palavras predefinidas.</p>
+                    <p><strong>Dica:</strong> Use listas para armazenar as letras e controle o estado do jogo.</p>
+                </div>
+                <div class="code-block">
+                    <pre><code># Exemplo de solução
+import random
+
+palavras = ["python", "programacao", "computador", "algoritmo", "variavel", 
+           "funcao", "lista", "dicionario", "loop", "condicional"]
+
+palavra_secreta = random.choice(palavras).upper()
+letras_adivinhadas = []
+letras_erradas = []
+max_erros = 6
+
+def mostrar_palavra():
+    return ' '.join([letra if letra in letras_adivinhadas else '_' for letra in palavra_secreta])
+
+def mostrar_forca(erros):
+    estagios = [
+        "  +---+\n      |\n      |\n      |\n      |\n      |\n==========",
+        "  +---+\n  |   |\n      |\n      |\n      |\n      |\n==========",
+        "  +---+\n  |   |\n  O   |\n      |\n      |\n      |\n==========",
+        "  +---+\n  |   |\n  O   |\n  |   |\n      |\n      |\n==========",
+        "  +---+\n  |   |\n  O   |\n /|   |\n      |\n      |\n==========",
+        "  +---+\n  |   |\n  O   |\n /|\\  |\n      |\n      |\n==========",
+        "  +---+\n  |   |\n  O   |\n /|\\  |\n /    |\n      |\n==========",
+        "  +---+\n  |   |\n  O   |\n /|\\  |\n / \\   |\n      |\n=========="
+    ]
+    return estagios[erros]
+
+print("🎯 JOGO DA FORCA")
+print(f"Palavra tem {len(palavra_secreta)} letras")
+
+while len(letras_erradas) < max_erros:
+    print("\n" + mostrar_forca(len(letras_erradas)))
+    print(f"\nPalavra: {mostrar_palavra()}")
+    print(f"Letras erradas: {', '.join(letras_erradas)}")
+    print(f"Tentativas restantes: {max_erros - len(letras_erradas)}")
+    
+    if '_' not in mostrar_palavra():
+        print("\n🎉 Parabéns! Você ganhou!")
+        print(f"A palavra era: {palavra_secreta}")
+        break
+    
+    letra = input("\nDigite uma letra: ").upper()
+    
+    if len(letra) != 1 or not letra.isalpha():
+        print("❌ Digite apenas uma letra!")
+        continue
+    
+    if letra in letras_adivinhadas or letra in letras_erradas:
+        print("❌ Você já tentou essa letra!")
+        continue
+    
+    if letra in palavra_secreta:
+        letras_adivinhadas.append(letra)
+        print(f"✅ Boa! A letra '{letra}' está na palavra!")
+    else:
+        letras_erradas.append(letra)
+        print(f"❌ A letra '{letra}' não está na palavra!")
+else:
+    print("\n" + mostrar_forca(len(letras_erradas)))
+    print(f"\n💀 Você perdeu! A palavra era: {palavra_secreta}")</code></pre>
+                </div>
+            </section>
+
+            <!-- Desafio 8 -->
+            <section class="challenge-section">
+                <h2>💰 Desafio 8: Conversor de Moedas</h2>
+                <div class="challenge-description">
+                    <p><strong>Objetivo:</strong> Criar um conversor de moedas com taxas de câmbio predefinidas.</p>
+                    <p><strong>Dica:</strong> Use dicionários para armazenar as taxas de conversão.</p>
+                </div>
+                <div class="code-block">
+                    <pre><code># Exemplo de solução
+# Taxas de câmbio (valores fictícios para exemplo)
+taxas_cambio = {
+    "USD": {"BRL": 5.20, "EUR": 0.85, "GBP": 0.73, "JPY": 110.0},
+    "BRL": {"USD": 0.19, "EUR": 0.16, "GBP": 0.14, "JPY": 21.15},
+    "EUR": {"USD": 1.18, "BRL": 6.12, "GBP": 0.86, "JPY": 129.5},
+    "GBP": {"USD": 1.37, "BRL": 7.12, "EUR": 1.16, "JPY": 150.8},
+    "JPY": {"USD": 0.009, "BRL": 0.047, "EUR": 0.008, "GBP": 0.007}
+}
+
+moedas_disponiveis = list(taxas_cambio.keys())
+simbolos_moedas = {
+    "USD": "$", "BRL": "R$", "EUR": "€", "GBP": "£", "JPY": "¥"
+}
+
+def converter_moeda(valor, moeda_origem, moeda_destino):
+    if moeda_origem == moeda_destino:
+        return valor
+    return valor * taxas_cambio[moeda_origem][moeda_destino]
+
+print("💰 CONVERSOR DE MOEDAS")
+print(f"Moedas disponíveis: {', '.join(moedas_disponiveis)}")
+
+while True:
+    try:
+        valor = float(input("\nDigite o valor a converter: "))
+        
+        print(f"\nMoedas: {', '.join(moedas_disponiveis)}")
+        moeda_origem = input("Moeda de origem: ").upper()
+        moeda_destino = input("Moeda de destino: ").upper()
+        
+        if moeda_origem not in moedas_disponiveis or moeda_destino not in moedas_disponiveis:
+            print("❌ Moeda inválida!")
+            continue
+        
+        valor_convertido = converter_moeda(valor, moeda_origem, moeda_destino)
+        
+        simbolo_origem = simbolos_moedas[moeda_origem]
+        simbolo_destino = simbolos_moedas[moeda_destino]
+        
+        print(f"\n💱 RESULTADO DA CONVERSÃO:")
+        print(f"{simbolo_origem} {valor:.2f} {moeda_origem} = {simbolo_destino} {valor_convertido:.2f} {moeda_destino}")
+        print(f"Taxa de câmbio: 1 {moeda_origem} = {taxas_cambio[moeda_origem][moeda_destino]} {moeda_destino}")
+        
+        continuar = input("\nDeseja fazer outra conversão? (s/n): ").lower()
+        if continuar != 's':
+            print("👋 Obrigado por usar o conversor!")
+            break
+            
+    except ValueError:
+        print("❌ Digite um valor numérico válido!")
+    except KeyError:
+        print("❌ Erro na conversão. Verifique as moedas digitadas.")</code></pre>
+                </div>
+            </section>
+
+            <!-- Desafio 9 -->
+            <section class="challenge-section">
+                <h2>📅 Desafio 9: Calculadora de Idade</h2>
+                <div class="challenge-description">
+                    <p><strong>Objetivo:</strong> Criar uma calculadora que determine a idade exata em anos, meses e dias.</p>
+                    <p><strong>Dica:</strong> Use a biblioteca datetime para trabalhar com datas.</p>
+                </div>
+                <div class="code-block">
+                    <pre><code># Exemplo de solução
+from datetime import datetime, date
+
+def calcular_idade(data_nascimento):
+    hoje = date.today()
+    
+    anos = hoje.year - data_nascimento.year
+    meses = hoje.month - data_nascimento.month
+    dias = hoje.day - data_nascimento.day
+    
+    # Ajustar se ainda não fez aniversário este ano
+    if meses < 0 or (meses == 0 and dias < 0):
+        anos -= 1
+        meses += 12
+    
+    # Ajustar dias negativos
+    if dias < 0:
+        meses -= 1
+        # Calcular dias do mês anterior
+        if hoje.month == 1:
+            dias_mes_anterior = 31
+        else:
+            mes_anterior = hoje.month - 1
+            ano_atual = hoje.year
+            if mes_anterior == 2:
+                # Verificar ano bissexto
+                if (ano_atual % 4 == 0 and ano_atual % 100 != 0) or (ano_atual % 400 == 0):
+                    dias_mes_anterior = 29
+                else:
+                    dias_mes_anterior = 28
+            elif mes_anterior in [4, 6, 9, 11]:
+                dias_mes_anterior = 30
+            else:
+                dias_mes_anterior = 31
+        
+        dias += dias_mes_anterior
+    
+    return anos, meses, dias
+
+def calcular_proximos_eventos(data_nascimento):
+    hoje = date.today()
+    
+    # Próximo aniversário
+    proximo_aniversario = date(hoje.year, data_nascimento.month, data_nascimento.day)
+    if proximo_aniversario < hoje:
+        proximo_aniversario = date(hoje.year + 1, data_nascimento.month, data_nascimento.day)
+    
+    dias_para_aniversario = (proximo_aniversario - hoje).days
+    
+    return dias_para_aniversario, proximo_aniversario
+
+print("📅 CALCULADORA DE IDADE")
+
+while True:
+    try:
+        print("\nDigite sua data de nascimento:")
+        dia = int(input("Dia: "))
+        mes = int(input("Mês: "))
+        ano = int(input("Ano: "))
+        
+        data_nascimento = date(ano, mes, dia)
+        
+        if data_nascimento > date.today():
+            print("❌ Data de nascimento não pode ser no futuro!")
+            continue
+        
+        anos, meses, dias = calcular_idade(data_nascimento)
+        dias_para_aniversario, proximo_aniversario = calcular_proximos_eventos(data_nascimento)
+        
+        # Calcular idade em diferentes unidades
+        total_dias = (date.today() - data_nascimento).days
+        total_semanas = total_dias // 7
+        total_meses = anos * 12 + meses
+        
+        print(f"\n🎂 RESULTADO:")
+        print(f"📊 Idade exata: {anos} anos, {meses} meses e {dias} dias")
+        print(f"📈 Total de dias vividos: {total_dias:,} dias")
+        print(f"📅 Total de semanas: {total_semanas:,} semanas")
+        print(f"🗓️ Total de meses: {total_meses} meses")
+        
+        print(f"\n🎉 PRÓXIMOS EVENTOS:")
+        print(f"🎂 Próximo aniversário: {proximo_aniversario.strftime('%d/%m/%Y')}")
+        print(f"⏰ Faltam {dias_para_aniversario} dias para seu aniversário")
+        
+        # Curiosidades
+        print(f"\n🤔 CURIOSIDADES:")
+        print(f"🌍 Você já viveu aproximadamente {total_dias * 24:,} horas")
+        print(f"⏱️ Isso são cerca de {total_dias * 24 * 60:,} minutos")
+        print(f"💓 Seu coração bateu aproximadamente {total_dias * 100000:,} vezes")
+        
+        continuar = input("\nCalcular outra idade? (s/n): ").lower()
+        if continuar != 's':
+            print("👋 Obrigado por usar a calculadora!")
+            break
+            
+    except ValueError:
+        print("❌ Data inválida! Digite números válidos.")
+    except Exception as e:
+        print(f"❌ Erro: {e}")</code></pre>
+                </div>
+            </section>
+
+            <!-- Desafio 10 -->
+            <section class="challenge-section">
+                <h2>🎮 Desafio 10: Jogo Pedra, Papel, Tesoura</h2>
+                <div class="challenge-description">
+                    <p><strong>Objetivo:</strong> Implementar o clássico jogo com placar e múltiplas rodadas.</p>
+                    <p><strong>Dica:</strong> Use random para a escolha do computador e implemente a lógica de vitória.</p>
+                </div>
+                <div class="code-block">
+                    <pre><code># Exemplo de solução
+import random
+
+def determinar_vencedor(jogador, computador):
+    if jogador == computador:
+        return "empate"
+    elif (jogador == "pedra" and computador == "tesoura") or \
+         (jogador == "papel" and computador == "pedra") or \
+         (jogador == "tesoura" and computador == "papel"):
+        return "jogador"
+    else:
+        return "computador"
+
+def mostrar_escolha(escolha):
+    emojis = {"pedra": "🪨", "papel": "📄", "tesoura": "✂️"}
+    return f"{emojis[escolha]} {escolha.capitalize()}"
+
+opcoes = ["pedra", "papel", "tesoura"]
+placar_jogador = 0
+placar_computador = 0
+empates = 0
+rodada = 1
+
+print("🎮 PEDRA, PAPEL, TESOURA")
+print("Digite 'sair' para encerrar o jogo")
+print("\n📋 REGRAS:")
+print("🪨 Pedra vence Tesoura")
+print("📄 Papel vence Pedra")
+print("✂️ Tesoura vence Papel")
+
+while True:
+    print(f"\n🎯 RODADA {rodada}")
+    print(f"📊 PLACAR: Você {placar_jogador} x {placar_computador} Computador (Empates: {empates})")
+    
+    # Entrada do jogador
+    escolha_jogador = input("\nEscolha (pedra/papel/tesoura): ").lower().strip()
+    
+    if escolha_jogador == "sair":
+        break
+    
+    if escolha_jogador not in opcoes:
+        print("❌ Escolha inválida! Use: pedra, papel ou tesoura")
+        continue
+    
+    # Escolha do computador
+    escolha_computador = random.choice(opcoes)
+    
+    # Mostrar escolhas
+    print(f"\n👤 Você escolheu: {mostrar_escolha(escolha_jogador)}")
+    print(f"🤖 Computador escolheu: {mostrar_escolha(escolha_computador)}")
+    
+    # Determinar vencedor
+    resultado = determinar_vencedor(escolha_jogador, escolha_computador)
+    
+    if resultado == "empate":
+        print("🤝 Empate!")
+        empates += 1
+    elif resultado == "jogador":
+        print("🎉 Você ganhou esta rodada!")
+        placar_jogador += 1
+    else:
+        print("😞 Computador ganhou esta rodada!")
+        placar_computador += 1
+    
+    rodada += 1
+    
+    # Verificar se alguém chegou a 5 vitórias
+    if placar_jogador == 5 or placar_computador == 5:
+        print("\n🏆 FIM DE JOGO!")
+        if placar_jogador > placar_computador:
+            print("🎊 PARABÉNS! Você é o campeão!")
+        else:
+            print("🤖 O computador é o campeão!")
+        
+        jogar_novamente = input("\nJogar novamente? (s/n): ").lower()
+        if jogar_novamente == 's':
+            placar_jogador = 0
+            placar_computador = 0
+            empates = 0
+            rodada = 1
+            print("\n🔄 Novo jogo iniciado!")
+        else:
+            break
+
+# Estatísticas finais
+total_jogos = placar_jogador + placar_computador + empates
+if total_jogos > 0:
+    print(f"\n📈 ESTATÍSTICAS FINAIS:")
+    print(f"🎮 Total de rodadas: {total_jogos}")
+    print(f"🏆 Suas vitórias: {placar_jogador} ({placar_jogador/total_jogos*100:.1f}%)")
+    print(f"🤖 Vitórias do computador: {placar_computador} ({placar_computador/total_jogos*100:.1f}%)")
+    print(f"🤝 Empates: {empates} ({empates/total_jogos*100:.1f}%)")
+
+print("\n👋 Obrigado por jogar!")</code></pre>
+                </div>
+            </section>
+
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p>🐍 <strong>10 Desafios Python para Iniciantes</strong></p>
+                <p>Pratique, experimente e evolua suas habilidades de programação!</p>
+                <p><em>Dica:</em> Tente resolver cada desafio antes de olhar a solução. 💪</p>
+            </div>
+        </footer>
+    </div>
+
+    <style>
+        .challenge-section {
+            background: linear-gradient(135deg, #2d2d30 0%, #1e1e1e 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 5px solid #007acc;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .challenge-section h2 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .challenge-description {
+            background: rgba(0, 122, 204, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 122, 204, 0.3);
+        }
+        
+        .challenge-description p {
+            margin: 0.5rem 0;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        .challenge-description strong {
+            color: #4fc3f7;
+        }
+        
+        .footer-content {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d30 100%);
+            border-radius: 12px;
+            margin-top: 3rem;
+            border: 1px solid rgba(0, 122, 204, 0.3);
+        }
+        
+        .footer-content p {
+            margin: 0.5rem 0;
+            color: #e0e0e0;
+        }
+        
+        .footer-content em {
+            color: #4fc3f7;
+            font-style: italic;
+        }
+    </style>
+    
+    <footer style="position: fixed; bottom: 10px; right: 10px; font-size: 12px; color: #666; background: rgba(255,255,255,0.9); padding: 5px 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        @Salomão Leme | 2025
+    </footer>
+</body>
+</html>

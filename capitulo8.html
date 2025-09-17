@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 8: Funções - Curso Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            line-height: 1.6;
+            tab-size: 4;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+        .solution {
+            display: none;
+        }
+        .solution.show {
+            display: block;
+        }
+        .concept-box {
+            border-left: 4px solid #3b82f6;
+            background-color: #eff6ff;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .warning-box {
+            border-left: 4px solid #f59e0b;
+            background-color: #fffbeb;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    
+        
+        @media (max-width: 640px) {
+            .code-block {
+                font-size: 0.75rem;
+                padding: 0.75rem;
+            }
+            .container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-4 md:py-8">
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+            <div class="mb-6">
+                <a href="curso-python-completo.html" class="text-blue-600 hover:text-blue-800 font-medium">&larr; Voltar ao Curso</a>
+            </div>
+            
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8">Capítulo 8: Funções</h1>
+            
+            <div class="space-y-6 md:space-y-8">
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">8.1 Introdução às Funções</h2>
+                    <p class="text-gray-600 mb-4">
+                        Funções são blocos de código reutilizáveis que executam uma tarefa específica. 
+                        Elas ajudam a organizar o código, evitar repetição e tornar programas mais legíveis.
+                    </p>
+                    
+                    <div class="concept-box">
+                        <h3 class="font-semibold text-blue-800 mb-2">Por que usar funções?</h3>
+                        <ul class="list-disc list-inside text-blue-700">
+                            <li><strong>Reutilização:</strong> Escreva uma vez, use várias vezes</li>
+                            <li><strong>Organização:</strong> Divide problemas complexos em partes menores</li>
+                            <li><strong>Manutenção:</strong> Facilita correções e melhorias</li>
+                            <li><strong>Legibilidade:</strong> Código mais claro e compreensível</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# Definindo uma função simples
+def saudacao():
+    print("Olá! Bem-vindo ao curso de Python!")
+
+# Chamando a função
+saudacao()
+saudacao()  # Pode ser chamada quantas vezes quiser
+
+# Função que retorna um valor
+def obter_nome_curso():
+    return "Curso Completo de Python"
+
+# Usando o valor retornado
+nome = obter_nome_curso()
+print(f"Você está fazendo o: {nome}")
+
+# Função com cálculo
+def calcular_quadrado(numero):
+    resultado = numero ** 2
+    return resultado
+
+# Testando a função
+print(f"O quadrado de 5 é: {calcular_quadrado(5)}")
+print(f"O quadrado de 10 é: {calcular_quadrado(10)}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">8.2 Parâmetros e Argumentos</h2>
+                    <p class="text-gray-600 mb-4">
+                        Parâmetros são variáveis definidas na função. Argumentos são os valores 
+                        passados para a função quando ela é chamada.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Função com um parâmetro
+def cumprimentar(nome):
+    print(f"Olá, {nome}! Como você está?")
+
+cumprimentar("Maria")
+cumprimentar("João")
+
+# Função com múltiplos parâmetros
+def calcular_area_retangulo(largura, altura):
+    area = largura * altura
+    return area
+
+# Chamando com argumentos posicionais
+area1 = calcular_area_retangulo(5, 3)
+print(f"Área do retângulo: {area1}")
+
+# Chamando com argumentos nomeados
+area2 = calcular_area_retangulo(altura=4, largura=6)
+print(f"Área do retângulo: {area2}")
+
+# Função com parâmetros padrão
+def apresentar_pessoa(nome, idade=18, cidade="São Paulo"):
+    print(f"Nome: {nome}")
+    print(f"Idade: {idade} anos")
+    print(f"Cidade: {cidade}")
+    print("-" * 20)
+
+# Testando com diferentes combinações
+apresentar_pessoa("Ana")
+apresentar_pessoa("Carlos", 25)
+apresentar_pessoa("Beatriz", 30, "Rio de Janeiro")
+apresentar_pessoa("Diego", cidade="Brasília")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">8.3 Tipos de Argumentos</h2>
+                    <p class="text-gray-600 mb-4">
+                        Python oferece diferentes formas de passar argumentos para funções.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# *args - argumentos posicionais variáveis
+def somar_numeros(*numeros):
+    total = 0
+    for numero in numeros:
+        total += numero
+    return total
+
+print(f"Soma de 1, 2, 3: {somar_numeros(1, 2, 3)}")
+print(f"Soma de 10, 20, 30, 40: {somar_numeros(10, 20, 30, 40)}")
+print(f"Soma de apenas 5: {somar_numeros(5)}")
+
+# **kwargs - argumentos nomeados variáveis
+def exibir_informacoes(**informacoes):
+    print("Informações recebidas:")
+    for chave, valor in informacoes.items():
+        print(f"{chave}: {valor}")
+    print()
+
+exibir_informacoes(nome="João", idade=25, profissao="Programador")
+exibir_informacoes(produto="Notebook", preco=2500.00, marca="Dell")
+
+# Combinando diferentes tipos de argumentos
+def funcao_completa(obrigatorio, padrao="valor padrão", *args, **kwargs):
+    print(f"Obrigatório: {obrigatorio}")
+    print(f"Padrão: {padrao}")
+    print(f"Args extras: {args}")
+    print(f"Kwargs: {kwargs}")
+    print("-" * 30)
+
+funcao_completa("teste")
+funcao_completa("teste", "novo valor")
+funcao_completa("teste", "novo valor", 1, 2, 3)
+funcao_completa("teste", "novo valor", 1, 2, 3, extra1="valor1", extra2="valor2")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">8.4 Escopo de Variáveis</h2>
+    <p class="text-gray-600 mb-4">
+                        O escopo determina onde uma variável pode ser acessada no código.
+                    </p>
+                    
+                    <div class="warning-box">
+                        <h3 class="font-semibold text-amber-800 mb-2">⚠️ Atenção ao Escopo</h3>
+                        <p class="text-amber-700">
+                            Variáveis locais só existem dentro da função. Variáveis globais podem 
+                            ser acessadas em qualquer lugar, mas modificá-las requer a palavra-chave <code>global</code>.
+                        </p>
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# Variável global
+contador_global = 0
+nome_programa = "Sistema de Vendas"
+
+def exemplo_escopo_local():
+    # Variável local
+    numero_local = 10
+    print(f"Dentro da função - número local: {numero_local}")
+    print(f"Dentro da função - nome programa: {nome_programa}")
+
+exemplo_escopo_local()
+# print(numero_local)  # Erro! Variável local não existe aqui
+
+def modificar_contador():
+    global contador_global
+    contador_global += 1
+    print(f"Contador incrementado para: {contador_global}")
+
+print(f"Contador inicial: {contador_global}")
+modificar_contador()
+modificar_contador()
+print(f"Contador final: {contador_global}")
+
+# Exemplo com variável local que "esconde" a global
+def exemplo_shadowing():
+    nome_programa = "Sistema Local"  # Variável local com mesmo nome
+    print(f"Dentro da função: {nome_programa}")
+
+print(f"Antes da função: {nome_programa}")
+exemplo_shadowing()
+print(f"Depois da função: {nome_programa}")
+
+# Função aninhada e escopo
+def funcao_externa():
+    x = 10
+    
+    def funcao_interna():
+        nonlocal x  # Permite modificar variável da função externa
+        x += 5
+        print(f"Função interna - x: {x}")
+    
+    print(f"Antes da função interna - x: {x}")
+    funcao_interna()
+    print(f"Depois da função interna - x: {x}")
+
+funcao_externa()
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">8.5 Funções Lambda</h2>
+                    <p class="text-gray-600 mb-4">
+                        Funções lambda são funções anônimas de uma linha, úteis para operações simples.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Função normal vs função lambda
+def quadrado_normal(x):
+    return x ** 2
+
+quadrado_lambda = lambda x: x ** 2
+
+print(f"Função normal: {quadrado_normal(5)}")
+print(f"Função lambda: {quadrado_lambda(5)}")
+
+# Lambda com múltiplos parâmetros
+somar = lambda a, b: a + b
+multiplicar = lambda a, b, c: a * b * c
+
+print(f"Soma: {somar(3, 7)}")
+print(f"Multiplicação: {multiplicar(2, 3, 4)}")
+
+# Usando lambda com funções built-in
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# map() - aplica função a cada elemento
+quadrados = list(map(lambda x: x ** 2, numeros))
+print(f"Quadrados: {quadrados}")
+
+# filter() - filtra elementos
+pares = list(filter(lambda x: x % 2 == 0, numeros))
+print(f"Números pares: {pares}")
+
+# sorted() com lambda como chave
+pessoas = [
+    {"nome": "Ana", "idade": 25},
+    {"nome": "Bruno", "idade": 30},
+    {"nome": "Carlos", "idade": 20}
+]
+
+# Ordenar por idade
+pessoas_por_idade = sorted(pessoas, key=lambda pessoa: pessoa["idade"])
+print("Pessoas ordenadas por idade:")
+for pessoa in pessoas_por_idade:
+    print(f"{pessoa['nome']} - {pessoa['idade']} anos")
+
+# Ordenar por nome
+pessoas_por_nome = sorted(pessoas, key=lambda pessoa: pessoa["nome"])
+print("\nPessoas ordenadas por nome:")
+for pessoa in pessoas_por_nome:
+    print(f"{pessoa['nome']} - {pessoa['idade']} anos")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">8.6 Documentação de Funções (Docstrings)</h2>
+                    <p class="text-gray-600 mb-4">
+                        Docstrings são strings que documentam o que uma função faz, seus parâmetros e retorno.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+def calcular_imc(peso, altura):
+    """
+    Calcula o Índice de Massa Corporal (IMC).
+    
+    Parâmetros:
+    peso (float): Peso da pessoa em quilogramas
+    altura (float): Altura da pessoa em metros
+    
+    Retorna:
+    float: O valor do IMC calculado
+    
+    Exemplo:
+    >>> calcular_imc(70, 1.75)
+    22.86
+    """
+    imc = peso / (altura ** 2)
+    return round(imc, 2)
+
+def classificar_imc(imc):
+    """
+    Classifica o IMC de acordo com os padrões da OMS.
+    
+    Parâmetros:
+    imc (float): Valor do IMC
+    
+    Retorna:
+    str: Classificação do IMC
+    """
+    if imc < 18.5:
+        return "Abaixo do peso"
+    elif imc < 25:
+        return "Peso normal"
+    elif imc < 30:
+        return "Sobrepeso"
+    else:
+        return "Obesidade"
+
+# Testando as funções
+peso = 70
+altura = 1.75
+imc = calcular_imc(peso, altura)
+classificacao = classificar_imc(imc)
+
+print(f"Peso: {peso} kg")
+print(f"Altura: {altura} m")
+print(f"IMC: {imc}")
+print(f"Classificação: {classificacao}")
+
+# Acessando a documentação
+print("\nDocumentação da função calcular_imc:")
+print(calcular_imc.__doc__)
+
+# Usando help() para ver documentação completa
+# help(calcular_imc)
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">8.7 Funções Recursivas</h2>
+                    <p class="text-gray-600 mb-4">
+                        Recursão é quando uma função chama a si mesma. Útil para problemas que podem 
+                        ser divididos em subproblemas similares.
+                    </p>
+                    
+                    <div class="warning-box">
+                        <h3 class="font-semibold text-amber-800 mb-2">⚠️ Cuidado com Recursão</h3>
+                        <p class="text-amber-700">
+                            Sempre defina uma condição de parada (caso base) para evitar recursão infinita!
+                        </p>
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# Exemplo clássico: Fatorial
+def fatorial(n):
+    """
+    Calcula o fatorial de um número usando recursão.
+    
+    Parâmetros:
+    n (int): Número para calcular o fatorial
+    
+    Retorna:
+    int: Fatorial de n
+    """
+    # Caso base
+    if n == 0 or n == 1:
+        return 1
+    # Caso recursivo
+    else:
+        return n * fatorial(n - 1)
+
+# Testando fatorial
+for i in range(6):
+    print(f"{i}! = {fatorial(i)}")
+
+# Sequência de Fibonacci
+def fibonacci(n):
+    """
+    Retorna o n-ésimo número da sequência de Fibonacci.
+    
+    Parâmetros:
+    n (int): Posição na sequência (começando em 0)
+    
+    Retorna:
+    int: N-ésimo número de Fibonacci
+    """
+    if n <= 1:
+        return n
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+# Testando Fibonacci
+print("\nSequência de Fibonacci:")
+for i in range(10):
+    print(f"F({i}) = {fibonacci(i)}")
+
+# Contagem regressiva
+def contagem_regressiva(n):
+    """
+    Faz uma contagem regressiva usando recursão.
+    
+    Parâmetros:
+    n (int): Número inicial da contagem
+    """
+    if n <= 0:
+        print("🚀 Decolagem!")
+    else:
+        print(f"Contagem: {n}")
+        contagem_regressiva(n - 1)
+
+print("\nContagem regressiva:")
+contagem_regressiva(5)
+
+# Soma de lista usando recursão
+def somar_lista(lista):
+    """
+    Soma todos os elementos de uma lista usando recursão.
+    
+    Parâmetros:
+    lista (list): Lista de números
+    
+    Retorna:
+    int/float: Soma dos elementos
+    """
+    if not lista:  # Lista vazia
+        return 0
+    else:
+        return lista[0] + somar_lista(lista[1:])
+
+numeros = [1, 2, 3, 4, 5]
+print(f"\nSoma da lista {numeros}: {somar_lista(numeros)}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Exercícios Práticos</h2>
+                    
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-3">Exercício 1: Calculadora de Funções</h3>
+                        <p class="text-blue-700 mb-4">
+                            Crie uma calculadora que use funções para cada operação matemática básica. 
+                            Inclua um menu para o usuário escolher a operação.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol1')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol1" class="solution mt-4">
+                            <div class="code-block">
+# Calculadora com Funções
+print("=== CALCULADORA AVANÇADA ===")
+
+def somar(a, b):
+    """Retorna a soma de dois números."""
+    return a + b
+
+def subtrair(a, b):
+    """Retorna a subtração de dois números."""
+    return a - b
+
+def multiplicar(a, b):
+    """Retorna a multiplicação de dois números."""
+    return a * b
+
+def dividir(a, b):
+    """Retorna a divisão de dois números."""
+    if b == 0:
+        return "Erro: Divisão por zero!"
+    return a / b
+
+def potencia(a, b):
+    """Retorna a potência de a elevado a b."""}]}}}
+    return a ** b
+
+def raiz_quadrada(a):
+    """Retorna a raiz quadrada de um número."""
+    if a < 0:
+        return "Erro: Raiz de número negativo!"
+    return a ** 0.5
+
+def porcentagem(valor, percentual):
+    """Calcula a porcentagem de um valor."""
+    return (valor * percentual) / 100
+
+def obter_numeros():
+    """Obtém dois números do usuário."""
+    try:
+        a = float(input("Digite o primeiro número: "))
+        b = float(input("Digite o segundo número: "))
+        return a, b
+    except ValueError:
+        print("Erro: Digite números válidos!")
+        return None, None
+
+def obter_numero():
+    """Obtém um número do usuário."""
+    try:
+        return float(input("Digite um número: "))
+    except ValueError:
+        print("Erro: Digite um número válido!")
+        return None
+
+def exibir_menu():
+    """Exibe o menu de opções."""
+    print("\n" + "="*40)
+    print("           CALCULADORA")
+    print("="*40)
+    print("1. Somar")
+    print("2. Subtrair")
+    print("3. Multiplicar")
+    print("4. Dividir")
+    print("5. Potência")
+    print("6. Raiz Quadrada")
+    print("7. Porcentagem")
+    print("8. Histórico")
+    print("9. Limpar Histórico")
+    print("0. Sair")
+    print("="*40)
+
+def adicionar_historico(operacao, resultado):
+    """Adiciona operação ao histórico."""
+    historico.append(f"{operacao} = {resultado}")
+
+def exibir_historico():
+    """Exibe o histórico de operações."""
+    if not historico:
+        print("Histórico vazio!")
+        return
+    
+    print("\n=== HISTÓRICO ===")
+    for i, operacao in enumerate(historico, 1):
+        print(f"{i:2d}. {operacao}")
+
+# Lista para armazenar histórico
+historico = []
+
+# Loop principal
+while True:
+    exibir_menu()
+    opcao = input("Escolha uma opção: ")
+    
+    if opcao == "1":
+        a, b = obter_numeros()
+        if a is not None and b is not None:
+            resultado = somar(a, b)
+            print(f"Resultado: {a} + {b} = {resultado}")
+            adicionar_historico(f"{a} + {b}", resultado)
+    
+    elif opcao == "2":
+        a, b = obter_numeros()
+        if a is not None and b is not None:
+            resultado = subtrair(a, b)
+            print(f"Resultado: {a} - {b} = {resultado}")
+            adicionar_historico(f"{a} - {b}", resultado)
+    
+    elif opcao == "3":
+        a, b = obter_numeros()
+        if a is not None and b is not None:
+            resultado = multiplicar(a, b)
+            print(f"Resultado: {a} × {b} = {resultado}")
+            adicionar_historico(f"{a} × {b}", resultado)
+    
+    elif opcao == "4":
+        a, b = obter_numeros()
+        if a is not None and b is not None:
+            resultado = dividir(a, b)
+            print(f"Resultado: {a} ÷ {b} = {resultado}")
+            if isinstance(resultado, (int, float)):
+                adicionar_historico(f"{a} ÷ {b}", resultado)
+    
+    elif opcao == "5":
+        a, b = obter_numeros()
+        if a is not None and b is not None:
+            resultado = potencia(a, b)
+            print(f"Resultado: {a} ^ {b} = {resultado}")
+            adicionar_historico(f"{a} ^ {b}", resultado)
+    
+    elif opcao == "6":
+        a = obter_numero()
+        if a is not None:
+            resultado = raiz_quadrada(a)
+            print(f"Resultado: √{a} = {resultado}")
+            if isinstance(resultado, (int, float)):
+                adicionar_historico(f"√{a}", resultado)
+    
+    elif opcao == "7":
+        print("Cálculo de porcentagem:")
+        valor = obter_numero()
+        if valor is not None:
+            print("Digite o percentual:")
+            percentual = obter_numero()
+            if percentual is not None:
+                resultado = porcentagem(valor, percentual)
+                print(f"Resultado: {percentual}% de {valor} = {resultado}")
+                adicionar_historico(f"{percentual}% de {valor}", resultado)
+    
+    elif opcao == "8":
+        exibir_historico()
+    
+    elif opcao == "9":
+        historico.clear()
+        print("Histórico limpo!")
+    
+    elif opcao == "0":
+        print("Saindo da calculadora...")
+        break
+    
+    else:
+        print("Opção inválida! Tente novamente.")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-green-800 mb-3">Exercício 2: Sistema de Validação</h3>
+                        <p class="text-green-700 mb-4">
+                            Crie funções para validar diferentes tipos de dados: CPF, email, telefone, 
+                            senha forte, etc. Use essas funções em um sistema de cadastro.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol2')" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol2" class="solution mt-4">
+                            <div class="code-block">
+# Sistema de Validação
+import re
+
+print("=== SISTEMA DE VALIDAÇÃO ===")
+
+def validar_cpf(cpf):
+    """
+    Valida um CPF brasileiro.
+    
+    Parâmetros:
+    cpf (str): CPF a ser validado
+    
+    Retorna:
+    bool: True se válido, False caso contrário
+    """
+    # Remove caracteres não numéricos
+    cpf = re.sub(r'\D', '', cpf)
+    
+    # Verifica se tem 11 dígitos
+    if len(cpf) != 11:
+        return False
+    
+    # Verifica se todos os dígitos são iguais
+    if cpf == cpf[0] * 11:
+        return False
+    
+    # Calcula primeiro dígito verificador
+    soma = sum(int(cpf[i]) * (10 - i) for i in range(9))
+    primeiro_digito = (soma * 10) % 11
+    if primeiro_digito == 10:
+        primeiro_digito = 0
+    
+    # Calcula segundo dígito verificador
+    soma = sum(int(cpf[i]) * (11 - i) for i in range(10))
+    segundo_digito = (soma * 10) % 11
+    if segundo_digito == 10:
+        segundo_digito = 0
+    
+    # Verifica se os dígitos calculados conferem
+    return cpf[-2:] == f"{primeiro_digito}{segundo_digito}"
+
+def validar_email(email):
+    """
+    Valida um endereço de email.
+    
+    Parâmetros:
+    email (str): Email a ser validado
+    
+    Retorna:
+    bool: True se válido, False caso contrário
+    """
+    padrao = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(padrao, email) is not None
+
+def validar_telefone(telefone):
+    """
+    Valida um número de telefone brasileiro.
+    
+    Parâmetros:
+    telefone (str): Telefone a ser validado
+    
+    Retorna:
+    bool: True se válido, False caso contrário
+    """
+    # Remove caracteres não numéricos
+    telefone = re.sub(r'\D', '', telefone)
+    
+    # Verifica se tem 10 ou 11 dígitos (com DDD)
+    if len(telefone) not in [10, 11]:
+        return False
+    
+    # Verifica se o DDD é válido (11 a 99)
+    ddd = int(telefone[:2])
+    if ddd < 11 or ddd > 99:
+        return False
+    
+    return True
+
+def validar_senha_forte(senha):
+    """
+    Valida se uma senha é forte.
+    
+    Critérios:
+    - Pelo menos 8 caracteres
+    - Pelo menos uma letra minúscula
+    - Pelo menos uma letra maiúscula
+    - Pelo menos um número
+    - Pelo menos um caractere especial
+    
+    Parâmetros:
+    senha (str): Senha a ser validada
+    
+    Retorna:
+    tuple: (bool, list) - (é_válida, lista_de_problemas)
+    """
+    problemas = []
+    
+    if len(senha) < 8:
+        problemas.append("Deve ter pelo menos 8 caracteres")
+    
+    if not re.search(r'[a-z]', senha):
+        problemas.append("Deve ter pelo menos uma letra minúscula")
+    
+    if not re.search(r'[A-Z]', senha):
+        problemas.append("Deve ter pelo menos uma letra maiúscula")
+    
+    if not re.search(r'\d', senha):
+        problemas.append("Deve ter pelo menos um número")
+    
+    if not re.search(r'[!@#$%^&*(),.?":{}|<>]', senha):
+        problemas.append("Deve ter pelo menos um caractere especial")
+    
+    return len(problemas) == 0, problemas
+
+def validar_nome(nome):
+    """
+    Valida um nome.
+    
+    Parâmetros:
+    nome (str): Nome a ser validado
+    
+    Retorna:
+    bool: True se válido, False caso contrário
+    """
+    # Remove espaços extras
+    nome = nome.strip()
+    
+    # Verifica se não está vazio e tem pelo menos 2 caracteres
+    if len(nome) < 2:
+        return False
+    
+    # Verifica se contém apenas letras e espaços
+    return re.match(r'^[a-zA-Z�?-�\s]+$', nome) is not None
+
+def validar_idade(idade_str):
+    """
+    Valida uma idade.
+    
+    Parâmetros:
+    idade_str (str): Idade como string
+    
+    Retorna:
+    tuple: (bool, int) - (é_válida, idade_convertida)
+    """
+    try:
+        idade = int(idade_str)
+        if 0 <= idade <= 120:
+            return True, idade
+        else:
+            return False, None
+    except ValueError:
+        return False, None
+
+def cadastrar_usuario():
+    """
+    Realiza o cadastro de um usuário com validações.
+    """
+    print("\n=== CADASTRO DE USUÁRIO ===")
+    
+    # Validar nome
+    while True:
+        nome = input("Nome completo: ").strip()
+        if validar_nome(nome):
+            break
+        else:
+            print("❌ Nome inválido! Use apenas letras e espaços.")
+    
+    # Validar idade
+    while True:
+        idade_str = input("Idade: ")
+        valida, idade = validar_idade(idade_str)
+        if valida:
+            break
+        else:
+            print("❌ Idade inválida! Digite um número entre 0 e 120.")
+    
+    # Validar CPF
+    while True:
+        cpf = input("CPF: ")
+        if validar_cpf(cpf):
+            break
+        else:
+            print("❌ CPF inválido! Verifique os dígitos.")
+    
+    # Validar email
+    while True:
+        email = input("Email: ")
+        if validar_email(email):
+            break
+        else:
+            print("❌ Email inválido! Use o formato: usuario@dominio.com")
+    
+    # Validar telefone
+    while True:
+        telefone = input("Telefone (com DDD): ")
+        if validar_telefone(telefone):
+            break
+        else:
+            print("❌ Telefone inválido! Use formato: (11) 99999-9999")
+    
+    # Validar senha
+    while True:
+        senha = input("Senha: ")
+        valida, problemas = validar_senha_forte(senha)
+        if valida:
+            break
+        else:
+            print("❌ Senha fraca! Problemas encontrados:")
+            for problema in problemas:
+                print(f"   • {problema}")
+    
+    # Confirmar senha
+    while True:
+        confirmar_senha = input("Confirme a senha: ")
+        if senha == confirmar_senha:
+            break
+        else:
+            print("❌ Senhas não conferem!")
+    
+    # Exibir dados cadastrados
+    print("\n✅ USUÁRIO CADASTRADO COM SUCESSO!")
+    print("="*40)
+    print(f"Nome: {nome}")
+    print(f"Idade: {idade} anos")
+    print(f"CPF: {cpf}")
+    print(f"Email: {email}")
+    print(f"Telefone: {telefone}")
+    print("Senha: ********")
+    print("="*40)
+
+def testar_validacoes():
+    """
+    Testa as funções de validação com exemplos.
+    """
+    print("\n=== TESTE DAS VALIDAÇÕES ===")
+    
+    # Teste CPF
+    cpfs_teste = ["11144477735", "123.456.789-09", "000.000.000-00", "12345678901"]
+    print("\nTeste de CPF:")
+    for cpf in cpfs_teste:
+        resultado = "✅ Válido" if validar_cpf(cpf) else "❌ Inválido"
+        print(f"{cpf}: {resultado}")
+    
+    # Teste Email
+    emails_teste = ["usuario@email.com", "teste@", "email.com", "user@domain.co.uk"]
+    print("\nTeste de Email:")
+    for email in emails_teste:
+        resultado = "✅ Válido" if validar_email(email) else "❌ Inválido"
+        print(f"{email}: {resultado}")
+    
+    # Teste Senha
+    senhas_teste = ["123456", "MinhaSenh@123", "senha", "SENHA123!"]
+    print("\nTeste de Senha:")
+    for senha in senhas_teste:
+        valida, problemas = validar_senha_forte(senha)
+        if valida:
+            print(f"{senha}: ✅ Forte")
+        else:
+            print(f"{senha}: ❌ Fraca - {', '.join(problemas)}")
+
+# Menu principal
+while True:
+    print("\n=== MENU PRINCIPAL ===")
+    print("1. Cadastrar usuário")
+    print("2. Testar validações")
+    print("3. Sair")
+    
+    opcao = input("Escolha uma opção: ")
+    
+    if opcao == "1":
+        cadastrar_usuario()
+    elif opcao == "2":
+        testar_validacoes()
+    elif opcao == "3":
+        print("Saindo do sistema...")
+        break
+    else:
+        print("Opção inválida!")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-purple-800 mb-3">Exercício 3: Gerador de Relatórios</h3>
+                        <p class="text-purple-700 mb-4">
+                            Crie um sistema que gere relatórios de vendas usando funções para calcular 
+                            estatísticas, formatar dados e exportar resultados.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol3')" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol3" class="solution mt-4">
+                            <div class="code-block">
+# Gerador de Relatórios de Vendas
+from datetime import datetime, timedelta
+import random
+
+print("=== GERADOR DE RELATÓRIOS DE VENDAS ===")
+
+# Dados de exemplo
+vendedores = ["Ana Silva", "Bruno Santos", "Carlos Oliveira", "Diana Costa", "Eduardo Lima"]
+produtos = [
+    {"nome": "Notebook", "preco": 2500.00, "categoria": "Eletrônicos"},
+    {"nome": "Mouse", "preco": 50.00, "categoria": "Acessórios"},
+    {"nome": "Teclado", "preco": 150.00, "categoria": "Acessórios"},
+    {"nome": "Monitor", "preco": 800.00, "categoria": "Eletrônicos"},
+    {"nome": "Impressora", "preco": 400.00, "categoria": "Equipamentos"},
+    {"nome": "Webcam", "preco": 200.00, "categoria": "Acessórios"}
+]
+
+def gerar_vendas_aleatorias(quantidade=50):
+    """
+    Gera vendas aleatórias para demonstração.
+    
+    Parâmetros:
+    quantidade (int): Número de vendas a gerar
+    
+    Retorna:
+    list: Lista de vendas
+    """
+    vendas = []
+    data_inicio = datetime.now() - timedelta(days=30)
+    
+    for _ in range(quantidade):
+        venda = {
+            "id": len(vendas) + 1,
+            "vendedor": random.choice(vendedores),
+            "produto": random.choice(produtos),
+            "quantidade": random.randint(1, 5),
+            "data": data_inicio + timedelta(days=random.randint(0, 30)),
+            "desconto": random.choice([0, 5, 10, 15])  # Percentual de desconto
+        }
+        
+        # Calcula valor total
+        valor_bruto = venda["produto"]["preco"] * venda["quantidade"]
+        valor_desconto = valor_bruto * (venda["desconto"] / 100)
+        venda["valor_total"] = valor_bruto - valor_desconto
+        
+        vendas.append(venda)
+    
+    return vendas
+
+def calcular_total_vendas(vendas):
+    """
+    Calcula o total de vendas.
+    
+    Parâmetros:
+    vendas (list): Lista de vendas
+    
+    Retorna:
+    float: Total de vendas
+    """
+    return sum(venda["valor_total"] for venda in vendas)
+
+def calcular_vendas_por_vendedor(vendas):
+    """
+    Calcula vendas agrupadas por vendedor.
+    
+    Parâmetros:
+    vendas (list): Lista de vendas
+    
+    Retorna:
+    dict: Vendas por vendedor
+    """
+    vendas_vendedor = {}
+    
+    for venda in vendas:
+        vendedor = venda["vendedor"]
+        if vendedor not in vendas_vendedor:
+            vendas_vendedor[vendedor] = {
+                "total_vendas": 0,
+                "quantidade_vendas": 0,
+                "produtos_vendidos": 0
+            }
+        
+        vendas_vendedor[vendedor]["total_vendas"] += venda["valor_total"]
+        vendas_vendedor[vendedor]["quantidade_vendas"] += 1
+        vendas_vendedor[vendedor]["produtos_vendidos"] += venda["quantidade"]
+    
+    return vendas_vendedor
+
+def calcular_vendas_por_produto(vendas):
+    """
+    Calcula vendas agrupadas por produto.
+    
+    Parâmetros:
+    vendas (list): Lista de vendas
+    
+    Retorna:
+    dict: Vendas por produto
+    """
+    vendas_produto = {}
+    
+    for venda in vendas:
+        produto = venda["produto"]["nome"]
+        if produto not in vendas_produto:
+            vendas_produto[produto] = {
+                "quantidade_vendida": 0,
+                "receita_total": 0,
+                "numero_vendas": 0,
+                "categoria": venda["produto"]["categoria"]
+            }
+        
+        vendas_produto[produto]["quantidade_vendida"] += venda["quantidade"]
+        vendas_produto[produto]["receita_total"] += venda["valor_total"]
+        vendas_produto[produto]["numero_vendas"] += 1
+    
+    return vendas_produto
+
+def calcular_vendas_por_categoria(vendas):
+    """
+    Calcula vendas agrupadas por categoria.
+    
+    Parâmetros:
+    vendas (list): Lista de vendas
+    
+    Retorna:
+    dict: Vendas por categoria
+    """
+    vendas_categoria = {}
+    
+    for venda in vendas:
+        categoria = venda["produto"]["categoria"]
+        if categoria not in vendas_categoria:
+            vendas_categoria[categoria] = {
+                "receita_total": 0,
+                "quantidade_vendas": 0
+            }
+        
+        vendas_categoria[categoria]["receita_total"] += venda["valor_total"]
+        vendas_categoria[categoria]["quantidade_vendas"] += 1
+    
+    return vendas_categoria
+
+def formatar_moeda(valor):
+    """
+    Formata um valor como moeda brasileira.
+    
+    Parâmetros:
+    valor (float): Valor a ser formatado
+    
+    Retorna:
+    str: Valor formatado
+    """
+    return f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
+
+def gerar_relatorio_geral(vendas):
+    """
+    Gera relatório geral de vendas.
+    
+    Parâmetros:
+    vendas (list): Lista de vendas
+    """
+    print("\n" + "="*60)
+    print("                RELATÓRIO GERAL DE VENDAS")
+    print("="*60)
+    
+    total_vendas = calcular_total_vendas(vendas)
+    total_produtos = sum(venda["quantidade"] for venda in vendas)
+    numero_vendas = len(vendas)
+    ticket_medio = total_vendas / numero_vendas if numero_vendas > 0 else 0
+    
+    print(f"Período: {min(venda['data'] for venda in vendas).strftime('%d/%m/%Y')} a {max(venda['data'] for venda in vendas).strftime('%d/%m/%Y')}")
+    print(f"Total de vendas: {formatar_moeda(total_vendas)}")
+    print(f"Número de transações: {numero_vendas}")
+    print(f"Produtos vendidos: {total_produtos} unidades")
+    print(f"Ticket médio: {formatar_moeda(ticket_medio)}")
+    
+    # Top vendedor
+    vendas_vendedor = calcular_vendas_por_vendedor(vendas)
+    top_vendedor = max(vendas_vendedor.items(), key=lambda x: x[1]["total_vendas"])
+    print(f"\nMelhor vendedor: {top_vendedor[0]}")
+    print(f"Vendas: {formatar_moeda(top_vendedor[1]['total_vendas'])}")
+    
+    # Top produto
+    vendas_produto = calcular_vendas_por_produto(vendas)
+    top_produto = max(vendas_produto.items(), key=lambda x: x[1]["receita_total"])
+    print(f"\nProduto mais vendido (receita): {top_produto[0]}")
+    print(f"Receita: {formatar_moeda(top_produto[1]['receita_total'])}")
+
+def gerar_relatorio_vendedores(vendas):
+    """
+    Gera relatório detalhado por vendedor.
+    
+    Parâmetros:
+    vendas (list): Lista de vendas
+    """
+    print("\n" + "="*80)
+    print("                    RELATÓRIO POR VENDEDOR")
+    print("="*80)
+    
+    vendas_vendedor = calcular_vendas_por_vendedor(vendas)
+    
+    # Ordena por total de vendas (decrescente)
+    vendedores_ordenados = sorted(vendas_vendedor.items(), 
+                                key=lambda x: x[1]["total_vendas"], 
+                                reverse=True)
+    
+    for i, (vendedor, dados) in enumerate(vendedores_ordenados, 1):
+        ticket_medio = dados["total_vendas"] / dados["quantidade_vendas"]
+        
+        print(f"\n{i}º LUGAR - {vendedor}")
+        print("-" * 50)
+        print(f"Total em vendas: {formatar_moeda(dados['total_vendas'])}")
+        print(f"Número de vendas: {dados['quantidade_vendas']}")
+        print(f"Produtos vendidos: {dados['produtos_vendidos']} unidades")
+        print(f"Ticket médio: {formatar_moeda(ticket_medio)}")
+
+def gerar_relatorio_produtos(vendas):
+    """
+    Gera relatório detalhado por produto.
+    
+    Parâmetros:
+    vendas (list): Lista de vendas
+    """
+    print("\n" + "="*80)
+    print("                    RELATÓRIO POR PRODUTO")
+    print("="*80)
+    
+    vendas_produto = calcular_vendas_por_produto(vendas)
+    
+    # Ordena por receita total (decrescente)
+    produtos_ordenados = sorted(vendas_produto.items(), 
+                              key=lambda x: x[1]["receita_total"], 
+                              reverse=True)
+    
+    for i, (produto, dados) in enumerate(produtos_ordenados, 1):
+        receita_media = dados["receita_total"] / dados["numero_vendas"]
+        
+        print(f"\n{i}º - {produto} ({dados['categoria']})")
+        print("-" * 50)
+        print(f"Receita total: {formatar_moeda(dados['receita_total'])}")
+        print(f"Quantidade vendida: {dados['quantidade_vendida']} unidades")
+        print(f"Número de vendas: {dados['numero_vendas']}")
+        print(f"Receita média por venda: {formatar_moeda(receita_media)}")
+
+def gerar_relatorio_categorias(vendas):
+    """
+    Gera relatório por categoria de produto.
+    
+    Parâmetros:
+    vendas (list): Lista de vendas
+    """
+    print("\n" + "="*60)
+    print("                RELATÓRIO POR CATEGORIA")
+    print("="*60)
+    
+    vendas_categoria = calcular_vendas_por_categoria(vendas)
+    total_geral = calcular_total_vendas(vendas)
+    
+    # Ordena por receita total (decrescente)
+    categorias_ordenadas = sorted(vendas_categoria.items(), 
+                                key=lambda x: x[1]["receita_total"], 
+                                reverse=True)
+    
+    for categoria, dados in categorias_ordenadas:
+        percentual = (dados["receita_total"] / total_geral) * 100
+        
+        print(f"\n{categoria}")
+        print("-" * 30)
+        print(f"Receita: {formatar_moeda(dados['receita_total'])}")
+        print(f"Participação: {percentual:.1f}%")
+        print(f"Número de vendas: {dados['quantidade_vendas']}")
+
+def exportar_relatorio_csv(vendas, nome_arquivo="relatorio_vendas.csv"):
+    """
+    Exporta relatório para arquivo CSV.
+    
+    Parâmetros:
+    vendas (list): Lista de vendas
+    nome_arquivo (str): Nome do arquivo
+    """
+    try:
+        with open(nome_arquivo, 'w', encoding='utf-8') as arquivo:
+            # Cabeçalho
+            arquivo.write("ID,Data,Vendedor,Produto,Categoria,Quantidade,Valor_Unitario,Desconto,Valor_Total\n")
+            
+            # Dados
+            for venda in vendas:
+                linha = f"{venda['id']},{venda['data'].strftime('%d/%m/%Y')},{venda['vendedor']},{venda['produto']['nome']},{venda['produto']['categoria']},{venda['quantidade']},{venda['produto']['preco']:.2f},{venda['desconto']}%,{venda['valor_total']:.2f}\n"
+                arquivo.write(linha)
+        
+        print(f"\n✅ Relatório exportado para: {nome_arquivo}")
+    except Exception as e:
+        print(f"\n❌ Erro ao exportar: {e}")
+
+# Gerar dados de exemplo
+vendas_exemplo = gerar_vendas_aleatorias(100)
+
+# Menu principal
+while True:
+    print("\n=== MENU DE RELATÓRIOS ===")
+    print("1. Relatório Geral")
+    print("2. Relatório por Vendedor")
+    print("3. Relatório por Produto")
+    print("4. Relatório por Categoria")
+    print("5. Exportar para CSV")
+    print("6. Gerar novos dados")
+    print("7. Sair")
+    
+    opcao = input("Escolha uma opção: ")
+    
+    if opcao == "1":
+        gerar_relatorio_geral(vendas_exemplo)
+    elif opcao == "2":
+        gerar_relatorio_vendedores(vendas_exemplo)
+    elif opcao == "3":
+        gerar_relatorio_produtos(vendas_exemplo)
+    elif opcao == "4":
+        gerar_relatorio_categorias(vendas_exemplo)
+    elif opcao == "5":
+        nome = input("Nome do arquivo (ou Enter para padrão): ").strip()
+        if not nome:
+            nome = "relatorio_vendas.csv"
+        exportar_relatorio_csv(vendas_exemplo, nome)
+    elif opcao == "6":
+        quantidade = input("Quantidade de vendas (ou Enter para 100): ").strip()
+        try:
+            quantidade = int(quantidade) if quantidade else 100
+            vendas_exemplo = gerar_vendas_aleatorias(quantidade)
+            print(f"✅ {quantidade} vendas geradas!")
+        except ValueError:
+            print("❌ Quantidade inválida!")
+    elif opcao == "7":
+        print("Saindo do sistema...")
+        break
+    else:
+        print("Opção inválida!")
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="mt-8">
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Resumo do Capítulo</h2>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>Definição:</strong> Use <code>def nome_funcao():</code> para criar funções</li>
+                            <li><strong>Parâmetros:</strong> Valores que a função recebe para processar</li>
+                            <li><strong>Return:</strong> Use <code>return</code> para retornar valores</li>
+                            <li><strong>Argumentos:</strong> Posicionais, nomeados, *args, **kwargs</li>
+                            <li><strong>Escopo:</strong> Variáveis locais vs globais, use <code>global</code> quando necessário</li>
+                            <li><strong>Lambda:</strong> Funções anônimas para operações simples</li>
+                            <li><strong>Docstrings:</strong> Documente suas funções com """texto"""</li>
+                            <li><strong>Recursão:</strong> função que chama a si mesma (defina caso base!)</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <div class="flex justify-between mt-8">
+                    <a href="capitulo7.html" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 w-full md:w-auto">
+                        &larr; Capítulo Anterior
+                    </a>
+                    <a href="capitulo9.html" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 w-full md:w-auto">
+                        Próximo Capítulo &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.classList.toggle('show');
+        }
+    </script>
+    
+    <footer style="position: fixed; bottom: 10px; right: 10px; font-size: 12px; color: #666; background: rgba(255,255,255,0.9); padding: 5px 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        @Salomão Leme | 2025
+    </footer>
+</body>
+</html>
+
+

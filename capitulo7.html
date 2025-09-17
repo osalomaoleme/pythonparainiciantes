@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 7: Listas e Dicionários - Curso Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            line-height: 1.6;
+            tab-size: 4;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+        .solution {
+            display: none;
+        }
+        .solution.show {
+            display: block;
+        }
+        .method-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .method-table th, .method-table td {
+            border: 1px solid #d1d5db;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .method-table th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+        }
+    
+        
+        @media (max-width: 640px) {
+            .code-block {
+                font-size: 0.75rem;
+                padding: 0.75rem;
+            }
+            .container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-4 md:py-8">
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+            <div class="mb-6">
+                <a href="curso-python-completo.html" class="text-blue-600 hover:text-blue-800 font-medium">&larr; Voltar ao Curso</a>
+            </div>
+            
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8">Capítulo 7: Listas e Dicionários</h1>
+            
+            <div class="space-y-6 md:space-y-8">
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">7.1 Listas - Introdução</h2>
+                    <p class="text-gray-600 mb-4">
+                        Listas são estruturas de dados que armazenam múltiplos itens em uma única variável. 
+                        São ordenadas, mutáveis e permitem valores duplicados.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Criando listas
+lista_vazia = []
+lista_numeros = [1, 2, 3, 4, 5]
+lista_frutas = ["maçã", "banana", "laranja"]
+lista_mista = [1, "texto", 3.14, True]
+
+print("Lista de números:", lista_numeros)
+print("Lista de frutas:", lista_frutas)
+print("Lista mista:", lista_mista)
+
+# Acessando elementos (índices começam em 0)
+print("\nAcessando elementos:")
+print(f"Primeira fruta: {lista_frutas[0]}")
+print(f"Segunda fruta: {lista_frutas[1]}")
+print(f"Última fruta: {lista_frutas[-1]}")
+print(f"Penúltima fruta: {lista_frutas[-2]}")
+
+# Tamanho da lista
+print(f"\nTamanho da lista de frutas: {len(lista_frutas)}")
+
+# Verificando se um item existe
+if "banana" in lista_frutas:
+    print("Banana está na lista!")
+
+if "uva" not in lista_frutas:
+    print("Uva não está na lista!")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">7.2 Manipulando Listas</h2>
+                    <p class="text-gray-600 mb-4">
+                        Listas são mutáveis, ou seja, você pode modificar seus elementos após a criação.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Modificando elementos
+frutas = ["maçã", "banana", "laranja"]
+print("Lista original:", frutas)
+
+frutas[1] = "uva"  # Substitui "banana" por "uva"
+print("Após modificação:", frutas)
+
+# Adicionando elementos
+frutas.append("manga")  # Adiciona no final
+print("Após append:", frutas)
+
+frutas.insert(1, "kiwi")  # Insere na posição 1
+print("Após insert:", frutas)
+
+# Removendo elementos
+frutas.remove("uva")  # Remove a primeira ocorrência
+print("Após remove:", frutas)
+
+fruta_removida = frutas.pop()  # Remove e retorna o último
+print(f"Removeu: {fruta_removida}")
+print("Lista atual:", frutas)
+
+fruta_removida = frutas.pop(0)  # Remove e retorna o índice 0
+print(f"Removeu: {fruta_removida}")
+print("Lista final:", frutas)
+
+# Limpando a lista
+frutas.clear()
+print("Lista após clear:", frutas)
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">7.3 Métodos Úteis de Listas</h2>
+                    <p class="text-gray-600 mb-4">
+                        Python oferece muitos métodos úteis para trabalhar com listas.
+                    </p>
+                    
+                    <table class="method-table mb-4">
+                        <thead>
+                            <tr>
+                                <th>Método</th>
+                                <th>Descrição</th>
+                                <th>Exemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>append(item)</code></td>
+                                <td>Adiciona item no final</td>
+                                <td><code>lista.append(5)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>insert(pos, item)</code></td>
+                                <td>Insere item na posição</td>
+                                <td><code>lista.insert(0, 'novo')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>remove(item)</code></td>
+                                <td>Remove primeira ocorrência</td>
+                                <td><code>lista.remove('item')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>pop(index)</code></td>
+                                <td>Remove e retorna item</td>
+                                <td><code>item = lista.pop()</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>index(item)</code></td>
+                                <td>Retorna índice do item</td>
+                                <td><code>pos = lista.index('item')</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>count(item)</code></td>
+                                <td>Conta ocorrências</td>
+                                <td><code>qtd = lista.count(5)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>sort()</code></td>
+                                <td>Ordena a lista</td>
+                                <td><code>lista.sort()</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>reverse()</code></td>
+                                <td>Inverte a ordem</td>
+                                <td><code>lista.reverse()</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="code-block mb-4">
+# Exemplos práticos dos métodos
+numeros = [3, 1, 4, 1, 5, 9, 2, 6]
+print("Lista original:", numeros)
+
+# Ordenação
+numeros_ordenados = sorted(numeros)  # Não modifica a original
+print("Ordenada (sorted):", numeros_ordenados)
+print("Original ainda:", numeros)
+
+numeros.sort()  # Modifica a original
+print("Ordenada (sort):", numeros)
+
+# Contagem e busca
+print(f"\nO número 1 aparece {numeros.count(1)} vezes")
+print(f"O número 5 está na posição {numeros.index(5)}")
+
+# Copiando listas
+lista_original = [1, 2, 3]
+lista_copia = lista_original.copy()  # Cópia independente
+lista_referencia = lista_original    # Mesma lista
+
+lista_original.append(4)
+print(f"\nOriginal: {lista_original}")
+print(f"Cópia: {lista_copia}")
+print(f"Referência: {lista_referencia}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">7.4 Fatiamento de Listas (Slicing)</h2>
+                    <p class="text-gray-600 mb-4">
+                        O fatiamento permite extrair partes de uma lista usando a sintaxe [início:fim:passo].
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Fatiamento de listas
+numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+print("Lista completa:", numeros)
+
+# Fatiamento básico
+print(f"Primeiros 3: {numeros[:3]}")      # [0, 1, 2]
+print(f"Últimos 3: {numeros[-3:]}")       # [7, 8, 9]
+print(f"Do 2 ao 6: {numeros[2:7]}")       # [2, 3, 4, 5, 6]
+print(f"Do 1 ao 8, de 2 em 2: {numeros[1:9:2]}")  # [1, 3, 5, 7]
+
+# Fatiamento com passo negativo
+print(f"Lista invertida: {numeros[::-1]}")  # [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+print(f"Pares em ordem inversa: {numeros[::-2]}")  # [9, 7, 5, 3, 1]
+
+# Modificando fatias
+letras = ['a', 'b', 'c', 'd', 'e', 'f']
+print(f"\nLetras originais: {letras}")
+
+letras[1:4] = ['X', 'Y', 'Z']  # Substitui b, c, d por X, Y, Z
+print(f"Após substituição: {letras}")
+
+letras[::2] = ['1', '2', '3']  # Substitui elementos em posições pares
+print(f"Após substituição alternada: {letras}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">7.5 Dicionários - Introdução</h2>
+                    <p class="text-gray-600 mb-4">
+                        Dicionários armazenam dados em pares chave-valor. São ordenados (Python 3.7+), 
+                        mutáveis e não permitem chaves duplicadas.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Criando dicionários
+dicionario_vazio = {}
+pessoa = {
+    "nome": "João",
+    "idade": 30,
+    "cidade": "São Paulo",
+    "profissao": "Programador"
+}
+
+print("Dicionário pessoa:", pessoa)
+
+# Acessando valores
+print(f"\nNome: {pessoa['nome']}")
+print(f"Idade: {pessoa['idade']}")
+
+# Método get() - mais seguro
+print(f"Cidade: {pessoa.get('cidade')}")
+print(f"Estado: {pessoa.get('estado', 'Não informado')}")  # Valor padrão
+
+# Verificando se chave existe
+if "nome" in pessoa:
+    print("A chave 'nome' existe!")
+
+if "salario" not in pessoa:
+    print("A chave 'salario' não existe!")
+
+# Tamanho do dicionário
+print(f"\nO dicionário tem {len(pessoa)} chaves")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">7.6 Manipulando Dicionários</h2>
+                    <p class="text-gray-600 mb-4">
+                        Dicionários são mutáveis, permitindo adicionar, modificar e remover pares chave-valor.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Modificando e adicionando elementos
+contato = {
+    "nome": "Maria",
+    "telefone": "11999999999"
+}
+
+print("Contato original:", contato)
+
+# Adicionando nova chave
+contato["email"] = "maria@email.com"
+print("Após adicionar email:", contato)
+
+# Modificando valor existente
+contato["telefone"] = "11888888888"
+print("Após modificar telefone:", contato)
+
+# Usando update() para múltiplas alterações
+contato.update({
+    "idade": 25,
+    "cidade": "Rio de Janeiro",
+    "profissao": "Designer"
+})
+print("Após update:", contato)
+
+# Removendo elementos
+del contato["telefone"]  # Remove chave específica
+print("Após del telefone:", contato)
+
+idade = contato.pop("idade")  # Remove e retorna valor
+print(f"Idade removida: {idade}")
+print("Contato atual:", contato)
+
+# Removendo último item (Python 3.7+)
+ultimo_item = contato.popitem()
+print(f"Último item removido: {ultimo_item}")
+print("Contato final:", contato)
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">7.7 Métodos de Dicionários</h2>
+                    <p class="text-gray-600 mb-4">
+                        Dicionários possuem métodos úteis para acessar chaves, valores e itens.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Métodos de dicionários
+estudante = {
+    "nome": "Ana",
+    "curso": "Python",
+    "nota": 9.5,
+    "aprovado": True
+}
+
+print("Dicionário estudante:", estudante)
+
+# Obtendo chaves, valores e itens
+print(f"\nChaves: {list(estudante.keys())}")
+print(f"Valores: {list(estudante.values())}")
+print(f"Itens: {list(estudante.items())}")
+
+# Iterando sobre dicionário
+print("\nIterando sobre chaves:")
+for chave in estudante:
+    print(f"{chave}: {estudante[chave]}")
+
+print("\nIterando sobre chaves e valores:")
+for chave, valor in estudante.items():
+    print(f"{chave} = {valor}")
+
+print("\nIterando apenas sobre valores:")
+for valor in estudante.values():
+    print(valor)
+
+# Copiando dicionários
+estudante_copia = estudante.copy()
+estudante_referencia = estudante
+
+estudante["nota"] = 10.0
+print(f"\nOriginal: {estudante['nota']}")
+print(f"Cópia: {estudante_copia['nota']}")
+print(f"Referência: {estudante_referencia['nota']}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">7.8 Listas e Dicionários Aninhados</h2>
+                    <p class="text-gray-600 mb-4">
+                        Você pode criar estruturas de dados complexas combinando listas e dicionários.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Estruturas aninhadas
+escola = {
+    "nome": "Escola Python",
+    "endereco": {
+        "rua": "Rua das Flores, 123",
+        "cidade": "São Paulo",
+        "cep": "01234-567"
+    },
+    "alunos": [
+        {
+            "nome": "João",
+            "idade": 20,
+            "notas": [8.5, 9.0, 7.5]
+        },
+        {
+            "nome": "Maria",
+            "idade": 19,
+            "notas": [9.5, 8.0, 9.0]
+        }
+    ],
+    "professores": ["Dr. Silva", "Profa. Santos"]
+}
+
+# Acessando dados aninhados
+print(f"Nome da escola: {escola['nome']}")
+print(f"Cidade: {escola['endereco']['cidade']}")
+print(f"Primeiro aluno: {escola['alunos'][0]['nome']}")
+print(f"Notas do João: {escola['alunos'][0]['notas']}")
+
+# Calculando média das notas
+for aluno in escola['alunos']:
+    nome = aluno['nome']
+    notas = aluno['notas']
+    media = sum(notas) / len(notas)
+    print(f"Média de {nome}: {media:.2f}")
+
+# Adicionando novo aluno
+novo_aluno = {
+    "nome": "Pedro",
+    "idade": 21,
+    "notas": [7.0, 8.5, 9.5]
+}
+escola['alunos'].append(novo_aluno)
+
+print(f"\nTotal de alunos: {len(escola['alunos'])}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Exercícios Práticos</h2>
+                    
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-3">Exercício 1: Sistema de Notas</h3>
+                        <p class="text-blue-700 mb-4">
+                            Crie um programa que gerencie as notas de estudantes. O programa deve permitir 
+                            adicionar alunos, inserir notas e calcular médias.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol1')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol1" class="solution mt-4">
+                            <div class="code-block">
+# Sistema de Notas
+print("=== SISTEMA DE NOTAS ===")
+
+# Dicionário para armazenar dados dos alunos
+alunos = {}
+
+def adicionar_aluno():
+    nome = input("Nome do aluno: ").strip().title()
+    if nome in alunos:
+        print(f"Aluno {nome} já existe!")
+        return
+    
+    alunos[nome] = {
+        "notas": [],
+        "faltas": 0
+    }
+    print(f"Aluno {nome} adicionado com sucesso!")
+
+def adicionar_nota():
+    if not alunos:
+        print("Nenhum aluno cadastrado!")
+        return
+    
+    nome = input("Nome do aluno: ").strip().title()
+    if nome not in alunos:
+        print(f"Aluno {nome} não encontrado!")
+        return
+    
+    try:
+        nota = float(input("Nota (0-10): "))
+        if 0 <= nota <= 10:
+            alunos[nome]["notas"].append(nota)
+            print(f"Nota {nota} adicionada para {nome}!")
+        else:
+            print("Nota deve estar entre 0 e 10!")
+    except ValueError:
+        print("Digite uma nota válida!")
+
+def calcular_media(nome):
+    notas = alunos[nome]["notas"]
+    if notas:
+        return sum(notas) / len(notas)
+    return 0
+
+def exibir_relatorio():
+    if not alunos:
+        print("Nenhum aluno cadastrado!")
+        return
+    
+    print("\n" + "="*50)
+    print("           RELATÓRIO DE NOTAS")
+    print("="*50)
+    
+    for nome, dados in alunos.items():
+        notas = dados["notas"]
+        media = calcular_media(nome)
+        
+        print(f"\nAluno: {nome}")
+        print(f"Notas: {notas if notas else 'Nenhuma nota'}")
+        print(f"Média: {media:.2f}")
+        
+        if media >= 7.0:
+            status = "APROVADO"
+        elif media >= 5.0:
+            status = "RECUPERAÇÃO"
+        else:
+            status = "REPROVADO"
+        
+        print(f"Status: {status}")
+        print("-" * 30)
+
+# Menu principal
+while True:
+    print("\n=== MENU ===")
+    print("1. Adicionar aluno")
+    print("2. Adicionar nota")
+    print("3. Exibir relatório")
+    print("4. Sair")
+    
+    opcao = input("Escolha uma opção: ")
+    
+    if opcao == "1":
+        adicionar_aluno()
+    elif opcao == "2":
+        adicionar_nota()
+    elif opcao == "3":
+        exibir_relatorio()
+    elif opcao == "4":
+        print("Saindo do sistema...")
+        break
+    else:
+        print("Opção inválida!")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-green-800 mb-3">Exercício 2: Agenda de Contatos</h3>
+                        <p class="text-green-700 mb-4">
+                            Crie uma agenda de contatos que permita adicionar, buscar, editar e remover contatos. 
+                            Cada contato deve ter nome, telefone, email e endereço.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol2')" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol2" class="solution mt-4">
+                            <div class="code-block">
+# Agenda de Contatos
+print("=== AGENDA DE CONTATOS ===")
+
+# Dicionário para armazenar contatos
+agenda = {}
+
+def adicionar_contato():
+    nome = input("Nome: ").strip().title()
+    
+    if nome in agenda:
+        print(f"Contato {nome} já existe!")
+        opcao = input("Deseja atualizar? (s/n): ").lower()
+        if opcao != 's':
+            return
+    
+    telefone = input("Telefone: ").strip()
+    email = input("Email: ").strip().lower()
+    endereco = input("Endereço: ").strip()
+    
+    agenda[nome] = {
+        "telefone": telefone,
+        "email": email,
+        "endereco": endereco
+    }
+    
+    print(f"Contato {nome} salvo com sucesso!")
+
+def buscar_contato():
+    if not agenda:
+        print("Agenda vazia!")
+        return
+    
+    termo = input("Digite o nome para buscar: ").strip().lower()
+    encontrados = []
+    
+    for nome in agenda:
+        if termo in nome.lower():
+            encontrados.append(nome)
+    
+    if encontrados:
+        print(f"\nEncontrados {len(encontrados)} contato(s):")
+        for nome in encontrados:
+            exibir_contato(nome)
+    else:
+        print("Nenhum contato encontrado!")
+
+def exibir_contato(nome):
+    if nome in agenda:
+        contato = agenda[nome]
+        print(f"\n{'='*30}")
+        print(f"Nome: {nome}")
+        print(f"Telefone: {contato['telefone']}")
+        print(f"Email: {contato['email']}")
+        print(f"Endereço: {contato['endereco']}")
+        print(f"{'='*30}")
+    else:
+        print("Contato não encontrado!")
+
+def listar_contatos():
+    if not agenda:
+        print("Agenda vazia!")
+        return
+    
+    print(f"\n=== LISTA DE CONTATOS ({len(agenda)} contatos) ===")
+    nomes_ordenados = sorted(agenda.keys())
+    
+    for i, nome in enumerate(nomes_ordenados, 1):
+        contato = agenda[nome]
+        print(f"{i:2d}. {nome:<20} | {contato['telefone']:<15} | {contato['email']}")
+
+def remover_contato():
+    if not agenda:
+        print("Agenda vazia!")
+        return
+    
+    nome = input("Nome do contato a remover: ").strip().title()
+    
+    if nome in agenda:
+        exibir_contato(nome)
+        confirmacao = input("Tem certeza que deseja remover? (s/n): ").lower()
+        
+        if confirmacao == 's':
+            del agenda[nome]
+            print(f"Contato {nome} removido com sucesso!")
+        else:
+            print("Remoção cancelada.")
+    else:
+        print("Contato não encontrado!")
+
+def estatisticas():
+    if not agenda:
+        print("Agenda vazia!")
+        return
+    
+    total = len(agenda)
+    com_email = sum(1 for contato in agenda.values() if contato['email'])
+    com_endereco = sum(1 for contato in agenda.values() if contato['endereco'])
+    
+    print(f"\n=== ESTATÍSTICAS ===")
+    print(f"Total de contatos: {total}")
+    print(f"Com email: {com_email} ({com_email/total*100:.1f}%)")
+    print(f"Com endereço: {com_endereco} ({com_endereco/total*100:.1f}%)")
+
+# Menu principal
+while True:
+    print("\n=== MENU DA AGENDA ===")
+    print("1. Adicionar contato")
+    print("2. Buscar contato")
+    print("3. Listar todos")
+    print("4. Remover contato")
+    print("5. Estatísticas")
+    print("6. Sair")
+    
+    opcao = input("Escolha uma opção: ")
+    
+    if opcao == "1":
+        adicionar_contato()
+    elif opcao == "2":
+        buscar_contato()
+    elif opcao == "3":
+        listar_contatos()
+    elif opcao == "4":
+        remover_contato()
+    elif opcao == "5":
+        estatisticas()
+    elif opcao == "6":
+        print("Saindo da agenda...")
+        break
+    else:
+        print("Opção inválida!")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-purple-800 mb-3">Exercício 3: Análise de Vendas</h3>
+                        <p class="text-purple-700 mb-4">
+                            Crie um sistema que analise dados de vendas. O programa deve calcular totais por 
+                            vendedor, produto mais vendido e estatísticas gerais.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol3')" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol3" class="solution mt-4">
+                            <div class="code-block">
+# Análise de Vendas
+print("=== SISTEMA DE ANÁLISE DE VENDAS ===")
+
+# Dados de exemplo (em um sistema real, viriam de arquivo ou banco)
+vendas = [
+    {"vendedor": "João", "produto": "Notebook", "quantidade": 2, "valor_unitario": 2500.00},
+    {"vendedor": "Maria", "produto": "Mouse", "quantidade": 10, "valor_unitario": 50.00},
+    {"vendedor": "João", "produto": "Teclado", "quantidade": 5, "valor_unitario": 150.00},
+    {"vendedor": "Ana", "produto": "Monitor", "quantidade": 3, "valor_unitario": 800.00},
+    {"vendedor": "Maria", "produto": "Notebook", "quantidade": 1, "valor_unitario": 2500.00},
+    {"vendedor": "Ana", "produto": "Mouse", "quantidade": 8, "valor_unitario": 50.00},
+    {"vendedor": "João", "produto": "Monitor", "quantidade": 2, "valor_unitario": 800.00},
+]
+
+def calcular_total_venda(venda):
+    return venda["quantidade"] * venda["valor_unitario"]
+
+def relatorio_por_vendedor():
+    vendedores = {}
+    
+    for venda in vendas:
+        vendedor = venda["vendedor"]
+        total_venda = calcular_total_venda(venda)
+        
+        if vendedor not in vendedores:
+            vendedores[vendedor] = {
+                "total_vendas": 0,
+                "quantidade_itens": 0,
+                "numero_vendas": 0
+            }
+        
+        vendedores[vendedor]["total_vendas"] += total_venda
+        vendedores[vendedor]["quantidade_itens"] += venda["quantidade"]
+        vendedores[vendedor]["numero_vendas"] += 1
+    
+    print("\n" + "="*60)
+    print("           RELATÓRIO POR VENDEDOR")
+    print("="*60)
+    
+    # Ordenar por total de vendas (decrescente)
+    vendedores_ordenados = sorted(vendedores.items(), 
+                                key=lambda x: x[1]["total_vendas"], 
+                                reverse=True)
+    
+    for vendedor, dados in vendedores_ordenados:
+        print(f"\nVendedor: {vendedor}")
+        print(f"Total em vendas: R$ {dados['total_vendas']:,.2f}")
+        print(f"Itens vendidos: {dados['quantidade_itens']}")
+        print(f"Número de vendas: {dados['numero_vendas']}")
+        print(f"Ticket médio: R$ {dados['total_vendas']/dados['numero_vendas']:,.2f}")
+        print("-" * 40)
+
+def relatorio_por_produto():
+    produtos = {}
+    
+    for venda in vendas:
+        produto = venda["produto"]
+        total_venda = calcular_total_venda(venda)
+        
+        if produto not in produtos:
+            produtos[produto] = {
+                "quantidade_vendida": 0,
+                "receita_total": 0,
+                "numero_vendas": 0
+            }
+        
+        produtos[produto]["quantidade_vendida"] += venda["quantidade"]
+        produtos[produto]["receita_total"] += total_venda
+        produtos[produto]["numero_vendas"] += 1
+    
+    print("\n" + "="*60)
+    print("           RELATÓRIO POR PRODUTO")
+    print("="*60)
+    
+    # Ordenar por receita total (decrescente)
+    produtos_ordenados = sorted(produtos.items(), 
+                              key=lambda x: x[1]["receita_total"], 
+                              reverse=True)
+    
+    for produto, dados in produtos_ordenados:
+        print(f"\nProduto: {produto}")
+        print(f"Quantidade vendida: {dados['quantidade_vendida']} unidades")
+        print(f"Receita total: R$ {dados['receita_total']:,.2f}")
+        print(f"Número de vendas: {dados['numero_vendas']}")
+        print("-" * 40)
+
+def estatisticas_gerais():
+    total_receita = sum(calcular_total_venda(venda) for venda in vendas)
+    total_itens = sum(venda["quantidade"] for venda in vendas)
+    total_vendas = len(vendas)
+    
+    # Produto mais vendido (por quantidade)
+    produtos_qtd = {}
+    for venda in vendas:
+        produto = venda["produto"]
+        produtos_qtd[produto] = produtos_qtd.get(produto, 0) + venda["quantidade"]
+    
+    produto_mais_vendido = max(produtos_qtd.items(), key=lambda x: x[1])
+    
+    # Vendedor com maior receita
+    vendedores_receita = {}
+    for venda in vendas:
+        vendedor = venda["vendedor"]
+        total = calcular_total_venda(venda)
+        vendedores_receita[vendedor] = vendedores_receita.get(vendedor, 0) + total
+    
+    melhor_vendedor = max(vendedores_receita.items(), key=lambda x: x[1])
+    
+    print("\n" + "="*60)
+    print("           ESTATÍSTICAS GERAIS")
+    print("="*60)
+    print(f"Receita total: R$ {total_receita:,.2f}")
+    print(f"Total de itens vendidos: {total_itens}")
+    print(f"Número total de vendas: {total_vendas}")
+    print(f"Ticket médio: R$ {total_receita/total_vendas:,.2f}")
+    print(f"\nProduto mais vendido: {produto_mais_vendido[0]} ({produto_mais_vendido[1]} unidades)")
+    print(f"Melhor vendedor: {melhor_vendedor[0]} (R$ {melhor_vendedor[1]:,.2f})")
+
+def adicionar_venda():
+    print("\n=== ADICIONAR NOVA VENDA ===")
+    vendedor = input("Nome do vendedor: ").strip().title()
+    produto = input("Nome do produto: ").strip().title()
+    
+    try:
+        quantidade = int(input("Quantidade: "))
+        valor_unitario = float(input("Valor unitário: R$ "))
+        
+        nova_venda = {
+            "vendedor": vendedor,
+            "produto": produto,
+            "quantidade": quantidade,
+            "valor_unitario": valor_unitario
+        }
+        
+        vendas.append(nova_venda)
+        total = calcular_total_venda(nova_venda)
+        print(f"\nVenda adicionada com sucesso!")
+        print(f"Total da venda: R$ {total:,.2f}")
+        
+    except ValueError:
+        print("Erro: Digite valores numéricos válidos!")
+
+# Menu principal
+while True:
+    print("\n=== MENU DE ANÁLISE ===")
+    print("1. Relatório por vendedor")
+    print("2. Relatório por produto")
+    print("3. Estatísticas gerais")
+    print("4. Adicionar venda")
+    print("5. Sair")
+    
+    opcao = input("Escolha uma opção: ")
+    
+    if opcao == "1":
+        relatorio_por_vendedor()
+    elif opcao == "2":
+        relatorio_por_produto()
+    elif opcao == "3":
+        estatisticas_gerais()
+    elif opcao == "4":
+        adicionar_venda()
+    elif opcao == "5":
+        print("Saindo do sistema...")
+        break
+    else:
+        print("Opção inválida!")
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="mt-8">
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Resumo do Capítulo</h2>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>Listas:</strong> Ordenadas, mutáveis, permitem duplicatas</li>
+                            <li><strong>Métodos de lista:</strong> append(), insert(), remove(), pop(), sort()</li>
+                            <li><strong>Fatiamento:</strong> [início:fim:passo] para extrair partes</li>
+                            <li><strong>Dicionários:</strong> Pares chave-valor, ordenados, mutáveis</li>
+                            <li><strong>Métodos de dicionário:</strong> keys(), values(), items(), get()</li>
+                            <li><strong>Estruturas aninhadas:</strong> Listas dentro de dicionários e vice-versa</li>
+                            <li>Use copy() para criar cópias independentes</li>
+                            <li>Iteração com for é fundamental para processar dados</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <div class="flex justify-between mt-8">
+                    <a href="capitulo6.html" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 w-full md:w-auto">
+                        &larr; Capítulo Anterior
+                    </a>
+                    <a href="capitulo8.html" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 w-full md:w-auto">
+                        Próximo Capítulo &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.classList.toggle('show');
+        }
+    </script>
+    
+    <footer style="position: fixed; bottom: 10px; right: 10px; font-size: 12px; color: #666; background: rgba(255,255,255,0.9); padding: 5px 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        @Salomão Leme | 2025
+    </footer>
+</body>
+</html>
+
+

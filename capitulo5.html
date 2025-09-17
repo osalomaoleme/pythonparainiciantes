@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 5: Condicionais - Curso Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            line-height: 1.6;
+            tab-size: 4;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+        .solution {
+            display: none;
+        }
+        .solution.show {
+            display: block;
+        }
+        .flowchart {
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+    
+        
+        @media (max-width: 640px) {
+            .code-block {
+                font-size: 0.75rem;
+                padding: 0.75rem;
+            }
+            .container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-4 md:py-8">
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+            <div class="mb-6">
+                <a href="curso-python-completo.html" class="text-blue-600 hover:text-blue-800 font-medium">&larr; Voltar ao Curso</a>
+            </div>
+            
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8">Capítulo 5: Condicionais</h1>
+            
+            <div class="space-y-6 md:space-y-8">
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">5.1 Estrutura if</h2>
+                    <p class="text-gray-600 mb-4">
+                        A estrutura condicional <code class="bg-gray-200 px-2 py-1 rounded">if</code> permite que o programa 
+                        execute diferentes blocos de código baseado em condições.
+                    </p>
+                    
+                    <div class="flowchart">
+                        <div class="text-lg font-semibold mb-2">Fluxo do if</div>
+                        <div class="text-sm text-gray-600">
+                            condição → True: Executa bloco → False: Pula bloco
+                        </div>
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# Estrutura básica do if
+idade = 18
+
+if idade >= 18:
+    print("Você é maior de idade")
+    print("Pode votar e dirigir")
+
+print("Esta linha sempre executa")
+
+# Exemplo com input
+nota = float(input("Digite sua nota: "))
+
+if nota >= 7.0:
+    print("Parabéns! Você foi aprovado!")
+
+if nota < 7.0:
+    print("Você precisa estudar mais.")
+
+# Condições mais complexas
+temperatura = 25
+humidade = 60
+
+if temperatura > 30 and humidade > 70:
+    print("Dia muito quente e úmido")
+
+if temperatura < 15 or humidade < 30:
+    print("Condições climáticas extremas")
+                    </div>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4">
+                        <p class="text-blue-800">
+                            <strong>Dica:</strong> A indentação (espaços) é obrigatória em Python. 
+                            Use 4 espaços para cada nível de indentação.
+                        </p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">5.2 Estrutura if-else</h2>
+                    <p class="text-gray-600 mb-4">
+                        O <code class="bg-gray-200 px-2 py-1 rounded">else</code> permite executar um bloco alternativo 
+                        quando a condição do if é falsa.
+                    </p>
+                    
+                    <div class="flowchart">
+                        <div class="text-lg font-semibold mb-2">Fluxo do if-else</div>
+                        <div class="text-sm text-gray-600">
+                            condição → True: Bloco if → False: Bloco else
+                        </div>
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# Estrutura if-else básica
+idade = int(input("Digite sua idade: "))
+
+if idade >= 18:
+    print("Você é maior de idade")
+    print("Pode votar, dirigir e trabalhar")
+else:
+    print("Você é menor de idade")
+    print(f"Faltam {18 - idade} anos para a maioridade")
+
+# Exemplo com números
+numero = int(input("Digite um número: "))
+
+if numero % 2 == 0:
+    print(f"{numero} é par")
+else:
+    print(f"{numero} é ímpar")
+
+# Exemplo com strings
+senha = input("Digite a senha: ")
+
+if senha == "123456":
+    print("Acesso liberado!")
+else:
+    print("Senha incorreta!")
+    print("Acesso negado.")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">5.3 Estrutura if-elif-else</h2>
+                    <p class="text-gray-600 mb-4">
+                        O <code class="bg-gray-200 px-2 py-1 rounded">elif</code> (else if) permite testar múltiplas condições 
+                        em sequência.
+                    </p>
+                    
+                    <div class="flowchart">
+                        <div class="text-lg font-semibold mb-2">Fluxo do if-elif-else</div>
+                        <div class="text-sm text-gray-600">
+                            if → elif → elif → ... → else (opcional)
+                        </div>
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# Sistema de notas
+nota = float(input("Digite a nota (0-10): "))
+
+if nota >= 9.0:
+    conceito = "A"
+    status = "Excelente!"
+elif nota >= 8.0:
+    conceito = "B"
+    status = "Muito bom!"
+elif nota >= 7.0:
+    conceito = "C"
+    status = "Bom!"
+elif nota >= 6.0:
+    conceito = "D"
+    status = "Regular"
+else:
+    conceito = "F"
+    status = "Reprovado"
+
+print(f"Nota: {nota}")
+print(f"Conceito: {conceito}")
+print(f"Status: {status}")
+
+# Classificação de idade
+idade = int(input("Digite sua idade: "))
+
+if idade < 0:
+    print("Idade inválida!")
+elif idade <= 12:
+    categoria = "Criança"
+elif idade <= 17:
+    categoria = "Adolescente"
+elif idade <= 59:
+    categoria = "Adulto"
+elif idade <= 100:
+    categoria = "Idoso"
+else:
+    categoria = "Idade muito avançada"
+
+print(f"Categoria: {categoria}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">5.4 Condicionais Aninhadas</h2>
+                    <p class="text-gray-600 mb-4">
+                        Você pode colocar estruturas condicionais dentro de outras estruturas condicionais.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Exemplo de condicionais aninhadas
+usuario = input("Digite o usuário: ")
+senha = input("Digite a senha: ")
+
+if usuario == "admin":
+    if senha == "123456":
+        print("Login de administrador realizado com sucesso!")
+        print("Acesso total ao sistema")
+    else:
+        print("Senha de administrador incorreta!")
+else:
+    if usuario == "user":
+        if senha == "user123":
+            print("Login de usuário realizado com sucesso!")
+            print("Acesso limitado ao sistema")
+        else:
+            print("Senha de usuário incorreta!")
+    else:
+        print("Usuário não encontrado!")
+
+# Sistema de desconto
+valor_compra = float(input("Valor da compra: R$ "))
+tem_cartao = input("Tem cartão fidelidade? (s/n): ").lower()
+
+if valor_compra >= 100:
+    if tem_cartao == "s":
+        desconto = 0.15  # 15% de desconto
+        print("Desconto de 15% aplicado!")
+    else:
+        desconto = 0.10  # 10% de desconto
+        print("Desconto de 10% aplicado!")
+else:
+    if tem_cartao == "s":
+        desconto = 0.05  # 5% de desconto
+        print("Desconto de 5% aplicado!")
+    else:
+        desconto = 0  # Sem desconto
+        print("Nenhum desconto aplicado.")
+
+valor_final = valor_compra * (1 - desconto)
+print(f"Valor final: R$ {valor_final:.2f}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">5.5 Operador Ternário</h2>
+                    <p class="text-gray-600 mb-4">
+                        Uma forma concisa de escrever condicionais simples em uma única linha.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Operador ternário - sintaxe
+# valor_se_verdadeiro if condição else valor_se_falso
+
+idade = 20
+status = "Maior" if idade >= 18 else "Menor"
+print(f"Status: {status}")
+
+# Comparação com if-else tradicional
+# Forma tradicional:
+if idade >= 18:
+    status = "Maior"
+else:
+    status = "Menor"
+
+# Exemplos práticos
+numero = int(input("Digite um número: "))
+paridade = "Par" if numero % 2 == 0 else "ímpar"
+print(f"O número {numero} é {paridade}")
+
+# Determinando o maior de dois números
+a = 10
+b = 15
+maior = a if a > b else b
+print(f"O maior número é: {maior}")
+
+# Com strings
+nome = input("Digite seu nome: ")
+saudacao = f"Olá, {nome}!" if nome else "Olá, visitante!"
+print(saudacao)
+
+# Aninhando operadores ternários (não recomendado para casos complexos)
+nota = 8.5
+resultado = "A" if nota >= 9 else "B" if nota >= 8 else "C" if nota >= 7 else "D"
+print(f"Conceito: {resultado}")
+                    </div>
+                    
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                        <p class="text-yellow-800">
+                            <strong>Cuidado:</strong> Use o operador ternário apenas para condicionais simples. 
+                            Para lógica complexa, prefira if-elif-else tradicional.
+                        </p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Exercícios Práticos</h2>
+                    
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-3">Exercício 1: Sistema de Aprovação</h3>
+                        <p class="text-blue-700 mb-4">
+                            Crie um programa que calcule a média de 3 notas e determine se o aluno foi aprovado, 
+                            está em recuperação ou foi reprovado. (Aprovado ≥ 7, Recuperação 5-6.9, Reprovado < 5)
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol1')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol1" class="solution mt-4">
+                            <div class="code-block">
+# Sistema de Aprovação
+print("=== Sistema de Aprovação ===")
+
+# Entrada das notas
+nota1 = float(input("Digite a primeira nota: "))
+nota2 = float(input("Digite a segunda nota: "))
+nota3 = float(input("Digite a terceira nota: "))
+
+# Cálculo da média
+media = (nota1 + nota2 + nota3) / 3
+
+print(f"\nNotas: {nota1}, {nota2}, {nota3}")
+print(f"Média: {media:.2f}")
+
+# Determinação do status
+if media >= 7.0:
+    status = "APROVADO"
+    emoji = "🎉"
+    mensagem = "Parabéns! Você foi aprovado!"
+elif media >= 5.0:
+    status = "RECUPERAÇÃO"
+    emoji = "⚠️"
+    mensagem = "Você está em recuperação. Estude mais!"
+    pontos_necessarios = 7.0 - media
+    print(f"Você precisa de mais {pontos_necessarios:.2f} pontos para ser aprovado.")
+else:
+    status = "REPROVADO"
+    emoji = "❌"
+    mensagem = "Infelizmente você foi reprovado."
+
+print(f"\n{emoji} Status: {status}")
+print(mensagem)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-green-800 mb-3">Exercício 2: Calculadora de Imposto de Renda</h3>
+                        <p class="text-green-700 mb-4">
+                            Crie um programa que calcule o imposto de renda baseado na renda anual:<br>
+                            • Até R$ 22.847: Isento<br>
+                            • R$ 22.848 a R$ 33.919: 7.5%<br>
+                            • R$ 33.920 a R$ 45.012: 15%<br>
+                            • R$ 45.013 a R$ 55.976: 22.5%<br>
+                            • Acima de R$ 55.976: 27.5%
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol2')" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol2" class="solution mt-4">
+                            <div class="code-block">
+# Calculadora de Imposto de Renda
+print("=== Calculadora de Imposto de Renda ===")
+
+# Entrada da renda anual
+renda_anual = float(input("Digite sua renda anual: R$ "))
+
+# Cálculo do imposto baseado nas faixas
+if renda_anual <= 22847:
+    aliquota = 0
+    imposto = 0
+    faixa = "Isento"
+elif renda_anual <= 33919:
+    aliquota = 7.5
+    imposto = renda_anual * 0.075
+    faixa = "7,5%"
+elif renda_anual <= 45012:
+    aliquota = 15
+    imposto = renda_anual * 0.15
+    faixa = "15%"
+elif renda_anual <= 55976:
+    aliquota = 22.5
+    imposto = renda_anual * 0.225
+    faixa = "22,5%"
+else:
+    aliquota = 27.5
+    imposto = renda_anual * 0.275
+    faixa = "27,5%"
+
+# Cálculo da renda líquida
+renda_liquida = renda_anual - imposto
+renda_mensal_liquida = renda_liquida / 12
+
+# Exibição dos resultados
+print(f"\n{'='*40}")
+print("           CÁLCULO DO IR")
+print(f"{'='*40}")
+print(f"Renda Anual:      R$ {renda_anual:,.2f}")
+print(f"Faixa de Imposto: {faixa}")
+print(f"Imposto a Pagar:  R$ {imposto:,.2f}")
+print(f"Renda Líquida:    R$ {renda_liquida:,.2f}")
+print(f"Renda Mensal:     R$ {renda_mensal_liquida:,.2f}")
+print(f"{'='*40}")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-purple-800 mb-3">Exercício 3: Jogo de Adivinhação</h3>
+                        <p class="text-purple-700 mb-4">
+                            Crie um jogo onde o computador "pensa" em um número de 1 a 10 e o usuário 
+                            tenta adivinhar. Dê dicas se o número é maior ou menor.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol3')" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol3" class="solution mt-4">
+                            <div class="code-block">
+# Jogo de Adivinhação
+import random
+
+print("=== Jogo de Adivinhação ===")
+print("Estou pensando em um número de 1 a 10...")
+print("Você tem 3 tentativas para adivinhar!")
+
+# Número secreto
+numero_secreto = random.randint(1, 10)
+tentativas = 3
+acertou = False
+
+while tentativas > 0 and not acertou:
+    print(f"\nTentativas restantes: {tentativas}")
+    
+    try:
+        palpite = int(input("Digite seu palpite (1-10): "))
+        
+        if palpite < 1 or palpite > 10:
+            print("Por favor, digite um número entre 1 e 10!")
+            continue
+            
+        if palpite == numero_secreto:
+            print(f"\n🎉 Parabéns! Você acertou!")
+            print(f"O número era {numero_secreto}")
+            acertou = True
+        elif palpite < numero_secreto:
+            print("⬆️ O número que estou pensando é MAIOR!")
+            tentativas -= 1
+        else:
+            print("⬇️ O número que estou pensando é MENOR!")
+            tentativas -= 1
+            
+    except ValueError:
+        print("Por favor, digite apenas números!")
+
+if not acertou:
+    print(f"\n😞 Que pena! Suas tentativas acabaram.")
+    print(f"O número era {numero_secreto}")
+    print("Tente novamente na próxima vez!")
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="mt-8">
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Resumo do Capítulo</h2>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>if:</strong> Executa bloco se condição for verdadeira</li>
+                            <li><strong>else:</strong> Executa bloco alternativo</li>
+                            <li><strong>elif:</strong> Testa múltiplas condições em sequência</li>
+                            <li><strong>Indentação:</strong> Obrigatória para definir blocos de código</li>
+                            <li><strong>Condicionais aninhadas:</strong> if dentro de if</li>
+                            <li><strong>Operador ternário:</strong> condição em uma linha</li>
+                            <li>Use operadores lógicos (and, or, not) para condições complexas</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <div class="flex justify-between mt-8">
+                    <a href="capitulo4.html" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 w-full md:w-auto">
+                        &larr; Capítulo Anterior
+                    </a>
+                    <a href="capitulo6.html" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 w-full md:w-auto">
+                        Próximo Capítulo &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.classList.toggle('show');
+        }
+    </script>
+    
+    <footer style="position: fixed; bottom: 10px; right: 10px; font-size: 12px; color: #666; background: rgba(255,255,255,0.9); padding: 5px 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        @Salomão Leme | 2025
+    </footer>
+</body>
+</html>
+
+

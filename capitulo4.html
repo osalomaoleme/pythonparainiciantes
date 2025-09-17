@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 4: Operadores - Curso Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            line-height: 1.6;
+            tab-size: 4;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+        .solution {
+            display: none;
+        }
+        .solution.show {
+            display: block;
+        }
+        .operator-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .operator-table th, .operator-table td {
+            border: 1px solid #d1d5db;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .operator-table th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+        }
+    
+        
+        @media (max-width: 640px) {
+            .code-block {
+                font-size: 0.75rem;
+                padding: 0.75rem;
+            }
+            .container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-4 md:py-8">
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+            <div class="mb-6">
+                <a href="curso-python-completo.html" class="text-blue-600 hover:text-blue-800 font-medium">&larr; Voltar ao Curso</a>
+            </div>
+            
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8">Capítulo 4: Operadores</h1>
+            
+            <div class="space-y-6 md:space-y-8">
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">4.1 Operadores Aritméticos</h2>
+                    <p class="text-gray-600 mb-4">
+                        Os operadores aritméticos são usados para realizar operações matemáticas básicas.
+                    </p>
+                    
+                    <table class="operator-table mb-4">
+                        <thead>
+                            <tr>
+                                <th>Operador</th>
+                                <th>Descrição</th>
+                                <th>Exemplo</th>
+                                <th>Resultado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>+</code></td>
+                                <td>Adição</td>
+                                <td><code>5 + 3</code></td>
+                                <td><code>8</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>-</code></td>
+                                <td>Subtração</td>
+                                <td><code>5 - 3</code></td>
+                                <td><code>2</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>*</code></td>
+                                <td>Multiplicação</td>
+                                <td><code>5 * 3</code></td>
+                                <td><code>15</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>/</code></td>
+                                <td>Divisão</td>
+                                <td><code>10 / 3</code></td>
+                                <td><code>3.333...</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>//</code></td>
+                                <td>Divisão inteira</td>
+                                <td><code>10 // 3</code></td>
+                                <td><code>3</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>%</code></td>
+                                <td>Módulo (resto)</td>
+                                <td><code>10 % 3</code></td>
+                                <td><code>1</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>**</code></td>
+                                <td>Exponenciação</td>
+                                <td><code>2 ** 3</code></td>
+                                <td><code>8</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="code-block mb-4">
+# Exemplos práticos de operadores aritméticos
+a = 10
+b = 3
+
+print(f"a + b = {a + b}")    # 13
+print(f"a - b = {a - b}")    # 7
+print(f"a * b = {a * b}")    # 30
+print(f"a / b = {a / b}")    # 3.333...
+print(f"a // b = {a // b}")  # 3
+print(f"a % b = {a % b}")    # 1
+print(f"a ** b = {a ** b}")  # 1000
+
+# Precedência de operadores
+resultado = 2 + 3 * 4  # 14 (não 20)
+print(f"2 + 3 * 4 = {resultado}")
+
+# Usando parênteses para alterar precedência
+resultado = (2 + 3) * 4  # 20
+print(f"(2 + 3) * 4 = {resultado}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">4.2 Operadores de Comparação</h2>
+                    <p class="text-gray-600 mb-4">
+                        Os operadores de comparação são usados para comparar valores e retornam True ou False.
+                    </p>
+                    
+                    <table class="operator-table mb-4">
+                        <thead>
+                            <tr>
+                                <th>Operador</th>
+                                <th>Descrição</th>
+                                <th>Exemplo</th>
+                                <th>Resultado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>==</code></td>
+                                <td>Igual a</td>
+                                <td><code>5 == 5</code></td>
+                                <td><code>True</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>!=</code></td>
+                                <td>Diferente de</td>
+                                <td><code>5 != 3</code></td>
+                                <td><code>True</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&gt;</code></td>
+                                <td>Maior que</td>
+                                <td><code>5 &gt; 3</code></td>
+                                <td><code>True</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;</code></td>
+                                <td>Menor que</td>
+                                <td><code>5 &lt; 3</code></td>
+                                <td><code>False</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&gt;=</code></td>
+                                <td>Maior ou igual</td>
+                                <td><code>5 &gt;= 5</code></td>
+                                <td><code>True</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;=</code></td>
+                                <td>Menor ou igual</td>
+                                <td><code>3 &lt;= 5</code></td>
+                                <td><code>True</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="code-block mb-4">
+# Exemplos de operadores de comparação
+a = 10
+b = 5
+c = 10
+
+print(f"a == b: {a == b}")  # False
+print(f"a == c: {a == c}")  # True
+print(f"a != b: {a != b}")  # True
+print(f"a > b: {a > b}")    # True
+print(f"a < b: {a < b}")    # False
+print(f"a >= c: {a >= c}")  # True
+print(f"b <= a: {b <= a}")  # True
+
+# Comparação de strings
+nome1 = "Ana"
+nome2 = "Bruno"
+print(f"'{nome1}' < '{nome2}': {nome1 < nome2}")  # True (ordem alfabética)
+
+# Comparação de tipos diferentes
+print(f"5 == '5': {5 == '5'}")  # False (tipos diferentes)
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">4.3 Operadores Lógicos</h2>
+                    <p class="text-gray-600 mb-4">
+                        Os operadores lógicos são usados para combinar expressões booleanas.
+                    </p>
+                    
+                    <table class="operator-table mb-4">
+                        <thead>
+                            <tr>
+                                <th>Operador</th>
+                                <th>Descrição</th>
+                                <th>Exemplo</th>
+                                <th>Resultado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>and</code></td>
+                                <td>E lógico</td>
+                                <td><code>True and False</code></td>
+                                <td><code>False</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>or</code></td>
+                                <td>OU lógico</td>
+                                <td><code>True or False</code></td>
+                                <td><code>True</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>not</code></td>
+                                <td>NÃO lógico</td>
+                                <td><code>not True</code></td>
+                                <td><code>False</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="code-block mb-4">
+# Exemplos de operadores lógicos
+idade = 20
+salario = 3000
+
+# AND - ambas condições devem ser verdadeiras
+if idade >= 18 and salario >= 2000:
+    print("Aprovado para o empréstimo")
+
+# OR - pelo menos uma condição deve ser verdadeira
+if idade < 18 or salario < 1000:
+    print("Não aprovado")
+else:
+    print("Análise necessária")
+
+# NOT - inverte o valor booleano
+tem_carteira = True
+if not tem_carteira:
+    print("Não pode dirigir")
+else:
+    print("Pode dirigir")
+
+# Combinando operadores
+if (idade >= 18 and idade <= 65) and (salario >= 2000 or tem_carteira):
+    print("Perfil aprovado")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">4.4 Operadores de Atribuição</h2>
+                    <p class="text-gray-600 mb-4">
+                        Os operadores de atribuição são usados para atribuir valores às variáveis.
+                    </p>
+                    
+                    <table class="operator-table mb-4">
+                        <thead>
+                            <tr>
+                                <th>Operador</th>
+                                <th>Equivalente</th>
+                                <th>Exemplo</th>
+                                <th>Resultado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>=</code></td>
+                                <td>-</td>
+                                <td><code>x = 5</code></td>
+                                <td><code>x = 5</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>+=</code></td>
+                                <td><code>x = x + y</code></td>
+                                <td><code>x += 3</code></td>
+                                <td><code>x = x + 3</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>-=</code></td>
+                                <td><code>x = x - y</code></td>
+                                <td><code>x -= 2</code></td>
+                                <td><code>x = x - 2</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>*=</code></td>
+                                <td><code>x = x * y</code></td>
+                                <td><code>x *= 4</code></td>
+                                <td><code>x = x * 4</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>/=</code></td>
+                                <td><code>x = x / y</code></td>
+                                <td><code>x /= 2</code></td>
+                                <td><code>x = x / 2</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>%=</code></td>
+                                <td><code>x = x % y</code></td>
+                                <td><code>x %= 3</code></td>
+                                <td><code>x = x % 3</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>**=</code></td>
+                                <td><code>x = x ** y</code></td>
+                                <td><code>x **= 2</code></td>
+                                <td><code>x = x ** 2</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="code-block mb-4">
+# Exemplos de operadores de atribuição
+x = 10
+print(f"Valor inicial: {x}")
+
+x += 5  # x = x + 5
+print(f"Após x += 5: {x}")  # 15
+
+x -= 3  # x = x - 3
+print(f"Após x -= 3: {x}")  # 12
+
+x *= 2  # x = x * 2
+print(f"Após x *= 2: {x}")  # 24
+
+x /= 4  # x = x / 4
+print(f"Após x /= 4: {x}")  # 6.0
+
+x **= 2  # x = x ** 2
+print(f"Após x **= 2: {x}")  # 36.0
+
+# Atribuição múltipla
+a, b, c = 1, 2, 3
+print(f"a={a}, b={b}, c={c}")
+
+# Troca de valores
+a, b = b, a
+print(f"Após troca: a={a}, b={b}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">4.5 Operadores de Identidade e Pertencimento</h2>
+                    <p class="text-gray-600 mb-4">
+                        Operadores especiais para verificar identidade e pertencimento.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Operadores de identidade (is, is not)
+a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+
+print(f"a == b: {a == b}")    # True (mesmo conteúdo)
+print(f"a is b: {a is b}")    # False (objetos diferentes)
+print(f"a is c: {a is c}")    # True (mesmo objeto)
+
+# Operadores de pertencimento (in, not in)
+lista = [1, 2, 3, 4, 5]
+print(f"3 in lista: {3 in lista}")        # True
+print(f"6 not in lista: {6 not in lista}")  # True
+
+frase = "Python é incrível"
+print(f"'Python' in frase: {'Python' in frase}")  # True
+print(f"'Java' in frase: {'Java' in frase}")      # False
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Exercícios Práticos</h2>
+                    
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-3">Exercício 1: Calculadora Básica</h3>
+                        <p class="text-blue-700 mb-4">
+                            Crie uma calculadora que peça dois números e uma operação (+, -, *, /) e 
+                            exiba o resultado.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol1')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol1" class="solution mt-4">
+                            <div class="code-block">
+# Calculadora Básica
+print("=== Calculadora Básica ===")
+
+# Entrada de dados
+num1 = float(input("Digite o primeiro número: "))
+operacao = input("Digite a operação (+, -, *, /): ")
+num2 = float(input("Digite o segundo número: "))
+
+# Cálculo baseado na operação
+if operacao == "+":
+    resultado = num1 + num2
+elif operacao == "-":
+    resultado = num1 - num2
+elif operacao == "*":
+    resultado = num1 * num2
+elif operacao == "/":
+    if num2 != 0:
+        resultado = num1 / num2
+    else:
+        print("Erro: Divisão por zero!")
+        resultado = None
+else:
+    print("Operação inválida!")
+    resultado = None
+
+# Exibição do resultado
+if resultado is not None:
+    print(f"\n{num1} {operacao} {num2} = {resultado}")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-green-800 mb-3">Exercício 2: Verificador de Números</h3>
+                        <p class="text-green-700 mb-4">
+                            Crie um programa que verifique se um número é par ou ímpar, positivo ou negativo, 
+                            e se é múltiplo de 3.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol2')" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol2" class="solution mt-4">
+                            <div class="code-block">
+# Verificador de Números
+print("=== Verificador de Números ===")
+
+# Entrada
+numero = int(input("Digite um número inteiro: "))
+
+print(f"\nAnálise do número {numero}:")
+
+# Verificar par ou ímpar
+if numero % 2 == 0:
+    print("É par")
+else:
+    print("É ímpar")
+
+# Verificar positivo, negativo ou zero
+if numero > 0:
+    print("É positivo")
+elif numero < 0:
+    print("É negativo")
+else:
+    print("É zero")
+
+# Verificar múltiplo de 3
+if numero % 3 == 0:
+    print("É múltiplo de 3")
+else:
+    print("Não é múltiplo de 3")
+
+# Verificar se é múltiplo de 5 E de 3
+if numero % 3 == 0 and numero % 5 == 0:
+    print("É múltiplo de 3 E de 5")
+
+# Verificar se é múltiplo de 2 OU de 7
+if numero % 2 == 0 or numero % 7 == 0:
+    print("É múltiplo de 2 OU de 7")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-purple-800 mb-3">Exercício 3: Sistema de Login</h3>
+                        <p class="text-purple-700 mb-4">
+                            Crie um sistema simples que verifique se o usuário e senha estão corretos 
+                            usando operadores lógicos.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol3')" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol3" class="solution mt-4">
+                            <div class="code-block">
+# Sistema de Login
+print("=== Sistema de Login ===")
+
+# Credenciais corretas (em um sistema real, isso seria mais seguro)
+usuario_correto = "admin"
+senha_correta = "123456"
+max_tentativas = 3
+tentativas = 0
+
+while tentativas < max_tentativas:
+    # Entrada de dados
+    usuario = input("Usuário: ")
+    senha = input("Senha: ")
+    
+    # Verificação usando operadores lógicos
+    if usuario == usuario_correto and senha == senha_correta:
+        print("\nLogin realizado com sucesso!")
+        print("Bem-vindo ao sistema!")
+        break
+    else:
+        tentativas += 1
+        restantes = max_tentativas - tentativas
+        
+        if tentativas < max_tentativas:
+            if usuario != usuario_correto and senha != senha_correta:
+                print(f"\nUsuário e senha incorretos. {restantes} tentativas restantes.")
+            elif usuario != usuario_correto:
+                print(f"\nUsuário incorreto. {restantes} tentativas restantes.")
+            else:
+                print(f"\nSenha incorreta. {restantes} tentativas restantes.")
+        else:
+            print("\nNúmero máximo de tentativas excedido. Acesso bloqueado!")
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="mt-8">
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Resumo do Capítulo</h2>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>Aritméticos:</strong> +, -, *, /, //, %, **</li>
+                            <li><strong>Comparação:</strong> ==, !=, >, <, >=, <=</li>
+                            <li><strong>Lógicos:</strong> and, or, not</li>
+                            <li><strong>Atribuição:</strong> =, +=, -=, *=, /=, %=, **=</li>
+                            <li><strong>Identidade:</strong> is, is not</li>
+                            <li><strong>Pertencimento:</strong> in, not in</li>
+                            <li>Precedência de operadores: parênteses alteram a ordem</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <div class="flex justify-between mt-8">
+                    <a href="capitulo3.html" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 w-full md:w-auto">
+                        &larr; Capítulo Anterior
+                    </a>
+                    <a href="capitulo5.html" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 w-full md:w-auto">
+                        Próximo Capítulo &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.classList.toggle('show');
+        }
+    </script>
+    
+    <footer style="position: fixed; bottom: 10px; right: 10px; font-size: 12px; color: #666; background: rgba(255,255,255,0.9); padding: 5px 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        @Salomão Leme | 2025
+    </footer>
+</body>
+</html>
+
+

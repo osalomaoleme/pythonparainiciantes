@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 6: Laços de repetição - Curso Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            line-height: 1.6;
+            tab-size: 4;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+        .solution {
+            display: none;
+        }
+        .solution.show {
+            display: block;
+        }
+        .loop-diagram {
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+    
+        
+        @media (max-width: 640px) {
+            .code-block {
+                font-size: 0.75rem;
+                padding: 0.75rem;
+            }
+            .container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-4 md:py-8">
+        <div class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+            <div class="mb-6">
+                <a href="curso-python-completo.html" class="text-blue-600 hover:text-blue-800 font-medium">&larr; Voltar ao Curso</a>
+            </div>
+            
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8">Capítulo 6: Laços de repetição</h1>
+            
+            <div class="space-y-6 md:space-y-8">
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">6.1 Laço while</h2>
+                    <p class="text-gray-600 mb-4">
+                        O laço <code class="bg-gray-200 px-2 py-1 rounded">while</code> executa um bloco de código 
+                        repetidamente enquanto uma condição for verdadeira.
+                    </p>
+                    
+                    <div class="loop-diagram">
+                        <div class="text-lg font-semibold mb-2">Fluxo do while</div>
+                        <div class="text-sm text-gray-600">
+                            Verifica condição → True: Executa bloco → Volta para condição → False: Sai do loop
+                        </div>
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# Exemplo básico de while
+contador = 1
+
+while contador <= 5:
+    print(f"Contagem: {contador}")
+    contador += 1  # Importante: incrementar para evitar loop infinito
+
+print("Loop finalizado!")
+
+# Exemplo com input do usuário
+senha_correta = "123456"
+senha = ""
+
+while senha != senha_correta:
+    senha = input("Digite a senha: ")
+    if senha != senha_correta:
+        print("Senha incorreta! Tente novamente.")
+    else:
+        print("Senha correta! Acesso liberado.")
+
+# Somando números até o usuário digitar 0
+soma = 0
+numero = 1  # Inicializar com valor diferente de 0
+
+print("Digite números para somar (0 para parar):")
+while numero != 0:
+    numero = float(input("Número: "))
+    if numero != 0:
+        soma += numero
+
+print(f"Soma total: {soma}")
+                    </div>
+                    
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-4">
+                        <p class="text-red-800">
+                            <strong>Cuidado:</strong> Sempre certifique-se de que a condição do while 
+                            eventualmente se torne falsa, senão você terá um loop infinito!
+                        </p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">6.2 Laço for</h2>
+                    <p class="text-gray-600 mb-4">
+                        O laço <code class="bg-gray-200 px-2 py-1 rounded">for</code> é usado para iterar sobre 
+                        sequências (listas, strings, ranges, etc.).
+                    </p>
+                    
+                    <div class="loop-diagram">
+                        <div class="text-lg font-semibold mb-2">Fluxo do for</div>
+                        <div class="text-sm text-gray-600">
+                            Para cada item na sequência → Executa bloco → Próximo item → Fim da sequência: Sai
+                        </div>
+                    </div>
+                    
+                    <div class="code-block mb-4">
+# For com range()
+print("Contando de 1 a 5:")
+for i in range(1, 6):
+    print(f"Número: {i}")
+
+# Range com diferentes parâmetros
+print("\nContando de 0 a 9:")
+for i in range(10):  # range(10) = 0 a 9
+    print(i, end=" ")
+
+print("\n\nContando de 2 em 2:")
+for i in range(0, 11, 2):  # início, fim, passo
+    print(i, end=" ")
+
+print("\n\nContando regressivamente:")
+for i in range(10, 0, -1):
+    print(i, end=" ")
+
+# For com strings
+print("\n\nIterando sobre string:")
+nome = "Python"
+for letra in nome:
+    print(f"Letra: {letra}")
+
+# For com listas
+print("\nIterando sobre lista:")
+frutas = ["maçã", "banana", "laranja", "uva"]
+for fruta in frutas:
+    print(f"Fruta: {fruta}")
+
+# Enumerate para obter índice e valor
+print("\nCom índices:")
+for indice, fruta in enumerate(frutas):
+    print(f"{indice + 1}. {fruta}")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">6.3 Comandos break e continue</h2>
+                    <p class="text-gray-600 mb-4">
+                        <code class="bg-gray-200 px-2 py-1 rounded">break</code> interrompe o loop completamente, 
+                        enquanto <code class="bg-gray-200 px-2 py-1 rounded">continue</code> pula para a próxima iteração.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Exemplo com break
+print("Procurando o número 7:")
+for numero in range(1, 11):
+    if numero == 7:
+        print(f"Encontrei o {numero}! Parando a busca.")
+        break
+    print(f"Verificando: {numero}")
+
+print("\n" + "="*30)
+
+# Exemplo com continue
+print("Números ímpares de 1 a 10:")
+for numero in range(1, 11):
+    if numero % 2 == 0:  # Se for par
+        continue  # Pula para a próxima iteração
+    print(numero)
+
+print("\n" + "="*30)
+
+# Exemplo prático: validação de entrada
+print("Digite números positivos (0 para sair):")
+while True:
+    try:
+        numero = float(input("Número: "))
+        
+        if numero == 0:
+            print("Saindo...")
+            break
+        
+        if numero < 0:
+            print("Número negativo ignorado.")
+            continue
+        
+        print(f"Número válido: {numero}")
+        print(f"Quadrado: {numero ** 2}")
+        
+    except ValueError:
+        print("Entrada inválida! Digite apenas números.")
+        continue
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">6.4 Loops Aninhados</h2>
+                    <p class="text-gray-600 mb-4">
+                        Você pode colocar um loop dentro de outro loop para criar estruturas mais complexas.
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Tabuada completa
+print("=== TABUADA COMPLETA ===")
+for i in range(1, 11):
+    print(f"\nTabuada do {i}:")
+    for j in range(1, 11):
+        resultado = i * j
+        print(f"{i} x {j} = {resultado:2d}")
+
+print("\n" + "="*40)
+
+# Matriz de números
+print("Matriz 5x5:")
+for linha in range(5):
+    for coluna in range(5):
+        numero = linha * 5 + coluna + 1
+        print(f"{numero:3d}", end=" ")
+    print()  # Nova linha
+
+print("\n" + "="*40)
+
+# Padrão de asteriscos
+print("Triângulo de asteriscos:")
+for i in range(1, 6):
+    for j in range(i):
+        print("*", end="")
+    print()  # Nova linha
+
+print("\nTriângulo invertido:")
+for i in range(5, 0, -1):
+    for j in range(i):
+        print("*", end="")
+    print()  # Nova linha
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">6.5 Else em Loops</h2>
+                    <p class="text-gray-600 mb-4">
+                        Python permite usar <code class="bg-gray-200 px-2 py-1 rounded">else</code> com loops. 
+                        O bloco else executa quando o loop termina normalmente (sem break).
+                    </p>
+                    
+                    <div class="code-block mb-4">
+# Else com for
+print("Procurando número par maior que 10:")
+numeros = [1, 3, 5, 7, 9, 11, 13]
+
+for numero in numeros:
+    if numero > 10 and numero % 2 == 0:
+        print(f"Encontrado: {numero}")
+        break
+else:
+    print("Nenhum número par maior que 10 foi encontrado.")
+
+print("\n" + "="*40)
+
+# Else com while
+print("Tentando adivinhar a senha:")
+senha_correta = "python123"
+tentativas = 0
+max_tentativas = 3
+
+while tentativas < max_tentativas:
+    senha = input(f"Tentativa {tentativas + 1}: ")
+    tentativas += 1
+    
+    if senha == senha_correta:
+        print("Senha correta! Acesso liberado.")
+        break
+    else:
+        print("Senha incorreta.")
+else:
+    print("Número máximo de tentativas excedido. Acesso bloqueado!")
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Exercícios Práticos</h2>
+                    
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-3">Exercício 1: Contador de Números Pares</h3>
+                        <p class="text-blue-700 mb-4">
+                            Crie um programa que conte quantos números pares existem entre 1 e 100, 
+                            e calcule a soma desses números.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol1')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol1" class="solution mt-4">
+                            <div class="code-block">
+# Contador de Números Pares
+print("=== Contador de Números Pares (1-100) ===")
+
+contador_pares = 0
+soma_pares = 0
+lista_pares = []
+
+# Método 1: usando for
+for numero in range(1, 101):
+    if numero % 2 == 0:
+        contador_pares += 1
+        soma_pares += numero
+        lista_pares.append(numero)
+
+print(f"Quantidade de números pares: {contador_pares}")
+print(f"Soma dos números pares: {soma_pares}")
+print(f"Média dos números pares: {soma_pares / contador_pares:.2f}")
+
+# Exibindo os primeiros e últimos 5 números pares
+print(f"\nPrimeiros 5 pares: {lista_pares[:5]}")
+print(f"Últimos 5 pares: {lista_pares[-5:]}")
+
+# Método 2: usando range com passo 2 (mais eficiente)
+print("\n" + "="*40)
+print("Método alternativo (mais eficiente):")
+
+contador_pares_v2 = 0
+soma_pares_v2 = 0
+
+for numero in range(2, 101, 2):  # Começa em 2, vai até 100, passo 2
+    contador_pares_v2 += 1
+    soma_pares_v2 += numero
+
+print(f"Quantidade: {contador_pares_v2}")
+print(f"Soma: {soma_pares_v2}")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-green-800 mb-3">Exercício 2: Jogo da Adivinhação Melhorado</h3>
+                        <p class="text-green-700 mb-4">
+                            Crie um jogo onde o computador escolhe um número de 1 a 100 e o usuário 
+                            tem tentativas ilimitadas para adivinhar. Conte as tentativas e dê dicas.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol2')" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol2" class="solution mt-4">
+                            <div class="code-block">
+# Jogo da Adivinhação Melhorado
+import random
+
+print("=== JOGO DA ADIVINHAÇÃO ===")
+print("Estou pensando em um número de 1 a 100...")
+print("Tente adivinhar! (Digite 'sair' para desistir)")
+
+numero_secreto = random.randint(1, 100)
+tentativas = 0
+acertou = False
+historico_palpites = []
+
+while not acertou:
+    try:
+        entrada = input(f"\nTentativa {tentativas + 1}: ")
+        
+        # Opção de sair
+        if entrada.lower() == 'sair':
+            print(f"Você desistiu! O número era {numero_secreto}")
+            break
+        
+        palpite = int(entrada)
+        tentativas += 1
+        historico_palpites.append(palpite)
+        
+        # Validação do range
+        if palpite < 1 or palpite > 100:
+            print("Por favor, digite um número entre 1 e 100!")
+            tentativas -= 1  # Não conta como tentativa válida
+            historico_palpites.pop()  # Remove do histórico
+            continue
+        
+        # Verificação do palpite
+        if palpite == numero_secreto:
+            print(f"\n🎉 PARABÉNS! Você acertou!")
+            print(f"O número era {numero_secreto}")
+            print(f"Você precisou de {tentativas} tentativas")
+            
+            # Classificação da performance
+            if tentativas <= 5:
+                print("🏆 Excelente! Você é um mestre!")
+            elif tentativas <= 10:
+                print("👏 Muito bom! Boa intuição!")
+            elif tentativas <= 15:
+                print("👍 Bom trabalho!")
+            else:
+                print("💪 Persistência é a chave!")
+            
+            acertou = True
+        elif palpite < numero_secreto:
+            diferenca = numero_secreto - palpite
+            if diferenca <= 5:
+                print("🔥 Muito quente! O número é um pouco MAIOR!")
+            elif diferenca <= 15:
+                print("🌡️ Quente! O número é MAIOR!")
+            else:
+                print("❄️ Frio! O número é muito MAIOR!")
+        else:
+            diferenca = palpite - numero_secreto
+            if diferenca <= 5:
+                print("🔥 Muito quente! O número é um pouco MENOR!")
+            elif diferenca <= 15:
+                print("🌡️ Quente! O número é MENOR!")
+            else:
+                print("❄️ Frio! O número é muito MENOR!")
+        
+        # Mostrar histórico a cada 5 tentativas
+        if tentativas % 5 == 0 and tentativas > 0:
+            print(f"\nSeus últimos palpites: {historico_palpites[-5:]}")
+            
+    except ValueError:
+        print("Por favor, digite apenas números ou 'sair'!")
+
+print(f"\nHistórico completo: {historico_palpites}")
+print("Obrigado por jogar!")
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-purple-800 mb-3">Exercício 3: Calculadora de Sequência Fibonacci</h3>
+                        <p class="text-purple-700 mb-4">
+                            Crie um programa que gere os primeiros N números da sequência de Fibonacci, 
+                            onde N é fornecido pelo usuário.
+                        </p>
+                        
+                        <button onclick="toggleSolution('sol3')" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                            Ver solução
+                        </button>
+                        
+                        <div id="sol3" class="solution mt-4">
+                            <div class="code-block">
+# Calculadora de Sequência Fibonacci
+print("=== SEQUÊNCIA DE FIBONACCI ===")
+print("A sequência de Fibonacci: 0, 1, 1, 2, 3, 5, 8, 13, 21, ...")
+print("Cada número é a soma dos dois anteriores.")
+
+while True:
+    try:
+        n = int(input("\nQuantos números da sequência você quer ver? "))
+        
+        if n <= 0:
+            print("Por favor, digite um número positivo!")
+            continue
+        
+        break
+        
+    except ValueError:
+        print("Por favor, digite apenas números inteiros!")
+
+print(f"\nOs primeiros {n} números da sequência de Fibonacci:")
+print("="*50)
+
+# Casos especiais
+if n == 1:
+    print("1. 0")
+elif n == 2:
+    print("1. 0")
+    print("2. 1")
+else:
+    # Inicialização
+    a, b = 0, 1
+    fibonacci_list = [a, b]
+    
+    print(f"1. {a}")
+    print(f"2. {b}")
+    
+    # Gerar o restante da sequência
+    for i in range(3, n + 1):
+        proximo = a + b
+        fibonacci_list.append(proximo)
+        print(f"{i}. {proximo}")
+        
+        # Atualizar para próxima iteração
+        a, b = b, proximo
+
+# Estatísticas da sequência
+if n > 1:
+    print(f"\n{'='*50}")
+    print("ESTATÍSTICAS:")
+    print(f"Soma total: {sum(fibonacci_list)}")
+    print(f"Maior número: {max(fibonacci_list)}")
+    print(f"Números pares: {[num for num in fibonacci_list if num % 2 == 0]}")
+    print(f"Números ímpares: {[num for num in fibonacci_list if num % 2 != 0]}")
+    
+    # Razão áurea (para sequências maiores)
+    if n > 10:
+        razao = fibonacci_list[-1] / fibonacci_list[-2]
+        print(f"Razão entre os dois últimos números: {razao:.6f}")
+        print("(Aproxima-se da razão áurea: 1.618034...)")
+
+print("\nSequência completa:", fibonacci_list)
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="mt-8">
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Resumo do Capítulo</h2>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>while:</strong> Repete enquanto condição for verdadeira</li>
+                            <li><strong>for:</strong> Itera sobre sequências (range, listas, strings)</li>
+                            <li><strong>range():</strong> Gera sequências numéricas (início, fim, passo)</li>
+                            <li><strong>break:</strong> Sai do loop imediatamente</li>
+                            <li><strong>continue:</strong> Pula para próxima iteração</li>
+                            <li><strong>else em loops:</strong> Executa se loop terminar normalmente</li>
+                            <li><strong>enumerate():</strong> Obtém índice e valor simultaneamente</li>
+                            <li>Cuidado com loops infinitos - sempre altere a condição</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <div class="flex justify-between mt-8">
+                    <a href="capitulo5.html" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 w-full md:w-auto">
+                        &larr; Capítulo Anterior
+                    </a>
+                    <a href="capitulo7.html" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 w-full md:w-auto">
+                        Próximo Capítulo &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.classList.toggle('show');
+        }
+    </script>
+    
+    <footer style="position: fixed; bottom: 10px; right: 10px; font-size: 12px; color: #666; background: rgba(255,255,255,0.9); padding: 5px 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        @Salomão Leme | 2025
+    </footer>
+</body>
+</html>
+
+
